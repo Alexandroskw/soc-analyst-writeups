@@ -1,15 +1,15 @@
 # Ignored directories
-/Plantilla/
+/TryHackMe/Plantilla/
 /.obsidian/
 /.trash/
 
 # Ignored Files
-/Triada CIA.md
-/Data representation.md
-/Criptografía.md
-/Network/Modelos de Internet/TryHackMe — Modelo OSI (Open System Interconnection).md
-/TryHackMe — HTTP in Detail.md
-/Encodeo de datos.md
+/TryHackMe/Triada CIA.md
+/TryHackMe/Data representation.md
+/TryHackMe/Criptografía.md
+/TryHackMe/Network/Modelos de Internet/TryHackMe — Modelo OSI (Open System Interconnection).md
+/TryHackMe/TryHackMe — HTTP in Detail.md
+/TryHackMe/Encodeo de datos.md
 
 # Ignored file types
 /*.json

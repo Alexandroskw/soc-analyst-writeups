@@ -12,8 +12,6 @@ Documentar de forma clara y estructurada el proceso de análisis, investigación
 - Mejorar el pensamiento analítico y la metodología de la investigación.
 - Crear una base de conocimiento personal reutilizable.
 - Preparación para roles de **SOC Analyst**.
-
----
 ## Estructura del repositorio
 
 ```
@@ -25,9 +23,7 @@ Documentar de forma clara y estructurada el proceso de análisis, investigación
 ```
 
 Cada write-up incluye comandos utilizados, hallazgos relevantes, respuestas con razonamiento y **Lecciones aprendidas**.
-___
 ### Estado
 En construcción activa. Siguiendo Cybersecurity 101 path.
-___
 #### Perfiles
 [TryHackMe](https://tryhackme.com/p/alexxkw)
