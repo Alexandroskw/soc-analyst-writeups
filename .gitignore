@@ -1,0 +1,16 @@
+# Ignored directories
+/Plantilla/
+/.obsidian/
+/.trash/
+
+# Ignored Files
+/Triada CIA.md
+/Data representation.md
+/Criptografía.md
+/Network/Modelos de Internet/TryHackMe — Modelo OSI (Open System Interconnection).md
+/TryHackMe — HTTP in Detail.md
+
+# Ignored file types
+/*.json
+/*.js
+/*.png
