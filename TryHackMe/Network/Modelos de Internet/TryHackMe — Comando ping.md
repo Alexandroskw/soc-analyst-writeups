@@ -21,6 +21,6 @@ ___
 *Pregunta 5: ¿Qué bandera te da una salida mas verbosa?*
 **Respuesta: -v**
 ___
-[[TryHackMe — Comando traceroute]]
-[[TryHackMe — Comando WHOIS]]
-[[TryHackMe — Comando dig]]
+[TryHackMe — Comando traceroute](<TryHackMe — Comando traceroute.md>)
+[TryHackMe — Comando WHOIS](<TryHackMe — Comando WHOIS.md>)
+[TryHackMe — Comando dig](<TryHackMe — Comando dig.md>)

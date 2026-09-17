@@ -1,3 +1,4 @@
+# TryHackMe — Search skills
 **Dificultad** -> easy | **Date** -> 31-ago-26 | **Type** -> Free
 **Sala** -> [Search Skills](https://tryhackme.com/room/searchskills)
 ___
@@ -44,7 +45,7 @@ ___
 La documentación de las herramientas o productos es la forma más confiable de estar al día en el uso de las mismas. Mucho mejor que ver tutoriales por fuera.
 
 Una de estas documentaciones son las páginas `man` en la terminal de Linux. El uso es simple: `man <comando>`. Se puede entender la herramienta sin la necesidad de buscar un tutorial por fuera.
-![[nc_man_page.png]]
+![](<nc_man_page.png>)
 ___
 *Pregunta 1: What is the example command?*
 **Respuesta: `nc host.example.com 42`**

@@ -1,5 +1,6 @@
-**Difficult** -> easy | **Date** -> 24-jul-26 | **Type** -> Free
-**Room** -> [Network Traffic Basics](https://www.tryhackme.com/room/networktrafficbasics)
+# TryHackMe — Network Traffic Basics
+**Dificultad** -> easy | **Date** -> 24-jul-26 | **Type** -> Free
+**Sala** -> [Network Traffic Basics](https://www.tryhackme.com/room/networktrafficbasics)
 ## Introduction
 El Análisis de Trafico de Red (**NTA**) es un proceso que abarca la captura, inspección y el análisis de los datos que fluyen en una red y su principal objetivo es tener la visibilidad completa de lo que entra y sale de la red. El **NTA** no es sinónimo de **Wireshark**.
 El NTA va más allá, es una combinación de correlación de varios registros, inspección profunda de paquetes y estadísticas de flujo de red. Es una habilidad esencial para cualquier analista SOC L1 y otros roles en Blue y Red team. Como analista L1, debes ser hábil al navegar en un mar de datos de red y entender qué es normal y qué se sale de la línea base.
@@ -152,10 +153,10 @@ Algunos servicios de esta categoría son
 #### HTTPS
 #### HTTPS
 Un host pide un sitio web, esta respuesta es enviada al NGFW (Next Generation Firewall) que incluye un web proxy. El proxy actua como el servidor y establece una conexión TCP con el servidor web original y redirige las peticiones de los clientes. Cuando el proxy recibe la respuesta inspecciona el contenido y lo envía al host que lo ha solicitado y lo encuentra seguro.
-![[Pasted image 20260727143115.png]]
+![](<Pasted image 20260727143115.png>)
 #### DNS Externo
 El tráfico DNS con una red corporativa empieza cuando el host envía una query DNS a través del puerto 53 que actúa en nombre del host. Primero revisa si tiene la respuesta a la petición en la caché, si no la tiene envía una petición vía róuter a través del firewall a los DNS configurados.
-![[Pasted image 20260727143340.png]]
+![](<Pasted image 20260727143340.png>)
 ### Task 5 — How we can observe network traffic?
 Podemos obtener información para el análisis de tráfico de red de varias formas
 - Logs
@@ -171,7 +172,7 @@ Hay dos formas de capturar los paquetes completos
 Es un dispositivo físico que se pone en la red para capturar todo el tráfico que pasa sin afectar el desempeño. Los los datos entonces se envían a un IDS, packet capture box u otro tipo de sistema dedicado. El TAP únicamente opera en la capa de enlace del modelo TCP/IP. No necesita la dirección MAC o IP porque copia las señales eléctricas y las envía al puerto de monitoreo.
 #### Port mirroring
 Es un software que copia los paquetes de un dispositivo y los manda a otro dentro de la red para monitorearlos, por ejemplo un IDS u otros sistemas. Cada fabricante lo llama de una manera, en Cisco por ejemplo se le conoce como **SPAN**.
-![[Pasted image 20260727150959.png]]
+![](<Pasted image 20260727150959.png>)
 #### Best practices
 Cuando se vaya a hacer una captura de paquetes, es necesario tener en cuenta
 - Posición: dependiendo de qué tráfico queremos capturar, necesitamos posicionar correctamente el TAP o configurar el mirror correctamente.
@@ -179,25 +180,25 @@ Cuando se vaya a hacer una captura de paquetes, es necesario tener en cuenta
 - Mirror vs. TAP: los TAP's ofrecen una reducción del desempeño casi nula. El mirroring puede agregar latencia cuando una gran cantidad de tráfico está ocurriendo a través del puerto de mirroring.
 #### Actividad
 El ejercicio 1 pide posicionar un dispositivo TAP en el sitio correcto ya que un usuario utilizando una workstation aleatoria, ha hecho clic en un link de phishing y ha iniciado una petición HTTPS y la descarga de un archvio de PowerShell malicioso.
-![[Pasted image 20260727152331.png]]
+![](<Pasted image 20260727152331.png>)
 
 Lo lógico sería poner el TAP antes del **SW02** pero estaríamos consumiendo mucho almacenamiento al capturar los paquetes de todas las workstations. En el **SW01** tampoco puede ser puesto ya que consumiría en exceso almacenamiento por el Servidor DNS y el servidor de correo. Ponerlo en frente de las workstation es completamente inútil; no sabemos cuál fue utilizada.
 Si vamos para atrás, podemos ver Web Proxy (**WP01**). Como mencionan las instrucciones, se hizo una petición HTTP. Todos los dispositivos en la red hacen una petición HTTP(S) en este dispositivo ya que es el intermediario con el sitio real. Ahora podemos analizar el tráfico entrante y saliente
-![[Pasted image 20260727155854.png]]
+![](<Pasted image 20260727155854.png>)
 Ahora podemos empezar a buscar la bandera. Recordemos que el usuario hizo clic en un link malicioso en un correo de phishing y empezó a descargar un archivo. Esto último, la descarga es nuestra pista. En el análisis de los paquetes a la izquierda, podemos ver la información de los paquetes. Cuando se hace una conexión TCP correcta, se manda un código **200 OK**, que ha establecido conexión exitosamente.
 Con esto en mente podemos empezar a buscar con los código 200 que veamos. Sin embargo, debemos tomar en cuenta que está descargando un archivo, eso reduce aun más la búsqueda.
 El paquete que nos interesa está en la última página y al abrirlo aparece la bandera
-![[Pasted image 20260727161202.png]]
+![](<Pasted image 20260727161202.png>)
 **Bandera: THM{FoundTheMalware}**
 El ejercicio 2 dice que una workstation ha sido comprometida e instrucciones C2 (Command & Control) están siendo ejecutadas por registros DNS de texto. Necesitamos también capturar el tráfico DNS de la red.
 Lo importante aquí es el DNS, y en el ejercicio anterior, ya habíamos visto un servidor DNS. Lo lógico es poner el TAP en el servidor DNS y capturar todo su tráfico.
-![[Pasted image 20260727162010.png]]
+![](<Pasted image 20260727162010.png>)
 Como mencionan las instrucciones, se están inyectando comandos C2 por medio de un archivo de texto (TXT) en el DNS. Es importante recordar que el tráfico DNS va a través del puerto 53 y que estamos buscando C2 y un TXT. Con esto en mente, me puse a investigar en las descripciones de los paquetes si había una descripción con TXT o C2. En la segunda página está lo que estaba buscando. La información del paquete dice:
 ```json
 Standard query response 0x41eb TXT c2.tryhackrne.thn
 ```
 Contiene un TXT y es un C2. Si abrimos el paquete en la sección de **query** dice que es un c2 por medio de un TXT (TXT/IN)
-![[Pasted image 20260727164305.png]]
+![](<Pasted image 20260727164305.png>)
 Junto a la respuesta podemos encontrar la bandera **THM{C2CommandFound}**
 Completando el ejercicio.
 #### Tools
@@ -207,6 +208,6 @@ Hay algunas herramientas especializadas para capturar estos paquetes
 - IPS/IDS como snort, suricata y zeek
 
 ## References
-[[TryHackMe — Comando dig]]
-[[TryHackMe — Comando WHOIS]]
-[[TryHackMe — Modelo TCP-IP]]
+[TryHackMe — Comando dig](<TryHackMe — Comando dig.md>)
+[TryHackMe — Comando WHOIS](<TryHackMe — Comando WHOIS.md>)
+[TryHackMe — Modelo TCP-IP](<TryHackMe — Modelo TCP-IP.md>)

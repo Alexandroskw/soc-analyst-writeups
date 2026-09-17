@@ -1,3 +1,4 @@
+# TryHackMe — Windows Command Line
 **Dificultad** -> easy/medium/hard | **Date** -> 03-sep-26 | **Type** -> Free/premium
 **Sala** -> [Windows command line](https://tryhackme.com/room/windowscommandline)
 
@@ -22,9 +23,9 @@ ssh user@<IP_MACHINE>
 | `set`        | Verifica la ruta desde la línea de comandos |        `env`         |
 | `ver`        | Versión del S.O.                            |      `uname -r`      |
 | `systeminfo` | Información detallada del S.O.              |    `hostnamectl`     |
+
 > [!INFO]
-> Si la información desplegada es mucha, se puede utilzar un pipe `|` con `more`
-> 
+> Si la información desplegada es mucha, se puede utilzar un pipe `|` con `more`:
 > `systeminfo | more`
 
 ___
@@ -49,6 +50,7 @@ La línea de comandos tiene, valga la redundancia, comandos relacionados con la 
 | `netstat`  | Lista las conexiones de red actuales y los puertos que están escuchando |                      `netstat -a -i`                       |
 
 ___
+
 *Pregunta 1: Which command can we use to look up the server’s physical address (MAC address)?*
 **Respuesta: `ipconfig /all`**
 
@@ -73,7 +75,8 @@ ___
 |    `copy`     | Copia un archivo de una locación a otra                                                 |         `cp`         |
 |    `move`     | Mueve un archivo de una locación a otra                                                 |         `mv`         |
 | `del`/`erase` | Borra un archivo seleccionado                                                           |         `rm`         |
-> [!TIP] La equivalencia del comando `pwd`
+
+> [!TIP]
 > Al utilizar el comando `cd` **SIN** argumento en Windows, el comportamiento es exactamente igual que el comando `pwd` de Linux.
 > Sin embrago, en ambos sistemas funcionan igual para cambiar de directorio:
 > `cd mi_directorio`
@@ -100,6 +103,7 @@ ___
 > **NOTA**: El comando `taskkill` tiene dos _k_.
 
 ### Task 6 — Conclusion
+
 ___
 *Pregunta 1: The command `shutdown /s` can shut down a system. What is the command you can use to restart a system?*
 **Respuesta: `shutdown /r`**
@@ -112,4 +116,4 @@ ___
 + Los comandos en ambos sistemas son iguales en algunos casos. Si se aprenden los de un sistema, los del otro serán más intuitivos.
 + Diagnosticar problemas en Windows no excluye a la terminal.
 ## Referencias
-[[TryHackMe — Windows Fundamentals 2]]
+[TryHackMe — Windows Fundamentals 2](<TryHackMe — Windows Fundamentals 2.md>)

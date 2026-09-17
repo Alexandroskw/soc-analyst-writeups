@@ -1,5 +1,8 @@
+# TryHackMe — Windows Fundamentals 2
 **Dificultad** -> easy | **Date** -> 01-sep-26 | **Type** -> Free
 **Sala** -> [Windows Fundamentals 2](https://tryhackme.com/room/windowsfundamentals2x0x)
+
+___
 ## Introducción
 Sala enfocada en los fundamentos de Windows como la configuración de UAC, monitoreo de recursos y el registro de Windows.
 ## Solución
@@ -16,7 +19,7 @@ La herramienta **MSConfig** es una forma avanzada de solucionar problemas, el pr
 | **Services** | Lista todos los sevicios del sistema independientemente de su estado (ejecutando o detenido).                                      |
 | **Startup**  | Se debe de utilizar el Administrador de Tareas (Task Manager) ya que el MSConfig NO es un administrador de aplicaciones de inicio. |
 | **Tools**    | Da una breve descripción de cada herramienta en el sistema.                                                                        |
-> [!INFO]- Con relación a Startup
+> [!INFO]
 > En la VM de THM, se esta utilizando Windows Server no Windows 10 u 11. En la pestaña de **Startup** no aparecerá nada relacionado al Task Manager.
 
 #### Advance System Settings
@@ -77,9 +80,11 @@ La utilidad **Computer Management** tiene 3 secciones primarias: **System tools*
 | Local User and Groups | Lista los usuarios y grupos en el sistema                                                          | Ver si recientemente se ha creado un nuevo usuario.                       |
 | Performance           | Es una herramienta llamada **Performance Monitor**                                                 | Diagnosticar un incremento en el uso de los recursos del sistema.         |
 | Device manager        | Lista todos los dispositivos que están conectados en el sistema.                                   | Habilita o deshabilita un dispositivo que está causando conflicto.        |
-> [!INFO] Eventos en Windows
-> Para más detalle de los tipos de eventos que se pueden registrar, revisar [Event types](https://learn.microsoft.com/en-us/windows/win32/eventlog/event-types)
-> Para los logs estándar que se pueden ver bajo el Windows Logs, revisar [Eventlog Key](https://learn.microsoft.com/en-us/windows/win32/eventlog/eventlog-key)
+> [!INFO]
+> **Eventos en Windows**
+> 
+> - Para más detalle de los tipos de eventos que se pueden registrar, revisar [Event types](https://learn.microsoft.com/en-us/windows/win32/eventlog/event-types)
+> - Para los logs estándar que se pueden ver bajo el Windows Logs, revisar [Eventlog Key](https://learn.microsoft.com/en-us/windows/win32/eventlog/eventlog-key)
 
 **Storage** tiene dos partes importantes **Windows Server Backup** y **Disk Management**.
 
@@ -128,7 +133,7 @@ Las variables de entorno almacenan infomación del entorno del sistema operativo
 
 > La variable de entorno `WINDIR` almacena la localización del directorio de instalación de Windows.
 
-> [!TIP] Otras maneras de encontrar las variables de entorno
+> [!TIP]
 > `Control Panel > System and Security > System > Advanced system settings > Environment Variables`
 > 
 > `Settings > System > About > system info > Advanced system settings > Environment Variables`
@@ -169,13 +174,14 @@ La línea de comandos (CMD) sigue siendo útil hoy día incluso cuando todo es a
 | `netstat`  | Despliega las estadísticas de TCP/IP actuales de la red |
 | `net`      | Administra los recursos de la red                       |
 Similar al comando `man` en Linux, los comandos en Windows también tienen un manual de ayuda que se puede desplegar con: `/?`
-> `ipconfig /?`
+
+> Por ejemplo: `ipconfig /?`
 
 > [!INFO]
-> Habrá comandos (como `net`) que no funcionará el `/?`, en este caso, la palabra
-> `help` es la que desplegará el modo de uso del comando: `net help user`
+> Habrá comandos (como `net`) que no funcionará `/?`, en este caso, la bandera
+> `help` desplegará el manual de uso del comando: `net help user`
 
-> [!TIP] ¿Qué comandos puedo ejecutar?
+> [!TIP]
 > Para ver todos los comandos que se pueden ejecutar en el CMD, revisar [aquí](https://ss64.com/nt/).
 
 ___

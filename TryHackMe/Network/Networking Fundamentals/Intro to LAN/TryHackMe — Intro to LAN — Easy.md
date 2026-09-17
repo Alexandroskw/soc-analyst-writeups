@@ -8,23 +8,23 @@ Se da una breve introducción de qué es una LAN (Local Area Network), que son l
 ### Task 1 — Introducing LAN topologies
 #### Star topology (Topología en estrella)
 Un solo nodo central que puede ser un Switch o un Hub maneja toda la red.
-![[Pasted image 20260717005518.png]]
+![](<Pasted image 20260717005518.png>)
 Debido a su propia naturaleza, es la más sencilla de implementar y mantener a pesar del costo elevado ya que se debe de comprar nuevo equipo cada que se quiera aumentar el tamaño de la red.
 Si la red crece, los problemas también, ya que se se hace muy difícil mantenerla. Si el dispositivo central falla, ya no se envían ni reciben nuevos datos.
 #### Bus topology (topología de bus)
 Es una topología bastante sencilla, consiste en un único cable (bus) central donde se conectan todos los dispositivos similar al trono de un árbol. Sin embargo, si algo malo le ocurre a este cable central, se pierde toda la conexión en los dispositivos.
-![[Pasted image 20260717010600.png]]
+![](<Pasted image 20260717010600.png>)
 Otra desventaja es que es mas propensa a tener cuellos de botella si todos los dispositivos están pidiendo datos y se vuelve complicado identificar qué dispositivo es el que lo está ocasionando ya que los datos pedidos de todos los dispositivos van en el mismo tronco común.
 #### Ringo topology (topología en anillo)
 Similar a la topología anterior en el concepto de un único bus. Los dispositivos se conectan secuencialmente formando un bucle (de ahí el nombre de anillo). Los datos se envían a través del bucle utilizando los demás nodos hasta que llegan al dispositivo objetivo.
-![[Pasted image 20260717011150.png]]
+![](<Pasted image 20260717011150.png>)
 Los nodos solo pueden enviar datos de otro dispositivo si no tienen nada que enviar. Es unidireccional, es decir, los datos viajarán en un solo sentido. Siempre enviará sus propios datos antes que los de otro nodo. Debido a su naturaleza, es muy fácil resolver sus problemas si es que surjen.
 #### ¿Qué es un switch?
 Son dispositivos que se agregan a una red para expandirla agregando otros dispositivos a sus puertos. Anteriormente se utilizaban hubs que repetían el paquete en todos los puertos. El switch, almacena en qué puerto está conectado cada dispositivo y envía el paquete correspondiente evitando colisiones de paquetes y por lo tanto, pérdidas de datos
-![[Pasted image 20260717012936.png]]
+![](<Pasted image 20260717012936.png>)
 #### ¿Qué es un router?
 Como su nombre lo indica, se encarga de enrutar el tráfico de una red a otra o dentro de la misma red. El enrutamiento es el nombre que se le da al viaje de los datos a través de una red. El router se encarga de encontrar la ruta más corta de un dispositivo a otro para que los datos sean entregados satisfactoriamente. El enrutamiento funciona mejor cuando hay mas de un router involucrado.
-![[Pasted image 20260717013347.png]]
+![](<Pasted image 20260717013347.png>)
 *Question 1: What does LAN stand for?*
 **Answer: Local Area Network**
 *Question 2: What is the verb given to the job that Routers perform?*
@@ -36,21 +36,21 @@ Como su nombre lo indica, se encarga de enrutar el tráfico de una red a otra o 
 *Question 5: What topology is expensive to set up and maintain?*
 **Answer: Star topology**
 *Question 6: Complete the interactive lab attached to this task. What is the flag given at the end?*
-![[Pasted image 20260717013933.png]]
-![[Pasted image 20260717014011.png]]
-![[Pasted image 20260717014108.png]]
-![[Pasted image 20260717014139.png]]
-![[Pasted image 20260717014252.png]]
-![[Pasted image 20260717014323.png]]
-![[Pasted image 20260717014343.png]]
-![[Pasted image 20260717014359.png]]
-![[Pasted image 20260717014424.png]]
-![[Pasted image 20260717014443.png]]
+![](<Pasted image 20260717013933.png>)
+![](<Pasted image 20260717014011.png>)
+![](<Pasted image 20260717014108.png>)
+![](<Pasted image 20260717014139.png>)
+![](<Pasted image 20260717014252.png>)
+![](<Pasted image 20260717014323.png>)
+![](<Pasted image 20260717014343.png>)
+![](<Pasted image 20260717014359.png>)
+![](<Pasted image 20260717014424.png>)
+![](<Pasted image 20260717014443.png>)
 
 **Answer: THM{TOPOLOGY_FLAWS}**
 ### Task 2 — A primer on subnetting
 The subnetting is splitting up a network in more small networks itself.
-![[Pasted image 20260717205558.png]]
+![](<Pasted image 20260717205558.png>)
 A subnet mask is represented in a 32-bit (4 bytes) number 0 - 255
 Networks needs to know where to send the data like the network administrator. The network admin uses the subnettig to categorise and assign parts of the network.
 The subnetting uses the IP address in three different ways
@@ -83,7 +83,7 @@ The subnetting uses the IP address in three different ways
 ## Task 3 — ARP
 Address Resolution Protocol is the intermediary between IP Address and MAC address. Its the responsable to find the iterface (MAC) associated to an IP that is being requested.
 When a device wants communicate with another device, it send a broadcast (ARP request) to the entire network asking for the IP address that is being requested and awaits for a answer of the device has it (ARP reply).
-![[Pasted image 20260717223503.png]]
+![](<Pasted image 20260717223503.png>)
 > *Question 1: What does ARP stand for?*
 > **Answer: Address Resolution Protocol**
 
@@ -98,7 +98,7 @@ When a device wants communicate with another device, it send a broadcast (ARP re
 
 ## DHCP
 IP can be assigned manually by the user in the device or in most common cases would be automatic with the DHCP (Dynamic Host Configuration Protocol). When a device connects to a network and if the user not assigned an IP manually, it sends a **DHCP Discover** package it any DHCP server is on the network. Then the DHCP server replies back with an **DHCP Offer**, to offer a new IP address. The device will confirm it wants the IP with **DHCP Request** and lastly the DHCP server will reply aknowledging this process witt **DHCP ACK**
-![[Pasted image 20260717225243.png]]
+![](<Pasted image 20260717225243.png>)
 > *Question 1: What type of DHCP packet is used by a device to **retrieve an IP address?**
 > **Answer: DHCP Discover**
 
