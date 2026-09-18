@@ -203,19 +203,18 @@ http://MACHINE_IP:8111/log?path=%2Ftmp%2Funiq_sort_parsed_consolidated.log
 ```
 
 ![consolidated_](<./Images/log_viewer_consolidated.png>)
- 
 ___
-*Pregunta 1: Upon accessing the log viewer URL for unparsed raw log files, what error does `/var/log/websrv-02/rsyslog_cron.log` show when selecting the different filters?*
+*Pregunta 1: Upon accessing the log viewer URL for unparsed raw log files, what error does `/var/log/websrv-02/rsyslog_cron.log` show when selecting the different filters?* \
 **Respuesta: No date field**
 
 > **Cuidado**: Se debe desplegar el menú (1 / 4 logs), no agregar un filtro (`+Add filter`).
 
-*Pregunta 2: What is the process of standardising parsed data into a more easily readable and query-able format?*
+*Pregunta 2: What is the process of standardising parsed data into a more easily readable and query-able format?* \
 **Respuesta: Normalisation**
 
 > **NOTA**: Se han procesado los archivos y se les ha proporcionado un formato único para una lectura más eficiente.
 
-*Pregunta 3: What is the process of consolidating normalised logs to enhance the analysis of activities related to a specific IP address?*
+*Pregunta 3: What is the process of consolidating normalised logs to enhance the analysis of activities related to a specific IP address?* \
 **Respuesta: Enrichment**
 
 > El enriquecimiento agrega metadatos relevantes a las entradas de los logs (por ejemplo el timestamp).
@@ -228,5 +227,6 @@ ___
 - El pipeline `awk -> grep -> sort -> uniq` es replicable para cualquier tipo de análisis rápido.
 - Los comandos que se repiten en **cron** son sospechosos por definición; no es normal que se creen estos comandos.
 - Los logs por si solos no dicen nada. Hasta que no se correlacionan, es cuando tienen importancia y revelan un ataque.
+
 ## References
 [TryHackMe — Intro to Log Analysis](<TryHackMe — Intro to Log Analysis.md>)
