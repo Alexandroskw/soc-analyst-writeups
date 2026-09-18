@@ -194,7 +194,7 @@ Similar al comando `man` en Linux, los comandos en Windows también tienen un ma
 
 > Por ejemplo: `ipconfig /?`
 
-> [!INFO]
+> [!IMPORTANT]
 > Habrá comandos (como `net`) que no funcionará `/?`, en este caso, la bandera
 > `help` desplegará el manual de uso del comando: `net help user`
 
