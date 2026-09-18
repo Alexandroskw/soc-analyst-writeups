@@ -4,6 +4,7 @@
 
 ## Introducción
 Sala enfocada en el uso básico de la línea de comandos en Windows.
+
 ___
 *Pregunta 1: What is the default command line interpreter in the Windows environment?*
 **Respuesta: `cmd.exe`**
