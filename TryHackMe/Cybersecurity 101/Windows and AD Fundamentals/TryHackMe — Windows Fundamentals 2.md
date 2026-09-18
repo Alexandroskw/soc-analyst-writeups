@@ -1,7 +1,6 @@
 # TryHackMe — Windows Fundamentals 2
-**Dificultad** -> easy | **Date** -> 01-sep-26 | **Type** -> Free
+**Dificultad** -> easy | **Date** -> 01-sep-26 | **Type** -> Free  
 **Sala** -> [Windows Fundamentals 2](https://tryhackme.com/room/windowsfundamentals2x0x)
-
 ## Introducción
 Sala enfocada en los fundamentos de Windows como la configuración de UAC, monitoreo de recursos y el registro de Windows.
 
@@ -22,8 +21,8 @@ La herramienta **MSConfig** es una forma avanzada de solucionar problemas, el pr
 | **Startup**  | Se debe de utilizar el Administrador de Tareas (Task Manager) ya que el MSConfig NO es un administrador de aplicaciones de inicio. |
 | **Tools**    | Da una breve descripción de cada herramienta en el sistema.                                                                        |
 
-> [!INFO]
-> En la VM de THM, se esta utilizando Windows Server no Windows 10 u 11. En la pestaña de **Startup** no aparecerá nada relacionado al Task Manager.
+> [!NOTE]
+> En el laboratorio de THM, se está utilizando Windows Server en lugar de Windows 10 u 11. Por tanto, en la pestaña **Startup** no aparecerá nada relacionado al Task Manager u otras herramientas relacionadas.
 
 #### Advance System Settings
 Windows da unas configuraciones adicionales para controlar el comportamiento del desempeño y la recuperación.
@@ -43,22 +42,22 @@ Windows puede crear un archivo de recuperación de fallos (crash dump file) siem
 El desplegable `Write debugging information` dice el tipo de archivo crash dump está configurado. Soporta varios tipos: **Automatic memory dump**, **Kernel memory dump**, **Small memory dump (256 KB)**, **Complete memory dump** y **Ninguno**.
 
 ___
-*Pregunta 1: What is the name of the service that lists Systems Internals as the manufacturer?*
+*Pregunta 1: What is the name of the service that lists Systems Internals as the manufacturer?* \
 **Respuesta: PsShutdown**
 
 > **NOTA**: Ordenar por `Manufacturer` y marcar la casilla `Hide all Microsoft services`.
 
-*Pregunta 2: Whom is the Windows license registered to?*
+*Pregunta 2: Whom is the Windows license registered to?* \
 **Respuesta: Windows User**
 
 > Buscar en la pestaña de `Tools` la herramienta `About Windows`.
 
-*Pregunta 3: What is the command for Windows Troubleshooting?*
+*Pregunta 3: What is the command for Windows Troubleshooting?* \
 **Respuesta: C:\Windows\System32\control.exe /name Microsoft.Troubleshooting**
 
 > **NOTA**: Buscar en la pestaña `Tools`
 
-*Pregunta 4: What command will open the Control Panel? (The answer is  the name of .exe, not the full path)*
+*Pregunta 4: What command will open the Control Panel? (The answer is  the name of .exe, not the full path)* \
 **Respuesta: `control.exe`**
 
 > Revisar la descripción de la herramienta en la pestaña de `Tools`.
@@ -72,9 +71,8 @@ El **U**ser **A**ccount **C**ontrol (**UAC**) puede ser desactivado por completo
 | **Notify for apps**        | Solo notifica cuando las apps tratan de hacer modificaciones pero no cuando se cambian las configuraciones manualmente (Por defecto). |
 | **Notify without dimming** | Exactamente a lo de la anterior, pero la pantalla no se atenúa.                                                                       |
 | **Never notify**           | Notificaciones apagadas, no hay ningún tipo de alerta.                                                                                |
-
 ___
-*Pregunta 1: What is the command to open User Account Control Settings? (The answer is the name of the .exe file, not the full path)*
+*Pregunta 1: What is the command to open User Account Control Settings? (The answer is the name of the .exe file, not the full path)* \
 **Respuesta: `UserAccountControlSettings.exe`**
 
 > **NOTA**: buscar en la sección de `Tools` de **MSConfig**.
@@ -91,17 +89,13 @@ La utilidad **Computer Management** tiene 3 secciones primarias: **System tools*
 | Performance           | Es una herramienta llamada **Performance Monitor**                                                 | Diagnosticar un incremento en el uso de los recursos del sistema.         |
 | Device manager        | Lista todos los dispositivos que están conectados en el sistema.                                   | Habilita o deshabilita un dispositivo que está causando conflicto.        |
 
-> [!INFO]
+> [!TIP]
 > **Eventos en Windows**
 > 
 > - Para más detalle de los tipos de eventos que se pueden registrar, revisar [Event types](https://learn.microsoft.com/en-us/windows/win32/eventlog/event-types)
 > - Para los logs estándar que se pueden ver bajo el Windows Logs, revisar [Eventlog Key](https://learn.microsoft.com/en-us/windows/win32/eventlog/eventlog-key)
 
-**Storage** tiene dos partes importantes **Windows Server Backup** y **Disk Management**.
-
-> [!NOTE]
-> Como el laboratorio es Windows Server, hay herramientas que no están disponibles en Windows 10 u 11.
-
+**Storage** tiene dos partes importantes **Windows Server Backup** y **Disk Management**. \
 El **Disk Management** puede realizar tareas avanzadas en los almacenamientos como:  Configurar nueva unidad, Extender una partición, Encoger una partición, Asignar o cambiar la letra de una unidad.
 
 Los **servicios** son un tipo especial de aplicación que se ejecutan en segundo plano.
@@ -123,13 +117,13 @@ El menú `Startup type` tiene 3 tipos de configuración del servicio
 > La herramienta **WMIC** ha sido sustituída en Windows 10 por PowerShell.
 
 ___
-*Pregunta 1: What is the command to open Computer Management?*
+*Pregunta 1: What is the command to open Computer Management?* \
 **Respuesta: `compmgmt.msc`**
 
-*Pregunta 2: When is the `npcapwatchdog` scheduled task set to run at?*
+*Pregunta 2: When is the `npcapwatchdog` scheduled task set to run at?* \
 **Respuesta: At system startup**
 
-*Pregunta 3: What is the name of the hidden folder that is shared?*
+*Pregunta 3: What is the name of the hidden folder that is shared?* \
 **Respuesta: sh4r3dF0Ld3r**
 
 ### Task 5 — System Information
@@ -147,37 +141,37 @@ Las variables de entorno almacenan infomación del entorno del sistema operativo
 > La variable de entorno `WINDIR` almacena la localización del directorio de instalación de Windows.
 
 > [!TIP]
+> **Donde encontrar la variable `WINDIR`**
+> 
 > `Control Panel > System and Security > System > Advanced system settings > Environment Variables`
 > 
 > `Settings > System > About > system info > Advanced system settings > Environment Variables`
 
 ___
-*Pregunta 1: What is the command to open System Information? (The answer is the name of the .exe file, not the full path)*
+*Pregunta 1: What is the command to open System Information? (The answer is the name of the .exe file, not the full path)* \
 **Respuesta: `msinfo32.exe`**
 
-*Pregunta 2: What is listed under System Name?*
+*Pregunta 2: What is listed under System Name?* \
 **Respuesta: `THM-WINFUN2`**
 
 > **NOTA**: revisar en `System Summary`.
 
-*Pregunta 3: Under Environment Variables, what is the value for ComSpec?*
+*Pregunta 3: Under Environment Variables, what is the value for ComSpec?* \
 **Respuesta: `%SystemRoot%\system32\cmd.exe`**
-
 ### Task 6 — Resource Monitor
 A diferencia de otras herramientas mencionadas anteriormente, esta está enfocada en usuarios avanzados que necesitan resolver problemas avanzados en el sistema.
 La pestaña **Overview** tiene cuatro secciones: **CPU**, **Disco**, **Red** y **Memoria**.
 Las pestañas consecuentes corresponden a una de estas secciones de forma más específica.
 
-> [!INFO]
+> [!NOTE]
 > Hay un panel en el extremo derecho de **Resource Monitor** que muestra una vista
 > gráfica en tiempo real de cada una de las secciones.
 
 ___
-*Pregunta 1: What is the command to open Resource Monitor? (The answer is the name of the .exe file, not the full path)*
+*Pregunta 1: What is the command to open Resource Monitor? (The answer is the name of the .exe file, not the full path)* \
 **Respuesta: `resmon.exe`**
 
 > **NOTA**: la misma sala da el nombre al inicio, no es necesario encender la VM.
-
 ### Task 7 — Command prompt
 La línea de comandos (CMD) sigue siendo útil hoy día incluso cuando todo es a través de una interfaz gráfica (GUI).
 
@@ -190,24 +184,21 @@ La línea de comandos (CMD) sigue siendo útil hoy día incluso cuando todo es a
 | `netstat`  | Despliega las estadísticas de TCP/IP actuales de la red |
 | `net`      | Administra los recursos de la red                       |
 
-Similar al comando `man` en Linux, los comandos en Windows también tienen un manual de ayuda que se puede desplegar con: `/?`
+Similar al comando `man` en Linux, los comandos en Windows también tienen un manual de ayuda que se puede desplegar con `/?`, por ejemplo `ipconfig /?`.
 
-> Por ejemplo: `ipconfig /?`
-
-> [!IMPORTANT]
-> Habrá comandos (como `net`) que no funcionará `/?`, en este caso, la bandera
-> `help` desplegará el manual de uso del comando: `net help user`
+> [!WARNING]
+> Habrá comandos (como `net`) donde no funcionará `/?`, en este caso la bandera
+> `help` desplegará el manual de uso del comando `net help user`
 
 > [!TIP]
 > Para ver todos los comandos que se pueden ejecutar en el CMD, revisar [aquí](https://ss64.com/nt/).
 
 ___
-*Pregunta 1: In System Configuration, what is the full command for Internet Protocol Configuration?*
+*Pregunta 1: In System Configuration, what is the full command for Internet Protocol Configuration?* \
 **Respuesta: `C:\Windows\System32\cmd.exe /k %windir%\system32\ipconfig.exe`**
 
-*Pregunta 2: For the ipconfig command, how do you show detailed information?*
+*Pregunta 2: For the ipconfig command, how do you show detailed information?* \
 **Respuesta: `ipconfig /all`**
-
 ### Task 8 — Registry Editor
 El Editor de Registro contiene información que constantemente se referencia durante la operación del S.O como:
 + **Perfiles por cada usuario**
@@ -221,11 +212,10 @@ El Editor de Registro contiene información que constantemente se referencia dur
 > puede afectar al comportamiento de todo el sistema.
 
 ___
-*Pregunta 1: What is the command to open the Registry Editor? (The answer is the name of  the .exe file, not the full path)*
+*Pregunta 1: What is the command to open the Registry Editor? (The answer is the name of  the .exe file, not the full path)* \
 **Respuesta: `regedt32.exe`**
 
 > **NOTA**: no es `regedIt32.exe`, se debe quitar la _i_.
-
 ## Lecciones aprendidas
 + `msconfig` es mas poderoso de lo que aparenta. Se debe revisar a detalle la pestaña de herramientas.
 + El **UAC** configurado por defecto es más que suficiente en la mayoría de los casos.
