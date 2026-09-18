@@ -7,9 +7,10 @@ Sala enfocada en el uso básico de la línea de comandos en Windows.
 
 ___
 *Pregunta 1: What is the default command line interpreter in the Windows environment?*
-
 **Respuesta: `cmd.exe`**
+
 ## Solución
+
 ### Task 2 — Basic System Information
 
 ```bash
@@ -39,6 +40,7 @@ ___
 **Respuesta: WINSRV2022-CORE**
 
 > Utilizar el comando `systeminfo`
+
 ### Task 3 — Network troubleshooting
 La línea de comandos tiene, valga la redundancia, comandos relacionados con la red para revisar la configuración actual, comprobar las conexiones actuales y resolver problemas.
 
@@ -89,6 +91,7 @@ ___
 **Respuesta:THM{CLI_POWER}**
 
 > **NOTA**: Utilizar `type` al final para desplegar la bandera
+
 ### Task 5 — Task and Process Management
 Similar al **Task Manager** (Administrador de tareas), en la línea de comandos existe el comando `tasklist` que despliega todos los procesos activos. Se puede filtrar un proceso específico y ver sus tareas relacionadas.
 
@@ -111,10 +114,12 @@ ___
 
 *Pregunta 2: What command can you use to abort a scheduled system shutdown?*
 **Respuesta: `shutdown /a`**
+
 ## Lecciones aprendidas
 + La terminal en Windows es tan útil como la terminal de Linux.
 + "Moverse" entre directorios y el manejo de archivos de ambos sistemas es virtualmente igual.
 + Los comandos en ambos sistemas son iguales en algunos casos. Si se aprenden los de un sistema, los del otro serán más intuitivos.
 + Diagnosticar problemas en Windows no excluye a la terminal.
+
 ## Referencias
 [TryHackMe — Windows Fundamentals 2](<TryHackMe — Windows Fundamentals 2.md>)
