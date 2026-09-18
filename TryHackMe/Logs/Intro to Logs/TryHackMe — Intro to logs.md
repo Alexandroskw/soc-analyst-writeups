@@ -1,5 +1,5 @@
 # TryHackMe — Intro to Logs
-**Dificultad** -> Fácil | **Fecha** -> 31-jul-26 | **Tipo** -> Free + Hands-on
+**Dificultad** -> Fácil | **Fecha** -> 31-jul-26 | **Tipo** -> Free + Hands-on \
 **Sala** -> [Intro to logs](https://www.tryhackme.com/room/introtologs)
 ___
 ## Introducción
@@ -18,10 +18,10 @@ $ xfreerdp /u:damianhall /p:Logs321! /v:<MACHINE_IP> /dynamic_resolution
 ```
 
 ___
-*Pregunta 1: What is the name of your colleague who left a note on your Desktop?*
+*Pregunta 1: What is the name of your colleague who left a note on your Desktop?* \
 **Respuesta: Perry**
 
-*Pregunta 2: What is the full path to the suggested log file for initial investigation?*
+*Pregunta 2: What is the full path to the suggested log file for initial investigation?* \
 **Respuesta: `/var/log/gitlab/nginx/access.log`**
 ### Task 3 — Types, formats and standards
 #### Log Types
@@ -34,12 +34,14 @@ Los formatos de los logs varían pero usualmente van a caer en 3 categorías:
 
 ___
 
-*Pregunta 1: Based on the list of log types in this task, what log type is used by the log file specified in the note from Task 2?*
+*Pregunta 1: Based on the list of log types in this task, what log type is used by the log file specified in the note from Task 2?* \
 **Respuesta: Web server log**
+
 > NGINX es un servidor web, por lo tanto son peticiones HTTP lo que se está buscando.
 
-*Pregunta 2: Based on the list of log formats in this task, what log format is used by the log file specified in the note from Task 2?*
+*Pregunta 2: Based on the list of log formats in this task, what log format is used by the log file specified in the note from Task 2?* \
 **Respuesta: Combined**
+
 > Los logs tienen IP, timestamp, método HTTP, URL, status, referrer y User-Agent, por lo tanto es NCSA Combined.
 
 ### Task 4 — Collection, Management and Centralisation
@@ -61,14 +63,14 @@ sudo systemctl restart rsyslog
 ls /var/log/websrv-02/
 ```
 
-![rsyslog](<rsyslog.png>)
+![rsyslog](<./Images/rsyslog.png>)
 
 ```bash
 # Revisar la actividad de SSH en el archivo 
 cat /var/log/websrv-02/rsyslog_sshd.log
 ```
 
-![tail_command](<tail.png>)
+![tail_command](<./Images/tail.png>)
 
 ``` bash
 # Revisar la configuración del cron
@@ -90,7 +92,7 @@ $FileCreateMode 0644
 cat /var/log/websrv-02/rsyslog_cron.log | grep -w "CMD"
 ```
 
-![cat_command](<cat.png>)
+![cat_command](<./Images/cat.png>)
 
 ___
 
@@ -153,18 +155,17 @@ sudo logrotate -f /etc/logrotate.d/98-websrv-02_sshd.conf
 
 Cuando termina la ejecución, se crea el archivo de hashes para el **rsyslog** de SSH (se resaltó en amarillo)
 
-![hashes](<rsyslog_hashes.png>)
+![hashes](<./Images/rsyslog_hashes.png>)
 
 ___
 
 *Pregunta 1: Based on the logrotate configuration `/etc/logrotate.d/99-websrv-02_cron.conf`, how many versions of old compressed log file copies will be kept?*
 **Respuesta: 24**
 
-![websrv](<websrv.png>)
+![websrv](<./Images/websrv.png>)
 
 *Pregunta 2: Based on the logrotate configuration `/etc/logrotate.d/99-websrv-02_cron.conf`, what is the log rotation frequency?*
 **Respuesta: hourly**
-
 ___
 ### Task 6 — Log analysis process, tools and techniques
 **Flujo del análisis:**
@@ -174,7 +175,7 @@ ___
 http://MACHINE_IP:8111/log?log=%2Fvar%2Flog%2Fgitlab%2Fnginx%2Faccess.log&log=%2Fvar%2Flog%2Fwebsrv-02%2Frsyslog_cron.log&log=%2Fvar%2Flog%2Fwebsrv-02%2Frsyslog_sshd.log&log=%2Fvar%2Flog%2Fgitlab%2Fgitlab-rails%2Fapi_json.log
 ```
 
-![log_viewer](<log_viewer.png>)
+![log_viewer](<./Images/log_viewer.png>)
 
 ```bash
 # Usar awk y sed para normalizar las entradas de los logs
@@ -201,7 +202,7 @@ uniq /tmp/sort_parsed_consolidated.log > /tmp/uniq_sort_parsed_consolidated.log
 http://MACHINE_IP:8111/log?path=%2Ftmp%2Funiq_sort_parsed_consolidated.log
 ```
 
-![consolidated_](<log_viewer_consolidated.png>)
+![consolidated_](<./Images/log_viewer_consolidated.png>)
  
 ___
 *Pregunta 1: Upon accessing the log viewer URL for unparsed raw log files, what error does `/var/log/websrv-02/rsyslog_cron.log` show when selecting the different filters?*
