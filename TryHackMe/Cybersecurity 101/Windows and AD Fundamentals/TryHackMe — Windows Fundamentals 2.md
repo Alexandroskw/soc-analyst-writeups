@@ -4,8 +4,11 @@
 
 ## Introducción
 Sala enfocada en los fundamentos de Windows como la configuración de UAC, monitoreo de recursos y el registro de Windows.
+
 ## Solución
+
 ### Task 2 — System configuration and Advance System Settings
+
 #### System Configuration
 La herramienta **MSConfig** es una forma avanzada de solucionar problemas, el proposito principal es detectarlos al iniciar el dispositivo.
 
@@ -18,6 +21,7 @@ La herramienta **MSConfig** es una forma avanzada de solucionar problemas, el pr
 | **Services** | Lista todos los sevicios del sistema independientemente de su estado (ejecutando o detenido).                                      |
 | **Startup**  | Se debe de utilizar el Administrador de Tareas (Task Manager) ya que el MSConfig NO es un administrador de aplicaciones de inicio. |
 | **Tools**    | Da una breve descripción de cada herramienta en el sistema.                                                                        |
+
 > [!INFO]
 > En la VM de THM, se esta utilizando Windows Server no Windows 10 u 11. En la pestaña de **Startup** no aparecerá nada relacionado al Task Manager.
 
@@ -37,22 +41,28 @@ Windows puede crear un archivo de recuperación de fallos (crash dump file) siem
 > `Advance > Startup and Recovery > Settings`
 
 El desplegable `Write debugging information` dice el tipo de archivo crash dump está configurado. Soporta varios tipos: **Automatic memory dump**, **Kernel memory dump**, **Small memory dump (256 KB)**, **Complete memory dump** y **Ninguno**.
+
 ___
 *Pregunta 1: What is the name of the service that lists Systems Internals as the manufacturer?*
 **Respuesta: PsShutdown**
+
 > **NOTA**: Ordenar por `Manufacturer` y marcar la casilla `Hide all Microsoft services`.
 
 *Pregunta 2: Whom is the Windows license registered to?*
 **Respuesta: Windows User**
+
 > Buscar en la pestaña de `Tools` la herramienta `About Windows`.
 
 *Pregunta 3: What is the command for Windows Troubleshooting?*
 **Respuesta: C:\Windows\System32\control.exe /name Microsoft.Troubleshooting**
+
 > **NOTA**: Buscar en la pestaña `Tools`
 
 *Pregunta 4: What command will open the Control Panel? (The answer is  the name of .exe, not the full path)*
 **Respuesta: `control.exe`**
+
 > Revisar la descripción de la herramienta en la pestaña de `Tools`.
+
 ### Task 3 — Change UAC Settings
 El **U**ser **A**ccount **C**ontrol (**UAC**) puede ser desactivado por completo pero no se recomienda. Es un slider con 4 niveles de configuración; cada nivel cambia el cómo es que Windows da las alerta si una aplicación quiere hacer modificaciones a nivel de sistema.
 
@@ -62,6 +72,7 @@ El **U**ser **A**ccount **C**ontrol (**UAC**) puede ser desactivado por completo
 | **Notify for apps**        | Solo notifica cuando las apps tratan de hacer modificaciones pero no cuando se cambian las configuraciones manualmente (Por defecto). |
 | **Notify without dimming** | Exactamente a lo de la anterior, pero la pantalla no se atenúa.                                                                       |
 | **Never notify**           | Notificaciones apagadas, no hay ningún tipo de alerta.                                                                                |
+
 ___
 *Pregunta 1: What is the command to open User Account Control Settings? (The answer is the name of the .exe file, not the full path)*
 **Respuesta: `UserAccountControlSettings.exe`**
@@ -79,6 +90,7 @@ La utilidad **Computer Management** tiene 3 secciones primarias: **System tools*
 | Local User and Groups | Lista los usuarios y grupos en el sistema                                                          | Ver si recientemente se ha creado un nuevo usuario.                       |
 | Performance           | Es una herramienta llamada **Performance Monitor**                                                 | Diagnosticar un incremento en el uso de los recursos del sistema.         |
 | Device manager        | Lista todos los dispositivos que están conectados en el sistema.                                   | Habilita o deshabilita un dispositivo que está causando conflicto.        |
+
 > [!INFO]
 > **Eventos en Windows**
 > 
@@ -106,6 +118,7 @@ El menú `Startup type` tiene 3 tipos de configuración del servicio
 | Automático    | Inicia al encender el equipo (por defecto)           |
 | Manual        | Arranca cuando otro servicio o el usuario lo ejecuta |
 | Desactivado   | No se ejecutará                                      |
+
 > [!WARNING]
 > La herramienta **WMIC** ha sido sustituída en Windows 10 por PowerShell.
 
@@ -120,6 +133,7 @@ ___
 **Respuesta: sh4r3dF0Ld3r**
 
 ### Task 5 — System Information
+
 > *Windows incluye una herramienta llamada Microsoft System Information (`Msinfo32.exe`). Esta herramienta recopila información sobre la computadora y muestra una vista completa del hardware, componentes del sistema y entorno de software, que puede ser utilizada para diagnosticar problemas informáticos*.
 
 | Sección              | Descripción                                                                                                                                                                                                                                                            |
@@ -143,10 +157,12 @@ ___
 
 *Pregunta 2: What is listed under System Name?*
 **Respuesta: `THM-WINFUN2`**
+
 > **NOTA**: revisar en `System Summary`.
 
 *Pregunta 3: Under Environment Variables, what is the value for ComSpec?*
 **Respuesta: `%SystemRoot%\system32\cmd.exe`**
+
 ### Task 6 — Resource Monitor
 A diferencia de otras herramientas mencionadas anteriormente, esta está enfocada en usuarios avanzados que necesitan resolver problemas avanzados en el sistema.
 La pestaña **Overview** tiene cuatro secciones: **CPU**, **Disco**, **Red** y **Memoria**.
@@ -161,6 +177,7 @@ ___
 **Respuesta: `resmon.exe`**
 
 > **NOTA**: la misma sala da el nombre al inicio, no es necesario encender la VM.
+
 ### Task 7 — Command prompt
 La línea de comandos (CMD) sigue siendo útil hoy día incluso cuando todo es a través de una interfaz gráfica (GUI).
 
@@ -172,6 +189,7 @@ La línea de comandos (CMD) sigue siendo útil hoy día incluso cuando todo es a
 | `cls`      | Limpia la línea de comandos                             |
 | `netstat`  | Despliega las estadísticas de TCP/IP actuales de la red |
 | `net`      | Administra los recursos de la red                       |
+
 Similar al comando `man` en Linux, los comandos en Windows también tienen un manual de ayuda que se puede desplegar con: `/?`
 
 > Por ejemplo: `ipconfig /?`
@@ -189,6 +207,7 @@ ___
 
 *Pregunta 2: For the ipconfig command, how do you show detailed information?*
 **Respuesta: `ipconfig /all`**
+
 ### Task 8 — Registry Editor
 El Editor de Registro contiene información que constantemente se referencia durante la operación del S.O como:
 + **Perfiles por cada usuario**
