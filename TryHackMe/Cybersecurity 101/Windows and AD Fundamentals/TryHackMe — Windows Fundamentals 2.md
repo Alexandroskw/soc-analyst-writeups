@@ -2,7 +2,6 @@
 **Dificultad** -> easy | **Date** -> 01-sep-26 | **Type** -> Free
 **Sala** -> [Windows Fundamentals 2](https://tryhackme.com/room/windowsfundamentals2x0x)
 
-___
 ## Introducción
 Sala enfocada en los fundamentos de Windows como la configuración de UAC, monitoreo de recursos y el registro de Windows.
 ## Solución

@@ -7,6 +7,7 @@ Sala enfocada en el uso básico de la línea de comandos en Windows.
 
 ___
 *Pregunta 1: What is the default command line interpreter in the Windows environment?*
+
 **Respuesta: `cmd.exe`**
 ## Solución
 ### Task 2 — Basic System Information
@@ -25,9 +26,8 @@ ssh user@<IP_MACHINE>
 | `ver`        | Versión del S.O.                            |      `uname -r`      |
 | `systeminfo` | Información detallada del S.O.              |    `hostnamectl`     |
 
-> [!INFO]
-> Si la información desplegada es mucha, se puede utilzar un pipe `|` con `more`:
-> `systeminfo | more`
+> [!TIP]
+> Para poder visualizar la información de forma más condensada se puede utilizar el comando `more` de la siguiente forma: `systeminfo | more`.
 
 ___
 *Pregunta 1: What is the OS version of the Windows VM?*
