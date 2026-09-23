@@ -56,7 +56,7 @@ La documentación de las herramientas o productos es la forma más confiable de 
 
 Una de estas documentaciones son las páginas `man` en la terminal de Linux. El uso es simple: `man <comando>`. Se puede entender la herramienta sin la necesidad de buscar un tutorial por fuera.
 
-![man_page](<./Images/nc_man_page.png>)
+![man_page](nc_man_page.png)
 ___
 *Pregunta 1: What is the example command?* \
 **Respuesta: `nc host.example.com 42`**
@@ -79,4 +79,4 @@ ___
 * GitHub es más que una página para compartir código, también puede ser un lugar para investigar de las vulnerabilidades más actuales.
 
 ## Referencias
-[[Network Security Essentials]]
+[TryHackMe — Network Traffic Basics](../../Network/Network%20Traffic%20Basics/TryHackMe%20—%20Network%20Traffic%20Basics.md)

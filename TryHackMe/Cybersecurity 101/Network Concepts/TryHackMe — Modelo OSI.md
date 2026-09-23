@@ -1,7 +1,7 @@
 # TryHackMe — Modelo OSI
 **Dificultad** -> easy | **Date** -> 04-sep-26 | **Type** -> Free \
 **Sala** -> [Networking Concepts](https://tryhackme.com/room/networkingconcepts)
-___
+
 ## Introducción
 Sala enfocada en los modelos OSI y TCP/IP de Internet y las diferencias entre ambos.
 
@@ -19,8 +19,7 @@ El modelo OSI se compone de 7 capas:
 7. **Aplicación** (Application)
 
 > [!TIP]
-> **Mnemotecnia, un gran aliado**
-> 
+> **Mnemotecnia, un gran aliado** \
 > Se pueden utilizar mnemotecnias para recordar el orden de las capas
 > - **Please Do Not Throw Spinach Pizza Away**
 > - **All People Seem To Need Data Processing**
@@ -162,9 +161,9 @@ El protocolo `telnet` (Teletype Network) permite la conexión remota a una termi
 
 #### Conectando al laboratorio
 
-> Conectarse al laboratorio mediante AttackBox
-
 ```bash
+## Conectarse al laboratorio mediante 'AttackBox' ##
+
 # Conectando al servidor telnet (La "IP_MACHINE" varía)
 telnet <IP_MACHINE> 80
 
