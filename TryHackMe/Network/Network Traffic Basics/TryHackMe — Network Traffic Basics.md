@@ -258,4 +258,4 @@ Standard query response 0x41eb TXT c2.tryhackrne.thn
 - Hay algunas herramientas especializadas para capturar los paquetes: Wireshark, TCPdump, IPS/IDS (snort), Suricata y Zeek
 
 # References
-[TryHackMe — Modelo OSI](<../../../Cybersecurity%20101/Network%20Concepts/TryHackMe — Modelo OSI.md>)
+[TryHackMe — Modelo OSI](<../../Cybersecurity%20101/Network%20Concepts/TryHackMe%20—%20Modelo%20OSI.md>)
