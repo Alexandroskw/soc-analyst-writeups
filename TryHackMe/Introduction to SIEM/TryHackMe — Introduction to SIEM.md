@@ -6,17 +6,20 @@
 La sala se enfoca en el **Security Information and Event Management system** (**SIEM**) que es la solución de seguridad principal que tiene un Analista SOC, qué hace, como ingiere los logs y cómo funciona el flujo de una alerta.
 
 ## Solution
+
 ### Task 1 — Introduction
 *Pregunta 1: What does SIEM stand for?* \
 **Respuesta: Security Information and Event Management system**.
 
 ### Task 2 — Logs everywhere, answers nowhere
 #### Logs everywhere
+
 A los dispositivos los podemos llamar fuentes de registros (log sources). Se utilizan para identificar actividad maliciosa o soluciones a problemas. Se dividen en dos tipos:
 - **Host-Centric log sources**.
 - **Network-centric log sources**.
 
 #### Host-Centric Log Sources
+
 Los dispositivos que generan este tipo de logs son windows, linux, servidores, etc., básicamente endpoints:
 - Un usuario accesando a un archivo o intentando autenticarse
 - Un proceso en ejecución realiza una actividad
@@ -30,6 +33,7 @@ Son los registros que se generan cuando los dispositivos se comunican entre ello
 - Tráfico de red
 - Un usuario accediendo a un recurso de la empresa por medio de VPN
 - Archivos de red compartiendo actividad
+
 Crean una gran cantidad de registros constantemente
 
 #### Answers Nowhere
@@ -69,7 +73,8 @@ Algunos de los paneles de control por defecto de la mayoría de los SIEM son:
 #### Windows machine
 Windows registra cada evento que pueda ser visto por el **Event Viewer**. Le asigna un ID único a cada actividad para que el analista pueda examinar el evento y seguirlo.
 
-![Even_viewer_interface](<./Images/Event Viewer en Windows.png>)
+![Event_viewer_interface](<./Images/Event Viewer en Windows.png>)
+
 #### Linux machine
 Algunas de las locaciones más comunes donde Linux almacena los logs son:
 - `/var/log/httpd` o `/var/log/apache`: Logs de petición o respuesta y de errores de HTTP.
@@ -138,9 +143,11 @@ Los SIEM tienen reglas de detección diseñadas para detectar amenazas:
 Nombre del host (hostname) del equipo infectado obtenido al mismo tiempo que el nombre del usuario: **HR_02**. \
 Causa de la alerta disparada: la alerta se dispara si contiene la palabra *miner* o *crypt*.
 
+**Causa de la alerta disparada**: la alerta se dispara si contiene la palabra _miner_ o _crypt_. **miner** en el caso actual.
+
 ![](<./Images/rule.png>)
 
-Determinar Falso o Verdadero Positivo: Verdadero Positivo. El host necesita ser aislado. 
+Determinar Falso o Verdadero Positivo: Verdadero Positivo; el host necesita ser aislado. 
 
 ---
 *Pregunta 1: After clicking on the **Start Suspicious Activity button**, which process caused the alert?* \
