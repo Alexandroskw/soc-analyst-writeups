@@ -115,7 +115,6 @@ Los SIEM tienen reglas de detección diseñadas para detectar amenazas:
 
 > Las alertas que resultan en un **Falso Positivo** necesitan ser ajustadas para que no vuelva a ocurrir en el futuro.
 
----
 ### Task 6 — Lab Work
 **Inicio del laboratorio**: Start Suspicious activity
 

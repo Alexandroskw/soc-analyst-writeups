@@ -30,7 +30,7 @@ ___
 **Respuesta: Debug**
 
 > **PALABRA CLAVE** -> *application*
-___
+
 ## Task 3 — Where To Start and What To Do After Deciding the Log Purpose
 Es una buena idea hacer reuniones y lluvia de ideas. Las reuiniones pueden parecer algo superfluo pero puede ser el desencadenante de una lluvia de ideas.
 Hacer preguntas (correctas) es la forma más rápida de crear un plan al identificar las necesidades de cada configuración de los logs ya que cada una de ellas cumple un rol en específico.
@@ -60,7 +60,9 @@ _You are a consultant working for a growing startup. As a consultant, you partic
 > **Cumplir con los requisitos operativos y de seguridad específicos (no negociables) mientras que también se considera la viabilidad de mejorar la capacidad mediante la implementación de datos e ideas adicionales.**
 
 Se debe encontrar un equilibrio en las desiciones a nivel "operativo y de gestión" para lograr resultados seguros, eficientes, proactivos, resilientes y sostenibles en el ámbito de amenazas y de TI.
+
 ___
+
 _The session continues, and your teammates need your help; they will negotiate for logging budget and operation details. As a consultant, you must remind them of a vital point._ \
 *Pregunta 1: Which requirements are non-negotiable?* \
 **Respuesta: Operational and security requirements**
@@ -92,6 +94,7 @@ _The session continues, and your teammates need your help; they will negotiate f
 | Miscelanea                          | - Falta de planificación y hoja de ruta.<br>- Falta de recursos financieros/presupuesto.<br>- Falta de escenarios de implementación, guías y ejercicios.<br>- Falta de habilidades técnicas para implementar, mantener y analizar.<br>- Centrarse en la recopilación de registros en lugar de la fase de análisis.<br>- Ignorar los factores humanos y los posibles errores del sistema.                        |
 
 ___
+
 _Your team is working on policies to decide which logs will be stored and which portion will be available for analysis._ \
 *Pregunta 1: **Which of the given logging principles would be implemented and improved?*** \
 **Respuesta: Archiving and Accessibility**

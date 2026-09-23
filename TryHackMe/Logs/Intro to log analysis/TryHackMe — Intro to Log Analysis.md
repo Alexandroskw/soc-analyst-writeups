@@ -115,7 +115,7 @@ La línea de comandos es la forma más rápida que se tiene para hacer un análi
 #### `cat`
 Puede leer varios archivos y mostrar el contenido en la terminal. Despliega todo el contenido que tenga el (o los archivos)
 
-![cat_bat_command](<./cat_command.png>)
+![cat_bat_command](<./Images/cat_command.png>)
 
 En el caso de los logs, no es muy útil debido al gran tamaño de estos archivos.
 
@@ -125,7 +125,7 @@ En el caso de los logs, no es muy útil debido al gran tamaño de estos archivos
 #### `less`
 Es una mejora sobre el comando `cat` para ver archivos de log grandes. Divide el archivo en páginas y se puede desplazar a través de ellas con las flechas o poner el número de la página.
 
-![less_command](<./less_command.png>)
+![less_command](<./Images/less_command.png>)
 
 #### `tail`
 Está diseñado para ver únicamente el final de los archivos. Útil para ver lo último que se ha ingresado en el contexto de los log. Por defecto, `tail` muestra solamente 10 entradas pero con la bandera `-n` se puede aumentar el número de entradas.
@@ -265,15 +265,15 @@ ____
 Es una herramienta que ofrece más de 300 operaciones que combinadas para hacer una receta, hace que manejar datos sea muy sencillo. Algunas de las herramientas mas importantes son: **codificación y decodificación de datos**, **algoritmos de hasheo y cifrado**, y **análisis de datos**.
 En CyberChef también se puede utilizar expresiones regulares.
 
-![RegEx en CyberChef](<./RegEx_en_CyberChef.png>)
+![RegEx en CyberChef](<./Images/RegEx_en_CyberChef.png>)
 
 Para subir un archivo en el campo de "Input" damos clic en este icono
 
-![upload_file](<./upload_file_cyberchef.png>)
+![upload_file](<./Images/upload_file_cyberchef.png>)
 
 Podemos filtrar por las IP y buscar algún patrón.
 
-![log_file](<./log_file_cyberchef.png>)
+![log_file](<./Images/log_file_cyberchef.png>)
 
 ___
 *Pregunta 1: Locate the "loganalysis.zip" file under `/root/Rooms/introloganalysis/task8` and extract the contents.* \
