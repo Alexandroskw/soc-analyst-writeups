@@ -10,6 +10,7 @@ Sala enfocada en la introducción de conceptos básicos de las redes como la dir
 Las redes pueden estar formadas desde 2 dispositivos hasta millones de ellos. Puede ser desde una laptop y un celular hasta cámaras de seguridad, semáforos e incluso en el sector agrario.
 
 > Las redes son cosas conectadas
+
 ___
 *Pregunta 1: What is the key term for devices that are connected together?* \
 **Respuesta: Network**
@@ -57,7 +58,8 @@ En una red los dispositivos deben de identificarse y ser identificados para mant
 > Debido a la escasez de IPv4 se ha desarrollado el protocolo IPv6.
 
 > [!WARNING]
-> 
+> **Las MAC no son lo que aparentan** \
+> El *Spoofing* consiste en un dispositivo fingiendo ser otro dentro de la misma red.
 
 ___
 *Pregunta 1: What does the term "IP" stand for?* \
@@ -75,9 +77,13 @@ ___
 *Pregunta 5: Deploy the interactive lab using the "View Site" button and spoof your MAC address to access the site.  What is the flag?* \
 **Respuesta: THM{YOU_GOT_ON_TRYHACKME}**
 
-> **NOTA**: Hacer spoofing a la MAC de Alice
+> **NOTA**: Hacer spoofing
 
 ### Task 4 — Ping (ICMP)
+Ping es una de las herramientas más fundamentales para comprobar una red. Utiliza paquetes **ICMP** (Internet Control Message Protocol) para determinar el desempeño de red entre dos dispositivos.
+
+> [!NOTE]
+> Ping mide el tiempo que tardan los paquetes en viajar entre un dispositivo a otro mediante el echo del paquete **ICMP** y posteriormente la respuesta de echo del receptor.
 
 ___
 *Pregunta 1: What protocol does ping use?* \
@@ -89,3 +95,14 @@ ___
 *Pregunta 3: What flag do you get when you ping 8.8.8.8?* \
 **Respuesta: THM{I_PINGED_THE_SERVER}**
 Open the Site attached and put the `8.8.8.8` in the textbox and press the button "Send Ping Request"
+
+# Lecciones aprendidas
+- En términos sencillos, el Internet es una red de redes.
+- El "abuelo" de Internet fue la **ARPANET** en la década de 1960.
+- El Internet moderno surgió en 1989 gracias a **Tim Berners-Lee**
+- La dirección MAC no puede cambiar, está grabada en la interfaz de red desde la fábrica que lo hizo
+	- Las direcciones MAC pueden ser suplantadas.
+	- Las direcciones MAC se dividen en dos partes.
+- Las IP se dividen en IP's públicas y privadas.
+- Las direcciones IPv4 se están acabando, por tal motivo se ha creado el protocolo IPv6 que son 2^32 direcciones IP públicas.
+- Ping utiliza el protocolo **ICMP** para comprobar la conexión entre dos dispositivos.

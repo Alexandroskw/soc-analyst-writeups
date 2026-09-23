@@ -157,3 +157,6 @@ ___
 - La dirección de red es tanto el inicio de una red como el identificador de la misma.
 - El protocolo ARP es el encargado de vincular una dirección MAC con una dirección IP.
 - El DHCP se encarga de asignar las direcciones IP a los dispositivos de una red
+
+## Referencias
+[TryHackMe — What is Networking](../What%20is%20Networking/TryHackMe%20—%20What%20is%20Networking.md)
