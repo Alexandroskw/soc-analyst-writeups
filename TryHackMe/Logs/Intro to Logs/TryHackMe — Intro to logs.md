@@ -227,6 +227,3 @@ ___
 - El pipeline `awk -> grep -> sort -> uniq` es replicable para cualquier tipo de análisis rápido.
 - Los comandos que se repiten en **cron** son sospechosos por definición; no es normal que se creen estos comandos.
 - Los logs por si solos no dicen nada. Hasta que no se correlacionan, es cuando tienen importancia y revelan un ataque.
-
-## References
-[TryHackMe — Intro to Log Analysis](<TryHackMe — Intro to Log Analysis.md>)

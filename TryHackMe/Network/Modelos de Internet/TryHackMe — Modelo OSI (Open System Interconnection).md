@@ -32,5 +32,4 @@ Señales, cables, conectores. No hay ningún protocolo, es el hardware y la señ
 > **A**ll **P**eople **S**eem **T**o **N**eed **D**ata **P**rocessing
 
 La letra inicial de cada una de las palabras representa una de las capas del modelo de arriba hacia abajo.
-[TryHackMe — Modelo TCP-IP](<TryHackMe — Modelo TCP-IP.md>)
-[TryHackMe — Comando ping](<TryHackMe — Comando ping.md>)
+[TryHackMe — Modelo TCP-IP](<TryHackMe — Modelo TCP-IP.md>)[TryHackMe — Comando ping](<TryHackMe — Comando ping.md>)

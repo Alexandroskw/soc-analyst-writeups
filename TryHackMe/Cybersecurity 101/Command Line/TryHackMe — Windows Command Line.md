@@ -1,6 +1,7 @@
 # TryHackMe — Windows Command Line
 **Dificultad** -> easy | **Date** -> 03-sep-26 | **Type** -> Free \
 **Sala** -> [Windows command line](https://tryhackme.com/room/windowscommandline)
+
 ## Introducción
 Sala enfocada en el uso básico de la línea de comandos en Windows.
 ___
@@ -18,7 +19,7 @@ ssh user@<IP_MACHINE>
 ```
 
 | Comando      | Descripción                                 | Equivalente en Linux |
-| ------------ | ------------------------------------------- |:--------------------:|
+| :----------: | ------------------------------------------- |:--------------------:|
 | `set`        | Verifica la ruta desde la línea de comandos |        `env`         |
 | `ver`        | Versión del S.O.                            |      `uname -r`      |
 | `systeminfo` | Información detallada del S.O.              |    `hostnamectl`     |
@@ -28,7 +29,7 @@ ssh user@<IP_MACHINE>
 
 ___
 *Pregunta 1: What is the OS version of the Windows VM?* \
-**Respuesta: 10.0.20348.2655**
+**Respuesta: `10.0.20348.2655`**
 
 > Utilizar el comando `ver` 
 
@@ -41,7 +42,7 @@ ___
 La línea de comandos tiene, valga la redundancia, comandos relacionados con la red para revisar la configuración actual, comprobar las conexiones actuales y resolver problemas.
 
 |  Comando   | Descripción                                                             |                       Ejemplo de uso                       |
-| :--------: | :---------------------------------------------------------------------- | ---------------------------------------------------------- |
+| :--------: | ----------------------------------------------------------------------- | ---------------------------------------------------------- |
 | `ipconfig` | Despliega información básica de la red.                                 |                      `ipconfig /all`                       |
 |   `ping`   | Manda un paquete `ICMP` para comprobar la conexión con el servidor.     |                     `ping google.com`                      |
 | `tracert`  | Traza una ruta a través de la red para alcanzar el objetivo             |                    `tracert google.com`                    |
@@ -49,7 +50,6 @@ La línea de comandos tiene, valga la redundancia, comandos relacionados con la 
 | `netstat`  | Lista las conexiones de red actuales y los puertos que están escuchando |                      `netstat -a -i`                       |
 
 ___
-
 *Pregunta 1: Which command can we use to look up the server’s physical address (MAC address)?* \
 **Respuesta: `ipconfig /all`**
 
@@ -65,7 +65,7 @@ ___
 
 |    Comando    | Descripción                                                                             | Equivalente en Linux |
 | :-----------: | --------------------------------------------------------------------------------------- | :------------------: |
-|     `cd`      | Moverse entre directorios. Sin argumento despliega la información del directorio actual |        `pwd`         |
+|     `cd`      | Moverse entre directorios. Sin argumento despliega la información del directorio actual |   `pwd` (similar)    |
 |     `dir`     | Lista los directorios hijo dentro del directorio actual                                 |       `ls -l`        |
 |    `tree`     | Representación visual de los directorios hijo                                           |        Igual         |
 |    `mkdir`    | Crea un nuevo directorio                                                                |        Igual         |
@@ -108,11 +108,11 @@ ___
 *Pregunta 2: What command can you use to abort a scheduled system shutdown?* \
 **Respuesta: `shutdown /a`**
 
-## Lecciones aprendidas
+# Lecciones aprendidas
 + La terminal de Windows es tan útil como la terminal de Linux.
 + Navegar entre directorios y el manejo de archivos en ambos sistemas es virtualmente igual.
 + Los comandos de ambos sistemas son iguales en algunos casos. Si se aprenden los de un sistema, los del otro serán más intuitivos.
 + Diagnosticar problemas en Windows no excluye la terminal.
 
-## Referencias
-[TryHackMe — Windows Fundamentals 2](<TryHackMe — Windows Fundamentals 2.md>)
+# Referencias
+[TryHackMe — Windows Fundamentals 2](<../Windows and AD Fundamentals/TryHackMe — Windows Fundamentals 2.md>)

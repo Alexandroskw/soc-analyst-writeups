@@ -64,4 +64,4 @@ When press the "Request button we got the flag"
 Open the Site attached and put the `8.8.8.8` in the textbox and press the button "Send Ping Request"
 ![](<Pasted image 20260716231758.png>)
 We got the flag
-**Answer: THM{I_PINGED_THE_SERVER}**
+**Answer: THM{I_PINGED_THE_SERVER}**___
