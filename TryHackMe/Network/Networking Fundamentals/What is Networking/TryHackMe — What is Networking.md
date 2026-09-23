@@ -56,6 +56,9 @@ En una red los dispositivos deben de identificarse y ser identificados para mant
 
 > Debido a la escasez de IPv4 se ha desarrollado el protocolo IPv6.
 
+> [!WARNING]
+> 
+
 ___
 *Pregunta 1: What does the term "IP" stand for?* \
 **Respuesta: Internet Protocol**
@@ -71,6 +74,8 @@ ___
 
 *Pregunta 5: Deploy the interactive lab using the "View Site" button and spoof your MAC address to access the site.  What is the flag?* \
 **Respuesta: THM{YOU_GOT_ON_TRYHACKME}**
+
+> **NOTA**: Hacer spoofing a la MAC de Alice
 
 ### Task 4 — Ping (ICMP)
 
