@@ -1,7 +1,6 @@
 # TryHackMe — Intro to Logs
 **Dificultad** -> Fácil | **Fecha** -> 31-jul-26 | **Tipo** -> Free + Hands-on \
-**Sala** -> [Intro to logs](https://www.tryhackme.com/room/introtologs)
-___
+
 ## Introducción
 La sala se enfoca en lo que es un log, las fuentes y los métodos de recolección de los mismos. También se aborda el logging desde cero en Linux con **rsyslog** y **logrotate** para analizar y detectar posible actividad maliciosa.
 ## Solución
@@ -124,7 +123,7 @@ $ cat /etc/rsyslog.d/99-websrv-02-cron.conf
 
 ```bash
 # Crear el archivo de configuración de SSH
-/etc/logrotate.d/98-websrv-02_sshd.conf
+touch /etc/logrotate.d/98-websrv-02_sshd.conf
 ```
 
 ```yaml
@@ -166,7 +165,7 @@ ___
 
 *Pregunta 2: Based on the logrotate configuration `/etc/logrotate.d/99-websrv-02_cron.conf`, what is the log rotation frequency?*
 **Respuesta: hourly**
-___
+
 ### Task 6 — Log analysis process, tools and techniques
 **Flujo del análisis:**
 
@@ -207,7 +206,7 @@ ___
 *Pregunta 1: Upon accessing the log viewer URL for unparsed raw log files, what error does `/var/log/websrv-02/rsyslog_cron.log` show when selecting the different filters?* \
 **Respuesta: No date field**
 
-> **Cuidado**: Se debe desplegar el menú (1 / 4 logs), no agregar un filtro (`+Add filter`).
+> **CUIDADO**: Se debe desplegar el menú (1 / 4 logs), no agregar un filtro (`+Add filter`).
 
 *Pregunta 2: What is the process of standardising parsed data into a more easily readable and query-able format?* \
 **Respuesta: Normalisation**
@@ -227,6 +226,3 @@ ___
 - El pipeline `awk -> grep -> sort -> uniq` es replicable para cualquier tipo de análisis rápido.
 - Los comandos que se repiten en **cron** son sospechosos por definición; no es normal que se creen estos comandos.
 - Los logs por si solos no dicen nada. Hasta que no se correlacionan, es cuando tienen importancia y revelan un ataque.
-
-## References
-[TryHackMe — Intro to Log Analysis](<TryHackMe — Intro to Log Analysis.md>)

@@ -120,7 +120,6 @@ Los SIEM tienen reglas de detección diseñadas para detectar amenazas:
 
 > Las alertas que resultan en un **Falso Positivo** necesitan ser ajustadas para que no vuelva a ocurrir en el futuro.
 
----
 ### Task 6 — Lab Work
 **Inicio del laboratorio**: Start Suspicious activity
 
@@ -174,3 +173,6 @@ Determinar Falso o Verdadero Positivo: Verdadero Positivo; el host necesita ser 
 - Los EventID `104` y `4688` son vitales en las detecciones de equipos Windows. Se deben memorizar o cuando menos tener presente en todo momento.
 - El SIEM es una herramienta, el analista lo debe configurar. Los falsos positivos también son parte del día a día.
 - El flujo de triaje siempre es: **alerta → contexto → decisión → acción**.
+
+# Referencias
+[TryHackMe — Network Traffic Basics](<../Network/Network Traffic Basics/TryHackMe — Network Traffic Basics.md>)
