@@ -12,14 +12,14 @@ In this WriteUp I will documentate the process for the "**What is networking?**"
 Is only a little explication about what is a networking and what is a network itself. The networks are things connected and networks are part of our lives everyday
 *Question 1: What is the key term for devices that are connected together?*
 Answer: **Network**
-![](<Pasted image 20260716191317.png>)
+![Pasted image 20260716191317](./Imagenes/Pasted%20image%2020260716191317.png)
 In the image of above, are a simple example of a network of friends Alice, Bob and Jim
 ### Task 2 — What is the internet?
 The internet is a massive one network consisting in a many small networks.}
-![](<Pasted image 20260716192206.png>)
+![Pasted image 20260716192206](./Imagenes/Pasted%20image%2020260716192206.png)
 Now in the image of above, Alice introduce Zayn and Toby to Bob and Jim but Alice only can speak the language of Zayn and Toby. Now, Alice made a new network because she is the only one can speak with Zayn and Toby and Bob and Jim in their respective languages.
 The first network in history was the **ARPANET** project builded by the United States Defense Departament in the late 1960. The "modern" network was created in 1989 by **Tim Berners-Lee** with his World Wide Web (**WWW**).
-![](<Pasted image 20260716192859.png>)
+![Pasted image 20260716192859](./Imagenes/Pasted%20image%2020260716192859.png)
 The image of above is a network representation of Alice and her friends. Alice is the Internet, while Bob and Jim are a 1nd network and Zayn and Toby are the 2nd network
 *Question 1: Who invented the World Wide Web?*
 **Answer: Tim Berners-Lee**
@@ -30,11 +30,11 @@ In a network, all the devices must be identifying and identifiable. The devices
 #### IP address
 An IP address is an identifier for a device. The IP can change with the time and being assignated to another device without the IP can change. But the IP cannot be assigned to 2 devices at the same time.
 IP is divided in 4 groups separated with points (`.`), this groups are called octets
-![](<Pasted image 20260716201023.png>)
+![Pasted image 20260716201023](./Imagenes/Pasted%20image%2020260716201023.png)
 The devices can be on both a private and public network and depending on the type of network, the IP can be public or private. The IP in the image of above are an IPv4.
 #### MAC address
 The devices has an network physical interface in the motherboard. This interface is assigned at the factory. This is called Media Access Control (**MAC**). Consists in a twelve-character hex number split in two separated with a colon (:)
-![](<Pasted image 20260716202955.png>)
+![Pasted image 20260716202955](./Imagenes/Pasted%20image%2020260716202955.png)
 The MAC address can be faked with a method called **spoofing**. This is when a device pretends be another device using its MAC address.
 *Question 1: What does the term "IP" stand for?*
 **Answer: Internet Protocol**
@@ -45,11 +45,11 @@ The MAC address can be faked with a method called **spoofing**. This is when a d
 *Question 4: What does the term "MAC" stand for?*
 **Answer: Media Access Control**
 *Question 5: Deploy the interactive lab using the "View Site" button and spoof your MAC address to access the site.  What is the flag?*
-![](<Pasted image 20260716204116.png>)
+![Pasted image 20260716204116](./Imagenes/Pasted%20image%2020260716204116.png)
 The first image is the lab without change. We need spoofing the Alice MAC address into Bob's machine.
-![](<Pasted image 20260716204300.png>)
+![Pasted image 20260716204300](./Imagenes/Pasted%20image%2020260716204300.png)
 Only copy the grey MAC in the text box down in the Alice machine
-![](<Pasted image 20260716204434.png>)
+![Pasted image 20260716204434](./Imagenes/Pasted%20image%2020260716204434.png)
 When press the "Request button we got the flag"
 **Answer: THM{YOU_GOT_ON_TRYHACKME}**
 ### Task 4 — Ping (ICMP)

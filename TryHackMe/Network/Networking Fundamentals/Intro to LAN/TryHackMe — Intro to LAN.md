@@ -26,7 +26,7 @@ Sala enfocada en la introducción a una red de área local (**LAN**), sus difere
 > [!TIP]
 > **¿Qué es el _Routing_?** \
 > Nombre que se le da al proceso por el cual los datos viajan a través de las redes. \
-> El enrutamiento^[enrutamiento: castellanización de la palabra _routing_] crea una ruta entre las redes para que los datos sean entregados exitosamente
+> El enrutamiento crea una ruta entre las redes para que los datos sean entregados exitosamente
 
 ___
 *Pregunta 1: What does LAN stand for?* \
