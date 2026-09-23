@@ -1,67 +1,86 @@
-**Difficult** -> *easy*
-**Date** -> 16-jul-26
-**Type** -> Training
-**Weblink** -> [https://www.tryhackme.com/room/whatisnetworking](What is networking?)
-## Introduction
-```plain text
-Begin learning the fundamentals of computer networking in this bite-sized and interactive module. (THM definition)
-```
-In this WriteUp I will documentate the process for the "**What is networking?**" room, what I learned and what mistakes I did.
-## Solution
-### Task 1 — What is networking?
-Is only a little explication about what is a networking and what is a network itself. The networks are things connected and networks are part of our lives everyday
-*Question 1: What is the key term for devices that are connected together?*
-Answer: **Network**
-![Pasted image 20260716191317](./Imagenes/Pasted%20image%2020260716191317.png)
-In the image of above, are a simple example of a network of friends Alice, Bob and Jim
-### Task 2 — What is the internet?
-The internet is a massive one network consisting in a many small networks.}
-![Pasted image 20260716192206](./Imagenes/Pasted%20image%2020260716192206.png)
-Now in the image of above, Alice introduce Zayn and Toby to Bob and Jim but Alice only can speak the language of Zayn and Toby. Now, Alice made a new network because she is the only one can speak with Zayn and Toby and Bob and Jim in their respective languages.
-The first network in history was the **ARPANET** project builded by the United States Defense Departament in the late 1960. The "modern" network was created in 1989 by **Tim Berners-Lee** with his World Wide Web (**WWW**).
-![Pasted image 20260716192859](./Imagenes/Pasted%20image%2020260716192859.png)
-The image of above is a network representation of Alice and her friends. Alice is the Internet, while Bob and Jim are a 1nd network and Zayn and Toby are the 2nd network
-*Question 1: Who invented the World Wide Web?*
-**Answer: Tim Berners-Lee**
-### Task 3 — Identifying devices on a Network
-In a network, all the devices must be identifying and identifiable. The devices has two ways to identifying itself
-1. IP Address: can change
-2. MAC Address: can't change
-#### IP address
-An IP address is an identifier for a device. The IP can change with the time and being assignated to another device without the IP can change. But the IP cannot be assigned to 2 devices at the same time.
-IP is divided in 4 groups separated with points (`.`), this groups are called octets
-![Pasted image 20260716201023](./Imagenes/Pasted%20image%2020260716201023.png)
-The devices can be on both a private and public network and depending on the type of network, the IP can be public or private. The IP in the image of above are an IPv4.
-#### MAC address
-The devices has an network physical interface in the motherboard. This interface is assigned at the factory. This is called Media Access Control (**MAC**). Consists in a twelve-character hex number split in two separated with a colon (:)
-![Pasted image 20260716202955](./Imagenes/Pasted%20image%2020260716202955.png)
-The MAC address can be faked with a method called **spoofing**. This is when a device pretends be another device using its MAC address.
-*Question 1: What does the term "IP" stand for?*
-**Answer: Internet Protocol**
-*Question 2: What is each section of an IP address called?*
-**Answer: Octet**
-*Question 3: How many sections (in digits) does an IPv4 address have?*
-**Answer: 4**
-*Question 4: What does the term "MAC" stand for?*
-**Answer: Media Access Control**
-*Question 5: Deploy the interactive lab using the "View Site" button and spoof your MAC address to access the site.  What is the flag?*
-![Pasted image 20260716204116](./Imagenes/Pasted%20image%2020260716204116.png)
-The first image is the lab without change. We need spoofing the Alice MAC address into Bob's machine.
-![Pasted image 20260716204300](./Imagenes/Pasted%20image%2020260716204300.png)
-Only copy the grey MAC in the text box down in the Alice machine
-![Pasted image 20260716204434](./Imagenes/Pasted%20image%2020260716204434.png)
-When press the "Request button we got the flag"
-**Answer: THM{YOU_GOT_ON_TRYHACKME}**
-### Task 4 — Ping (ICMP)
-**ICMP** is an acronym for Internet Control Message Protocol. Its a useful tool to help verifying if the connection with other device exists. The time taken for ICMP packets between devices is called *ping*.
-*Question 1: What protocol does ping use?*
-**Answer: ICMP**
-*Question 2: What is the syntax to ping 10.10.10.10?*
-**Answer: ping 10.10.10.10**
-*Question 3: What flag do you get when you ping 8.8.8.8?*
+# TryHackMe — What is Networking
+**Dificultad** -> easy | **Date** -> 16-jul-26 | **Type** -> Free \
+**Sala** -> [What is networking?](https://www.tryhackme.com/room/whatisnetworking)
 
-![](<Pasted image 20260716231659.png>)
+# Introducción
+Sala enfocada en la introducción de conceptos básicos de las redes como la dirección IP y MAC.
+
+# Solución
+### Task 1 — What is networking?
+Las redes pueden estar formadas desde 2 dispositivos hasta millones de ellos. Puede ser desde una laptop y un celular hasta cámaras de seguridad, semáforos e incluso en el sector agrario.
+
+> Las redes son cosas conectadas
+___
+*Pregunta 1: What is the key term for devices that are connected together?* \
+**Respuesta: Network**
+
+### Task 2 — What is the internet?
+
+> [!NOTE]
+> **¿Qué es el Internet?** \
+> El Internet es una red gigantesca formada por redes más pequeñas dentro de ella.
+
+La primera versión del Internet fue **ARPANET** creada en la década de 1960 por el Departamento de Defensa de Estados Unidos. \
+El Internet como se conoce actualmente fue creado en 1989 por **Tim Berners-Lee** con la creación del **WWW** (World Wide Web). El Internet se compone de dos tipos de redes:
+* Redes privadas: Redes pequeñas aisladas.
+* Redes públicas: Redes que conectan a las redes más pequeñas.
+
+___
+*Pregunta 1: Who invented the World Wide Web?* \
+**Respuesta: Tim Berners-Lee**
+
+### Task 3 — Identifying devices on a Network
+En una red los dispositivos deben de identificarse y ser identificados para mantener el orden. Los dispositivos tienen dos formas de ser identificados en una red
+1. Dirección IP: puede cambiar
+2. Dirección MAC: no puede cambiar
+
+> [!TIP]
+> **Una analogía para ambas direcciones**
+> - **Dirección IP**: similar al nombre propio de las personas. Se puede cambiar de forma legal.
+> - **Dirección MAC**: similar a las huellas digitales de las personas. Son únicas para cada una y no se pueden cambiar.
+
+
+| Dirección     | ¿Qué es?                                                                                                                                                                                                                                | Ejemplo                                                        |
+| ------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------- |
+| Dirección IP  | Es un conjunto de números divididos por puntos (`.`) en 4 secciones llamadas octetos. Se dividen en dos grupos: IP pública e IP privada. Tienen una serie de protocolos que forzan a los dispositivos a comunicarse de la misma manera. | - IP privada: `192.168.200.30`<br>- IP pública: `86.157.52.21` |
+| Dirección MAC | Es una interfaz física que se encuentra en la placa madre que se le asigna un valor único en la fábrica donde se construyó. Contiene 12 caracteres separados por dos puntos (`:`).                                                      | `A4:C3:FO:85:AC:2D`                                            |
+
+> [!NOTE]
+> **Acerca de la dirección MAC**  \
+> La dirección MAC está compuesta por un número hexadecimal de 12 caracteres.
+
+> [!IMPORTANT]
+> **Anatomía de una MAC**
+> - Los primeros seis dígitos de una dirección corresponden al fabricante de la interfaz
+> - Los seis restantes corresponden a la dirección única de la interfaz
+
+> Debido a la escasez de IPv4 se ha desarrollado el protocolo IPv6.
+
+___
+*Pregunta 1: What does the term "IP" stand for?* \
+**Respuesta: Internet Protocol**
+
+*Pregunta 2: What is each section of an IP address called?* \
+**Respuesta: Octet**
+
+*Pregunta 3: How many sections (in digits) does an IPv4 address have?* \
+**Respuesta: 4**
+
+*Pregunta 4: What does the term "MAC" stand for?* \
+**Respuesta: Media Access Control**
+
+*Pregunta 5: Deploy the interactive lab using the "View Site" button and spoof your MAC address to access the site.  What is the flag?* \
+**Respuesta: THM{YOU_GOT_ON_TRYHACKME}**
+
+### Task 4 — Ping (ICMP)
+
+___
+*Pregunta 1: What protocol does ping use?* \
+**Respuesta: ICMP**
+
+*Pregunta 2: What is the syntax to ping 10.10.10.10?* \
+**Respuesta: ping 10.10.10.10**
+
+*Pregunta 3: What flag do you get when you ping 8.8.8.8?* \
+**Respuesta: THM{I_PINGED_THE_SERVER}**
 Open the Site attached and put the `8.8.8.8` in the textbox and press the button "Send Ping Request"
-![](<Pasted image 20260716231758.png>)
-We got the flag
-**Answer: THM{I_PINGED_THE_SERVER}**___
