@@ -9,18 +9,18 @@ Sala enfocada en la introducción a una red de área local (LAN), sus diferentes
 ### Task 1 — Introducing LAN topologies
 El término *topología* en el contexto de las redes se refiere al diseño o la estructura de una red
 
-| Topología | Descripción                                                                                       | Pros y contras                                                                                                                                                             |
-| :-------: | ------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|   Star    | Un solo nodo central que puede ser un Switch o un Hub maneja toda la red.                         | - Sencilla de implementar y mantener<br>- Se debe comprar nuevo equipo cada que se aumentar su tamaño                                                                      |
-|    Bus    | Único cable (bus) central donde se conectan todos los dispositivos similar al tronco de un árbol. | - Si el bus se daña, toda la infraestructura se queda sin conexión<br>- Propensa a tener cuellos de botella                                                                |
-|   Ring    | Los dispositivos se conectan secuencialmente formando un bucle. (Similar a la anterior)           | - Los nodos solo pueden enviar datos de otro dispositivo si no tienen nada mas que enviar<br>- Es unidireccional<br>- Siempre enviará sus datos antes que los de otro nodo |
+| Topología | Descripción                                                                                       | Pros y contras                                                                                                                                                                                           |
+| :-------: | ------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|   Star    | Un solo nodo central que puede ser un Switch o un Hub maneja toda la red.                         | - Sencilla de implementar y mantener<br>- Se debe comprar nuevo equipo cada que se aumentar su tamaño                                                                                                    |
+|    Bus    | Único cable (bus) central donde se conectan todos los dispositivos similar al tronco de un árbol. | - Si el bus se daña, toda la infraestructura se queda sin conexión<br>- Propensa a tener cuellos de botella                                                                                              |
+|   Ring    | Los dispositivos se conectan secuencialmente formando un bucle. (Similar a la anterior)           | - Los nodos solo pueden enviar datos de otro dispositivo si no tienen nada mas que enviar<br>- Es unidireccional<br>- Siempre enviará sus datos antes que los de otro nodo<br>- Fácil de detectar fallos |
 
 #### Dispositivos de red
 
-| Dispositivo | ¿Qué hace?                                                                                                                                                                                                         |
-| ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Switch      | Están diseñados para agrupar cualquier otro dispositivo capaz de conectarse a la red mediante Ethernet. Cuentan con 4, 8, 16, 24, 32 o 64 puertos, lo cual permite agregar más dispositivos (incluyendo switches). |
-| Róuter      | Permite conectar otras redes y pasar datos entre ellas mediante el enrutamiento, de ahí su nombre.                                                                                                                 |
+| Dispositivo | ¿Qué hace?                                                                                                                                                                                                   |
+| ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Switch      | Diseñados para agrupar cualquier otro dispositivo capaz de conectarse a la red mediante Ethernet. Cuentan con 4, 8, 16, 24, 32 o 64 puertos, lo cual permite agregar más dispositivos (incluyendo switches). |
+| Róuter      | Permite conectar otras redes y pasar datos entre ellas mediante el enrutamiento, de ahí su nombre.                                                                                                           |
 
 ___
 *Pregunta 1: What does LAN stand for?* \
@@ -33,54 +33,58 @@ ___
 **Respuesta: Switch**
 
 *Pregunta 4: What topology is cost-efficient to set up?* \
-**Respuesta: Bus topology**owner:Alexandroskw 
+**Respuesta: Bus topology**
+
+> **RECORDATORIO**: Usa un único cable.
 
 *Pregunta 5: What topology is expensive to set up and maintain?* \
 **Respuesta: Star topology**
 
+> **NOTA**: Los datos deben seguir un único flujo
+
 *Pregunta 6: Complete the interactive lab attached to this task. What is the flag given at the end?* \
 **Answer: THM{TOPOLOGY_FLAWS}**
 
-![](<Pasted image 20260717013933.png>)
-![](<Pasted image 20260717014011.png>)
-![](<Pasted image 20260717014108.png>)
-![](<Pasted image 20260717014139.png>)
-![](<Pasted image 20260717014252.png>)
-![](<Pasted image 20260717014323.png>)
-![](<Pasted image 20260717014343.png>)
-![](<Pasted image 20260717014359.png>)
-![](<Pasted image 20260717014424.png>)
-![](<Pasted image 20260717014443.png>)
-
 ### Task 2 — A primer on subnetting
-The subnetting is splitting up a network in more small networks itself.
-![](<Pasted image 20260717205558.png>)
-A subnet mask is represented in a 32-bit (4 bytes) number 0 - 255
-Networks needs to know where to send the data like the network administrator. The network admin uses the subnettig to categorise and assign parts of the network.
-The subnetting uses the IP address in three different ways
+El subnetting se refiere a la técnica para dividir una red grande en varias redes más pequeñas dentro de sí misma.
 
-| Type            | Purpose                                                   | Explanation                                                                                                                                                                                     | Example        |
-| --------------- | --------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------- |
-| Network address | Identifies the start of the actual network                | A device can have the IP `192.168.1.20` will be in the net `192.168.1.0`                                                                                                                        | 192.168.1.0    |
-| Host address    | The IP of the device in the net                           | Your phone can have the IP `192.168.1.55`                                                                                                                                                       | `192.168.1.55` |
-| Default gateway | Is a IP capable of sending information to another network | If you wanna send information to the sales departament in a different network the data will be sent to this IP. usually use either the first or last host address in a network (`.1` or `.254`) | 192.168.11.1   |
+> El subnetting se utiliza para clasificar y asignar partes de una red a un tipo de información en específico.
+
+> [!NOTE]
+> Las IPv4 se dividen en 4 secciones llamadas octetos, al igual que las máscaras de red.
+
+> [!IMPORTANT]
+> Las IP y las máscaras de subred contienen 32-bits repartidos en los cuatro octetos formando 4 bytes. El rango de los octetos va de `0` a `255`.
+
+|      Tipo       | Propósito                                                                                                                   | Explicación                                                                                                          |     Ejemplo     |
+| :-------------: | --------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- | :-------------: |
+| Network Address | Identifica el inicio de la actual red y es usada para identificar la existencia de la misma                                 | Un dispositivo con una IP `192.168.1.100` será identificado en la red `192.168.1.0`                                  |  `192.168.1.0`  |
+|  Host Address   | Una dirección IP es utilizada para identificar a un dispositivo en una subred                                               | Un dispositivo puede tener la dirección de red `192.168.1.1`                                                         | `192.168.1.100` |
+| Default Gateway | El Gateway predeterminado es una dirección especial asignada a un dispositivo que es capaz de enviar información a otra red | Cualquier dato que deba enviarse a un dispositivo que no se encuentre en la misma red se enviará a este dispositivo. | `192.168.1.254` |
+
+> [!IMPORTANT]
+> **Respecto al Gateway** \
+> Pueden utilizar cualquier dirección de host pero por lo general utilizarán la primera o la última (`X.X.X.1` o `X.X.X.254`).
+
 
 ___
 *Pregunta 1: What is the technical term for dividing a network up into smaller pieces?* \
-**Answer: Subnettig**
+**Respuesta: Subnettig**
+
+> **NOTA**: El subnettig permite dividir una red muy grande
 
 *Pregunta 2: How many **bits** are in a subnet mask?* \
 **Answer: 32**
 
-> Using the hint in this. I don't remember so well
+> **RECORDATORIO**: Los 32-bits están repartidos en los octetos.
 
 *Pregunta 3: What is the range of a section (octet) of a subnet mask?* \
 **Answer: 0-255**
 
-Remember the basics of the IP Address in the last room
-
 *Pregunta 4: What address is used to identify the start of a network?* \
 **Answer: Network address**
+
+> **PALABRAS CLAVE** -> *start of a network*
 
 *Pregunta 5: What address is used to identify devices within a network?* \
 **Answer: Host address**
