@@ -1,6 +1,6 @@
 # TryHackMe — Intro to Logs
 **Dificultad** -> Fácil | **Fecha** -> 31-jul-26 | **Tipo** -> Free + Hands-on \
-
+**Sala** -> [Intro to Logs](https://tryhackme.com/room/introtologs)
 ## Introducción
 La sala se enfoca en lo que es un log, las fuentes y los métodos de recolección de los mismos. También se aborda el logging desde cero en Linux con **rsyslog** y **logrotate** para analizar y detectar posible actividad maliciosa.
 ## Solución
