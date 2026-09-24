@@ -26,8 +26,7 @@ ___
 [VirusTotal](https://www.virustotal.com) recolecta los resultados de al menos 70 motores de antivirus y escaneos de sitios web en una sola interfaz. Se puede subir un archivo, una URL, dominio o un hash de un archivo. Te dirá si tu búsqueda está marcado como maliciosa o no.
 
 > [!WARNING]
-> **Una herramienta no es infalible**
-> 
+> **Una herramienta no es infalible** \
 > VirusTotal puede tener fallos, no es del todo infalible.
 
 ___
@@ -43,8 +42,7 @@ Si la CVE es de alto impacto, se le asignará un apodo como WannaCry o Stuxnet. 
 Es un estándar para que cualquiera que discuta acerca de una vulnerabilidad esté hablando de la misma vulnerabilidad.
 
 > [!NOTE]
-> **Pruebas de conceptos (PoCs)**
-> 
+> **Pruebas de conceptos (PoCs)** \
 > Hay sitios como [ExploitDB](https://www.exploit-db.com/) que tienen scripts que demuestran estas vulnerabilidades.
 
 ___

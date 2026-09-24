@@ -94,7 +94,6 @@ ___
 
 *Pregunta 3: What flag do you get when you ping 8.8.8.8?* \
 **Respuesta: THM{I_PINGED_THE_SERVER}**
-Open the Site attached and put the `8.8.8.8` in the textbox and press the button "Send Ping Request"
 
 # Lecciones aprendidas
 - En términos sencillos, el Internet es una red de redes.
