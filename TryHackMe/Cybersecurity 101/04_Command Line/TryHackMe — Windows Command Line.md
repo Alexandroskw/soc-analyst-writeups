@@ -115,4 +115,4 @@ ___
 + Diagnosticar problemas en Windows no excluye la terminal.
 
 # Referencias
-[TryHackMe — Windows Fundamentals 2](<../Windows and AD Fundamentals/TryHackMe — Windows Fundamentals 2.md>)
+[TryHackMe — Windows Fundamentals 2](TryHackMe%20—%20Windows%20Fundamentals%202.md)
