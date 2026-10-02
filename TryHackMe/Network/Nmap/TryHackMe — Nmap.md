@@ -240,5 +240,32 @@ ___
 > **NOTA**: tanto Microsoft como Cisco no siguen el **RFC 793**.
 
 #### Task 9 — ICMP Network Scanning
+Al conectarse por primera vez a una red objetivo, el primer paso es obtener el "mapa" de la red, es decir, qué direcciones IP tienen hosts activos y cuales no.
+
+> Una forma de realizar este mapeo es con "ping sweep" (barrido de ping).
+
+Nmap envía un paquete ICMP a cada una de las IP dentro de la red. Cuando la IP responde se marca como "viva".
+
+> [!IMPORTANT]
+> Cuando se hace un ping sweep no es del todo exacto marcar como "viva" a una IP. Puede proveer un poco de contexto, es importante remarcarlo.
+
+Para realizar un ping sweep se utiliza la bandera `-sn` con el rango de IP
+- Rango especificado con guión: `nmap -sn 192.168.0.1-254`
+- Rango especificado con CIDR `nmap -sn 192.168.0.0/24`
+
+La bandera `-sn` obliga a Nmap a no escanear ningún puerto y depender de paquetes ICMP para identificar a los objetivos.
+
+> [!WARNING]
+> Nmap además de enviar el paquete ICMP, también enviará un paquete SYN al puerto 443 del objetivo junto con un paquete ACK (o SYN si no es *root*) al puerto 80.
+
+___
+*Pregunta 1: How would you perform a ping sweep on the 172.16.x.x network (Netmask: 255.255.0.0) using Nmap? (CIDR notation)* \
+**Respuesta: `nmap -sn 172.16.0.0/16`**
+
+### NSE Scripts
+#### Task 10 — Overview
+
+> NSE = **N**map **S**cripting **E**ngine
+
 
 ## Lecciones aprendidas
