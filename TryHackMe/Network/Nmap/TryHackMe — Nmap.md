@@ -109,18 +109,19 @@ How would you tell nmap to only scan port 80?* \
 
 > **NOTA**: Revisar la documentación en línea
 
-### Task 4 — Overview (Scan types)
+### Scan types
+#### Task 4 — Overview
 
-| Banderas comúnes        | - `-sT` (Puertos TCP abiertos)<br>- `-sS` (Escaneos "semiabiertos" SYN)<br>- `-sU` (Escaneo UDP) |
-| ----------------------- | ------------------------------------------------------------------------------------------------ |
-| Banderas no tan comúnes | - `-sN` (Escaneos nulos TCP)<br>- `-sF` (Escaneos TCP FIN)<br>- `-sX` (Escaneos TCP de Navidad)  |
+| Banderas comúnes                                                                           | Banderas no tan comúnes                                                                   |
+| ------------------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------- |
+| `-sT` (Puertos TCP abiertos)<br>`-sS` (Escaneos "semiabiertos" SYN)<br>`-sU` (Escaneo UDP) | `-sN` (Escaneos nulos TCP)<br>`-sF` (Escaneos TCP FIN)<br>`-sX` (Escaneos TCP de Navidad) |
 
 > [!NOTE]
 > A excepción de los escaneos UDP, las demás banderas funcionan de forma muy similar pero varía la forma en la que funcionan.
 
 ___
 **No se necesita respuesta**
-### Task 5 — TCP Connect Scans (Scan types)
+#### Task 5 — TCP Connect Scans
 El *TCP Connect Scan* realiza un three-way handshake con cada puerto del objetivo en turno y determina si el servicio está abierto con base a la respuesta recibida.
 
 > [!TIP]
@@ -145,4 +146,44 @@ ___
 **Respuesta: RST**
 
 > La mayoría de las banderas son abreviaciones de su significado (SYN -> Synchronization, ACK -> Acknowledge)
+
+#### Task 6 — SYN Scans
+
+> Los *SYN scans* son utilizados para escanear un rango de puertos en el objetivo u objetivos. Se les suele llamar "Half-open" o escaneos "sigilosos" ("stealth" scans).
+
+> [!IMPORTANT]
+> A diferencia del escaneo anterior que realizaba un three-way handshake completo, este escaneo envía de vuelta una bandera RST después de recibir las banderas SYN/ACK evitando que el servidor realice la solicitud varias veces
+
+| Ventajas                                                                                                                                                                | Desventajas                                                         |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| Se pueden eludir viejos IDS que buscan un threeway handshake completo.                                                                                                  | Requiere de permiso `sudo` para trabajar correctamente en Linux.    |
+| No son registrados por las aplicaciones que están escuchando en puertos abiertos (el estándar es que se registre la conexión cuando ha sido establecida completamente). | Algunos servicios inestables pueden ser afectados por escaneos SYN. |
+| Son significativamente más rápidos debido a que no se preocupan por completar el threeway handshake.                                                                    |                                                                     |
+
+> [!WARNING]
+> **Con respecto a `sudo`** \
+> El usuario *root* es el único que puede crear paquetes sin procesar (raw packets) que por defecto solo él puede hacer.
+
+> Los *SYN scans* son los escaneos por defecto en Nmap si se ejecuta con `sudo`.
+
+> [!TIP]
+> Si se escanean puertos cerrados o filtrados el comportamiento del escaneo es exactamente igual al *TCP Connect Scans*.
+> - puerto cerrado: se envía una bandera RST
+> - puerto filtrado: desecha el paquete (no hay respuesta) o se falsifica la bandera RST
+
+___
+*Pregunta 1: There are two other names for a SYN scan, what are they?* \
+**Respuesta: Half-open, stealth**
+
+*Pregunta 2: Can Nmap use a SYN scan without Sudo permissions (Y/N)?* \
+**Respuesta: N**
+
+>**NOTA**: Siempre se debe utilizar `sudo` si se quiere hacer un *stealth scan*.
+
+#### Task 7 — UDP Scans
+UDP a diferencia de TCP no crea una conexión. UDP envía los paquetes con la esperanza de que lleguen al puerto de destino. UDP es excelente para conexiones que requieran velocidad de conexión sobre la calidad de la misma.
+
+> Debido a que UDP no sabe si el paquete llegó a su destino, es más difícil de escanear (además de ser más lento).
+
+
 ## Lecciones aprendidas
