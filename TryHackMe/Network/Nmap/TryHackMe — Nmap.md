@@ -267,5 +267,38 @@ ___
 
 > NSE = **N**map **S**cripting **E**ngine
 
+Están escritos en el lenguaje de programación Lua y se pueden utilizar para gran variedad de cosas, desde escaneo por vulnerabilidades, hasta automatizar exploits para ellas.
 
+Las categorías más útiles de NSE son
+- `safe`: No afecta al objetivo
+- `intrusive`: Afecta al objetivo
+- `vuln`: Escanea por vulnerabilidades
+- `exploit`: Intenta explotar una vulnerabilidad
+- `auth`: Intenta saltar una autenticación para correr servicios
+- `brute`: Intenta obtener credenciales por fuerza bruta para ejecutar servicios
+- `discovery`: Intenta hacer una petición para ejecutar servicios para futura información acerca de la red
+
+> Otras categorías se pueden encontrar [aquí](https://nmap.org/book/nse-usage.html)
+
+___
+*Pregunta 1: What language are NSE scripts written in?* \
+**Respuesta: Lua**
+
+*Pregunta 2: Which category of scripts would be a very bad idea to run in a production environment?* \
+**Respuesta: `intrusive`**
+
+> **TIP**: afecta al objetivo
+
+#### Task 11 — Working with the NSE
+Para ejecutar un script específico se utiliza la bandera `--script=<SCRIPT_NAME>` (`--script=auth`). También se pueden ejecutar varios scripts al mismo tiempo separados por una coma `--scripts=http-brute,smb-enum-shares`.
+
+> [!TIP]
+> Algunos scripts requieren argumentos que se pueden activar con la bandera `--script-args` \
+> `nmap -p 80 --script http-put --script-args http-put.url='/dav/shell.php',http-put.file='./shell.php'` (los argumentos deben ser separados por una coma '`,`' y conectado al script correspondiente con un punto '`.`')
+
+***
+*Pregunta 1: What optional argument can the `ftp-anon.nse` script take?* \
+**Respuesta: `maxlist`**
+
+> **PRECAUCIÓN**: existen dos scripts para `ftp` en la documentación
 ## Lecciones aprendidas
