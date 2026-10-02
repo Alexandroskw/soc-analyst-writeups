@@ -2,7 +2,7 @@
 **Dificultad** -> easy | **Date** -> 28-sep-26 | **Type** -> Free \
 **Sala** -> [Nmap](https://tryhackme.com/room/furthernmap)
 ## Introducción
-Análisis detallado del uso de la herramienta __Nmap__, una potente herramienta para el escaneo de redes.
+Análisis acerca del uso de la herramienta __Nmap__, una potente herramienta para el escaneo de redes.
 ## Solución
 ### Task 2 — Introduction
 Entre más conocimiento se tenga de un objetivo, se tendrán más opciones para atacar a un sistema objetivo. Antes de realizar una audiotría de seguridad es necesario realizar un "mapeo" de la red a la que se le va a realizar dicha auditoría.
@@ -185,5 +185,60 @@ UDP a diferencia de TCP no crea una conexión. UDP envía los paquetes con la es
 
 > Debido a que UDP no sabe si el paquete llegó a su destino, es más difícil de escanear (además de ser más lento).
 
+> Los puertos cerrados responden con un paquete ICMP (ping) e indiscutiblemente, el puerto UDP está cerrado
+
+> [!NOTE]
+> **¿Los puertos UDP responden?** \
+> No debería de haber respuesta. Cuando esto ocurre, Nmap marca el puerto como `open|filtered`, es decir, puede estar abierto pero detrás de un firewall. \
+> Si hay respuesta (que es extremadamente raro), se marca como abierto y se envía la solicitud una segunda vez, si no hay respuesta se vuelve al estado `open|filtered`.
+
+> [!TIP]
+> Es buena práctica ejecutar un escaneo con la opción `--top-ports <número>` para disminuír el tiempo de escaneo (en comparación, un escaneo TDP se puede ejecutar en ~20 minutos en los primeros 1000 puertos).
+
+___
+*Pregunta 1: If a UDP port doesn't respond to an Nmap scan, what will it be marked as?* \
+**Respuesta: `open|filtered`**
+
+*Pregunta 2: When a UDP port is closed, by convention the target should send back a "port unreachable" message. Which protocol would it use to do so?* \
+
+#### Task 8 — NULL, FIN and Xmas
+No son tan populares y son extremadamente raros de utilizar principalmente porque son mucho más sigilosos que un *SYN Scan*.
+
+| Escaneo  | ¿Qué hace?                                                                                                                                                                                                 | Bandera en Nmap |
+| :------: | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :-------------: |
+| **NULL** | La petición TCP se envía sin ninguna bandera. Según el **RFC** la víctima debería responder con un RST si el puerto está cerrado.                                                                          |      `-sN`      |
+| **FIN**  | Funciona similar, pero en lugar de enviar un paquete completamente vacío, manda la bandera FIN que se utiliza para cerrar ordenadamente la conexión activa y una vez más la víctima responderá con un RST. |      `-sF`      |
+| **Xmas** | Manda un paquete TCP "malformado". Espera una respuesta RST para los puertos cerrados.                                                                                                                     |      `-sX`      |
+
+> [!TIP]
+> **¡Luces navideñas!** \
+> El escaneo de navidad (*Xmas scan*) envía un paquete con las banderas FIN, PSH y URG encendidas al mismo tiempo lo que hace que el paquete quede "iluminado" como un árbol de navidad.
+
+> [!WARNING]
+> **Ya sé como vas a reaccionar** \
+> Al igual que en *UDP scan*, se espera este comportamiento si el puerto se protege con un firewall. Por lo tanto solo identificarán los puertos como: *open|filtered*, *closed* o *filtered*.
+
+> Si el puerto se marca como filtrado, el puerto ha respondido con un paquete ICMP.
+
+> [!TIP]
+> RFC 793 dice que los host deben responder a paquetes malformados con la bandera RST en los puertos cerrados y no responder para los abiertos, Microsoft y Cisco no siguen esta regla. Ellos responden RST a cualquier caso haciendo que los puertos aparezcan como cerrados.
+
+> El objetivo de estos escaneos es evadir el firewall
+
+___
+*Pregunta 1: Which of the three shown scan types uses the URG flag?* \
+**Respuesta: xmas**
+
+*Pregunta 2: Why are NULL, FIN and Xmas scans generally used?* \
+**Respuesta: firewall evasion**
+
+> **RECORDATORIO**: Muchos IDS modernos saben cómo funciona el *SYN Scan* tradicional
+
+*Pregunta 3: Which common OS may respond to a NULL, FIN or Xmas scan with a RST for every port?* \
+**Respuesta: Microsoft Windows**
+
+> **NOTA**: tanto Microsoft como Cisco no siguen el **RFC 793**.
+
+#### Task 9 — ICMP Network Scanning
 
 ## Lecciones aprendidas
