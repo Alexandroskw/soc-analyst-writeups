@@ -33,7 +33,7 @@ ___
 *Pregunta 3: __Research__ How many of these are considered "well-known"? (These are the "standard" numbers mentioned in the task)*
 **Respuesta: 1024**
 
-> Usar la pista de la sala.
+> Usar la pista de la sala. \
 > **NOTA**: el 0 también cuenta
 
 ### Task 3 — Nmap switches
@@ -76,9 +76,7 @@ What switch would you use to save the nmap results in three major formats?* \
 *Pregunta 9: A very useful output format: how would you save results in a "grepable" format?* \
 **Respuesta: `-oG`**
 
-*Pregunta 10: Sometimes the results we're getting just aren't enough. If we don't care about how loud we are, we can enable "aggressive" mode. This is a shorthand switch that activates service detection, operating system detection, a traceroute and common script scanning.
-
-How would you activate this setting?* \
+*Pregunta 10: Sometimes the results we're getting just aren't enough. If we don't care about how loud we are, we can enable "aggressive" mode. This is a shorthand switch that activates service detection, operating system detection, a traceroute and common script scanning. How would you activate this setting?* \
 **Respuesta: `-A`**
 
 *Pregunta 11: Nmap offers five levels of "timing" template. These are essentially used to increase the speed your scan runs at. Be careful though: higher speeds are noisier, and can incur errors!
@@ -86,7 +84,7 @@ How would you activate this setting?* \
 How would you set the timing template to level 5?* \
 **Respuesta: `-T5`**
 
-> **NOTA**: Revisar la documentación
+> **NOTA**: Revisar la documentación en línea
 
 *Pregunta 12: We can also choose which port(s) to scan.
 
@@ -110,4 +108,41 @@ How would you tell nmap to only scan port 80?* \
 **Respuesta: `--script=vuln`**
 
 > **NOTA**: Revisar la documentación en línea
+
+### Task 4 — Overview (Scan types)
+
+| Banderas comúnes        | - `-sT` (Puertos TCP abiertos)<br>- `-sS` (Escaneos "semiabiertos" SYN)<br>- `-sU` (Escaneo UDP) |
+| ----------------------- | ------------------------------------------------------------------------------------------------ |
+| Banderas no tan comúnes | - `-sN` (Escaneos nulos TCP)<br>- `-sF` (Escaneos TCP FIN)<br>- `-sX` (Escaneos TCP de Navidad)  |
+
+> [!NOTE]
+> A excepción de los escaneos UDP, las demás banderas funcionan de forma muy similar pero varía la forma en la que funcionan.
+
+___
+**No se necesita respuesta**
+### Task 5 — TCP Connect Scans (Scan types)
+El *TCP Connect Scan* realiza un three-way handshake con cada puerto del objetivo en turno y determina si el servicio está abierto con base a la respuesta recibida.
+
+> [!TIP]
+> **Las tres fases del Three-way Handshake**
+> - El cliente envía un paquete TCP con la bandera *SYN*
+> - El servidor responde con las banderas *SYN/ACK*
+> - El cliente responde con la bandera *ACK*
+
+> [!IMPORTANT]
+> **¿Cómo determina Nmap si un puerto está cerrado?** \
+> Para determinar que un puerto está cerrado Nmap envía una petición TCP con la bandera *SYN*. El servidor objetivo entonces responderá con la bandera *RST* (Reset). Con esta última bandera Nmap establece que el puerto está cerrado.
+
+> Muchos firewalls están configurados para descartar paquetes entrantes. Nmap envía un paquete con la bandera *SYN* y no obtiene respuesta, esto indica que el puerto está protegido por un firewall y por lo tanto el puerto se considera *filtrado*.
+
+___
+*Pregunta 1: Which RFC defines the appropriate behaviour for the TCP protocol?* \
+**Respuesta: RFC 9293**
+
+> **NOTA**: Es el estándar actual y en la tarea aparece listado
+
+*Pregunta 2: If a port is closed, which flag should the server send back to indicate this?* \
+**Respuesta: RST**
+
+> La mayoría de las banderas son abreviaciones de su significado (SYN -> Synchronization, ACK -> Acknowledge)
 ## Lecciones aprendidas
