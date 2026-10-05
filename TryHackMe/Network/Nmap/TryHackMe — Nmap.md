@@ -1,5 +1,5 @@
 # TryHackMe — Nmap
-**Dificultad** -> easy | **Date** -> 28-sep-26 | **Type** -> Free \
+**Dificultad** -> easy | **Date** -> 28-sep-26 | **Type** -> Free + Hands-On \
 **Sala** -> [Nmap](https://tryhackme.com/room/furthernmap)
 ## Introducción
 Análisis acerca del uso de la herramienta __Nmap__, una potente herramienta para el escaneo de redes.
@@ -329,5 +329,39 @@ What is the filename of the script which determines the underlying OS of the SMB
 > **NOTA**: utilizar el comando `grep -w` junto con la pista desplegada
 
 ### Task 13 — Firewall Evasion
+Un host de Windows común bloquea por defecto todos los paquetes ICMP entrantes y esto es contraproducente ya que no solo se utiliza el comando `ping` para revisar si un objetivo está activo (Nmap lo hace por defecto).
+
+> Nmap registrará a un objetivo como inactivo con esta configuración de firewall y ni siquiera hará el intento de escanearlo 
+
+> [!TIP]
+> Para obligar a Nmap a escanear todos los hosts se puede utilizar la bandera `-Pn` que tratará a todos los objetivos como si estuvieran activos, brincando la configuración predeterminada del firewall.
+
+> Si ya se está dentro de la red local, Nmap utilizará ARP para revisar la actividad del host.
+
+
+| Bandera                   | ¿Qué hace?                                                                                                                                    |
+| ------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| `-f`                      | Fragmenta los paquetes haciendo más complicado el que el firewall o el IDS los identifiquen                                                   |
+| `--mtu <número>`          | Similar al anterior, pero otorga más control aceptando una unidad máxima de transmisión para los paquetes enviados (deben ser múltiplos de 8) |
+| `--scan-delay <tiempo>ms` | Agrega un retraso entre los paquetes enviados. Muy útil si la red es inestable y también bueno para evadir IDS/Firewall basados en tiempo     |
+| `--badsum`                | Genera un checksum inválido para los paquetes. Puede ser utilizado para verificar la existencia de un firewall o un IDS.                      |
+Estas banderas son peculiares a destacar, sin embargo se pueden revisar otras banderas [aquí](https://nmap.org/book/man-bypass-firewalls-ids.html)
+
+> [!NOTE]
+> **Acerca de la bandera `--badsum`** \
+> Cualquier stack TCP/IP desecharía un paquete con un checksum inválido pero algunos IPS/Firewalls pueden responder automáticamente sin siquiera revisar si el checksum es válido o no.
+
+___
+*Pregunta 1: Which simple (and frequently relied upon) protocol is often blocked, requiring the use of the `-Pn` switch?* \
+**Respuesta: `ICMP`**
+
+> **RECORDATORIO**: por defecto los host de Windows bloquea los paquetes ICMP
+
+*Pregunta 2: (Research) Which Nmap switch allows you to append an arbitrary length of random data to the end of packets?* \
+**Respuesta: `--data-length`**
+
+> **NOTA**: Utilizar el manual de Nmap  y buscar **random** \
+> **Palabras clave** -> *random data*
+
 
 ## Lecciones aprendidas
