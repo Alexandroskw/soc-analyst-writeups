@@ -301,4 +301,33 @@ Para ejecutar un script específico se utiliza la bandera `--script=<SCRIPT_NAME
 **Respuesta: `maxlist`**
 
 > **PRECAUCIÓN**: existen dos scripts para `ftp` en la documentación
+
+#### Task 12 — Searching for Scripts
+Hay dos formas de encontrar los scripts en Nmap
+- El [sitio oficial](https://nmap.org/nsedoc/)
+- De forma local (en Linux, Nmap almacena los scripts en `/usr/share/nmap/scripts`)
+
+> [!NOTE]
+> Dentro del directorio `scripts` existe un fichero llamado `script.db` sin embargo, la extensión es un "comodín", es un archivo de texto plano que contiene los nombres de los archivos y categorías
+
+> Formas de buscar en la base de datos
+> - Utilizando el comando `grep`: `grep "ftp" /usr/share/nmap/scripts/script.db`
+> - Utilizando el comando `ls`: `ls -l /usr/share/nmap/scripts/*ftp*`
+
+> [!IMPORTANT]
+> Para instalar scripts que se haya "perdido" descargando el script específico \
+> `sudo wget -o /usr/share/nmap/scripts/<SCRIPT_NAME>.nse https://svn.nmap.org/nmap/scripts/<SCRIPT_NAME>.nse && nmap --script-updatedb`
+
+___
+*Pregunta 1: Search for "smb" scripts in the `/usr/share/nmap/scripts/` directory using either of the demonstrated methods.  
+What is the filename of the script which determines the underlying OS of the SMB server?*
+**Respuesta: `smb-os-discovery.nse`**
+
+*Pregunta 2: Read through this script. What does it depend on?* \
+**Respuesta: `smb-brute`**
+
+> **NOTA**: utilizar el comando `grep -w` junto con la pista desplegada
+
+### Task 13 — Firewall Evasion
+
 ## Lecciones aprendidas
