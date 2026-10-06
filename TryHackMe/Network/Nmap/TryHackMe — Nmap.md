@@ -465,7 +465,7 @@ Read data files from: /usr/share/nmap
 Nmap done: 1 IP address (1 host up) scanned in 2.62 seconds
 ```
 
-![escaneo\_port80](escaneo_port80.png)
+![escaneo_port80](./Images/escaneo_port80.png)
 
 > - `SYN-SYN/ACK-ACK` detectado. Se establece la conexión
 > - `RST/ACK` se intenta una vez mas el Threeway handshake. Posible desecho de paquetes ICMP
