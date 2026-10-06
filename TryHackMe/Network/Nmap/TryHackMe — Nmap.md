@@ -21,7 +21,7 @@ Entre más conocimiento se tenga de un objetivo, se tendrán más opciones para 
 > [!TIP]
 > Todas las computadoras tienen un total de **65535** puertos dispobibles.
 
-**Nmap** se conectará a cada puerto del objeetivo y dependiendo de la respuesta se puede determinar como: **abierto**, **cerrado** o **filtrado** (usualmente por un firewall).
+**Nmap** se conectará a cada puerto del objetivo y dependiendo de la respuesta se puede determinar como: **abierto**, **cerrado** o **filtrado** (usualmente por un firewall).
 
 ___
 *Pregunta 1: What networking constructs are used to direct traffic to the right application on a server?*
@@ -200,7 +200,7 @@ ___
 **Respuesta: `open|filtered`**
 
 *Pregunta 2: When a UDP port is closed, by convention the target should send back a "port unreachable" message. Which protocol would it use to do so?* \
-
+**Respuesta: ICMP**
 #### Task 8 — NULL, FIN and Xmas
 No son tan populares y son extremadamente raros de utilizar principalmente porque son mucho más sigilosos que un *SYN Scan*.
 
@@ -334,10 +334,9 @@ Un host de Windows común bloquea por defecto todos los paquetes ICMP entrantes 
 > Nmap registrará a un objetivo como inactivo con esta configuración de firewall y ni siquiera hará el intento de escanearlo 
 
 > [!TIP]
-> Para obligar a Nmap a escanear todos los hosts se puede utilizar la bandera `-Pn` que tratará a todos los objetivos como si estuvieran activos, brincando la configuración predeterminada del firewall.
+> Para obligar a Nmap a escanear todos los hosts se puede utilizar la bandera `-Pn` que tratará a todos los objetivos como si estuvieran activos ya que no se molestará en enviar un paquete ICMP primero
 
 > Si ya se está dentro de la red local, Nmap utilizará ARP para revisar la actividad del host.
-
 
 | Bandera                   | ¿Qué hace?                                                                                                                                    |
 | ------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -363,5 +362,179 @@ ___
 > **NOTA**: Utilizar el manual de Nmap  y buscar **random** \
 > **Palabras clave** -> *random data*
 
+### Task 14 — Practical
+___
+*Pregunta 1: Does the target ip respond to ICMP echo (ping) requests (Y/N)?* \
+**Respuesta: N**
 
+```bash
+ping <MACHINE_IP>
+```
+
+*Pregunta 2: Perform an Xmas scan on the first 999 ports of the target -- how many ports are shown to be open or filtered?* \
+**Respuesta: 999**
+
+```bash
+# Utilizar la bandera '-Pn' para obligar a Nmap a escanear todos los puertos
+# esten activos o no
+
+# La bandera '-sX' realiza el escaneo de navidad y la bandera '-p' se utiliza para los puertos que queremos escanear
+nmap -sX -Pn -p 999 <MACHINE_IP>
+```
+
+> **NOTA**: *NO* utilizar un rango de IP con la bandera `-p`
+
+*Pregunta 3: There is a reason given for this -- what is it? \
+**Note:** The answer will be in your scan results. Think carefully about which switches to use -- and read the hint before asking for help!*
+**Respuesta: `no response`**
+
+```bash
+# Volver a ejecutar el comando anterior con un agregado
+# La bandera '-vv' es el modo verboso
+nmap -sX -Pn -p 999 -vv <MACHINE_IP>
+
+Starting Nmap 7.99 ( https://nmap.org ) at 2026-10-05 19:25 -0400
+Initiating Parallel DNS resolution of 1 host. at 19:25
+Completed Parallel DNS resolution of 1 host. at 19:25, 2.53s elapsed
+Initiating XMAS Scan at 19:25
+Scanning <MACHINE_IP> [1 port]
+Completed XMAS Scan at 19:25, 2.05s elapsed (1 total ports)
+Nmap scan report for <MACHINE_IP>
+Host is up, received user-set.
+Scanned at 2026-10-05 19:25:08 EDT for 2s
+PORT    STATE         SERVICE REASON
+```
+
+> El modo verboso muestra una nueva columna llamada `REASON`. Siempre prestar atención a las "razones" por las cuales se da un estado (`open`, `closed`, `open|filtered`).
+
+*Pregunta 4: Perform a TCP SYN scan on the first 5000 ports of the target -- how many ports are shown to be open?* \
+**Respuesta: 5**
+
+```bash
+# Utilizar la bandera '-sT' para realizar un escaneo de puertos TCP abiertos
+nmap -sT -Pn -p 0-5000 -vv <MACHINE_IP>
+Starting Nmap 7.99 ( https://nmap.org ) at 2026-10-05 19:36 -0400
+Initiating Parallel DNS resolution of 1 host. at 19:36
+Completed Parallel DNS resolution of 1 host. at 19:36, 2.51s elapsed
+Initiating Connect Scan at 19:36
+Scanning <MACHINE_IP> [5001 ports]
+Discovered open port 80/tcp on <MACHINE_IP>
+Discovered open port 21/tcp on <MACHINE_IP>
+Discovered open port 3389/tcp on <MACHINE_IP>
+Discovered open port 135/tcp on <MACHINE_IP>
+Discovered open port 53/tcp on <MACHINE_IP>
+Completed Connect Scan at 19:36, 16.63s elapsed (5001 total ports)
+Nmap scan report for <MACHINE_IP>
+Host is up, received user-set (0.064s latency).
+Scanned at 2026-10-05 19:36:39 EDT for 17s
+Not shown: 4996 filtered tcp ports (no-response)
+PORT     STATE SERVICE       REASON
+21/tcp   open  ftp           syn-ack
+53/tcp   open  domain        syn-ack
+80/tcp   open  http          syn-ack
+135/tcp  open  msrpc         syn-ack
+3389/tcp open  ms-wbt-server syn-ack
+
+Read data files from: /usr/share/nmap
+Nmap done: 1 IP address (1 host up) scanned in 19.16 seconds
+```
+
+> Ahora se deben de utilizar rangos ya que estamos escaneando específicamente puertos TCP. Se mantienen las otras banderas del comando anterior.
+
+*Pregunta 5: Open Wireshark and perform a TCP Connect scan against port 80 on the target, monitoring the results. Make sure you understand what's going on. Deploy the `ftp-anon` script against the box. Can Nmap login successfully to the FTP server on port 21? (Y/N)*
+**Respuesta: Y**
+
+```bash
+# Primero realizar un escaneo TCP al puerto 80 para determinar si está activa la conexión
+nmap -sT -Pn -p 80 -vv <MACHINE_IP>
+Starting Nmap 7.99 ( https://nmap.org ) at 2026-10-05 21:06 -0400
+Initiating Parallel DNS resolution of 1 host. at 21:06
+Completed Parallel DNS resolution of 1 host. at 21:06, 2.54s elapsed
+Initiating Connect Scan at 21:06
+Scanning <MACHINE_IP> [1 port]
+Discovered open port 80/tcp on <MACHINE_IP>
+Completed Connect Scan at 21:06, 0.06s elapsed (1 total ports)
+Nmap scan report for <MACHINE_IP>
+Host is up, received user-set (0.062s latency).
+Scanned at 2026-10-05 21:06:48 EDT for 0s
+
+PORT   STATE SERVICE REASON
+80/tcp open  http    syn-ack
+
+Read data files from: /usr/share/nmap
+Nmap done: 1 IP address (1 host up) scanned in 2.62 seconds
+```
+
+![escaneo\_port80](escaneo_port80.png)
+
+> - `SYN-SYN/ACK-ACK` detectado. Se establece la conexión
+> - `RST/ACK` se intenta una vez mas el Threeway handshake. Posible desecho de paquetes ICMP
+
+```bash
+# Se ejecuta nmap una vez más con la bandera '-sV' y '-sC'
+nmap -Pn -sV -sC <MACHINE_IP>
+Starting Nmap 7.99 ( https://nmap.org ) at 2026-10-05 21:17 -0400
+Nmap scan report for <MACHINE_IP>
+Host is up (0.062s latency).
+Not shown: 995 filtered tcp ports (no-response)
+PORT     STATE SERVICE       VERSION
+21/tcp   open  ftp           FileZilla ftpd 0.9.60 beta
+| ftp-anon: Anonymous FTP login allowed (FTP code 230)
+|_Can't get directory listing: TIMEOUT
+| ftp-syst: 
+|_  SYST: UNIX emulated by FileZilla
+53/tcp   open  domain        Simple DNS Plus
+80/tcp   open  http          Microsoft IIS httpd 10.0
+|_http-title: IIS Windows Server
+| http-methods: 
+|_  Potentially risky methods: TRACE
+|_http-server-header: Microsoft-IIS/10.0
+135/tcp  open  msrpc         Microsoft Windows RPC
+3389/tcp open  ms-wbt-server Microsoft Terminal Services
+|_ssl-date: 2026-10-06T01:18:22+00:00; +9s from scanner time.
+| ssl-cert: Subject: commonName=win-scan
+| Not valid before: 2026-10-04T23:08:53
+|_Not valid after:  2027-04-05T23:08:53
+| rdp-ntlm-info: 
+|   Target_Name: WIN-SCAN
+|   NetBIOS_Domain_Name: WIN-SCAN
+|   NetBIOS_Computer_Name: WIN-SCAN
+|   DNS_Domain_Name: win-scan
+|   DNS_Computer_Name: win-scan
+|   Product_Version: 10.0.17763
+|_  System_Time: 2026-10-06T01:17:51+00:00
+Service Info: OS: Windows; CPE: cpe:/o:microsoft:windows
+
+Host script results:
+|_clock-skew: mean: 8s, deviation: 0s, median: 7s
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 46.01 seconds
+```
+
+> - La bandera `-sV` prueba todos los puertos para determinar qué servicio se está ejecutando junto a su versión
+> - La bandera `-sC` ejecuta el script por defecto, que en este caso es `ftp-anon`
+
+> Revisando la salida del comando anterior, el estado del puerto 21 (FTP) es `open`, por lo tanto se puede establecer conexión.
 ## Lecciones aprendidas
+- Nmap es una herramienta de reconocimiento de red.
+- Entre más se conozca del objetivo, será más fácil atacar dicho objetivo.
+- Los mapeos de red son conocidos como **Port Scanning**
+- Las conexiones de red son entre dos puertos: uno de escucha en el servidor y otro en el equipo local que se abre aleatoriamente (ejemplo: conexión `HTTPS` en el puerto 443 y en el equipo local se abre el puerto 17500)
+- Todas las computadoras tienen un total de 65535 puertos disponibles
+- Hay un total de 1024 puertos "well-known" (bien conocidos)
+- Nmap está disponible tanto en Linux como en Windows (Kali Linux lo tiene instalado por defecto)
+- Existen varios tipos de escaneo pero los más importantes son: *TDP Scans* y *UDP Scans*
+- No es normal que los puertos UDP se marquen como abiertos, Nmap enviará la petición una segunda vez, si se marca como `open|filtered` entonces no se obtuvo respuesta
+- La respuesta que da un puerto UDP es un paquete ICMP, lo que quiere decir que está cerrado sin duda
+- El escaneo *Xmas* es particular ya que manda un paquete "malformado" (banderas FIN, PSH y URG encendidas), de ahí el nombre, ya que parece un "árbol de navidad" encendido
+- Los escaneos FIN, NULL y Xmas son más sigilosos que un escaneo SYN
+- El *SYN Scan* es sigiloso ya que no completa el threeway handshake
+- Cuando se conecta a una red, lo primero que se debe de hacer es obtener los hosts que están activos, ahí entra en juego el escaneo ICMP
+- *Ping sweep* manda un paquete ICMP a cada una de las direcciones de red para determinar cuales están activos
+- **NSE** es el acrónimo de *Nmap Scripting Engine*
+- Los scripts ses dividen en categorías y están escritos en Lua
+- Se puede ejecutar más de un script al mismo tiempo con la bandera `--scripts=<script_1>,<script_2>`
+- El script por defecto en Nmap es `ftp-anon` que se puede ejecutar con la bandera `-sC`
+- Por defecto, un host de Windows descarta los paquetes ICMP entrantes
+- La bandera `-Pn` obliga a Nmap a realizar un escaneo de toda la red ya que los tratará a todos como activos y no mandará ningún paquete ICMP (Ping)
