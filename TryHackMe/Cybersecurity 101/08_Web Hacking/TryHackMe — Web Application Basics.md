@@ -4,7 +4,6 @@
 
 ## Introducción
 La sala se enfoca en lo elemental de una aplicación web como una URL, peticiones y respuestas HTTP.
-
 ## Solución
 ### Task 2 — Web Application Overview
 Se puede pensar en una aplicación web como un planeta, donde los internautas son los astronautas que exploran el planeta por la superficie a miles de kilómetros de distancia viendo únicamente lo que hay en la superficie.
@@ -66,4 +65,41 @@ Es la dirección que se pone en el navegador. Permite buscar cualquier tipo de c
 **Respuesta: Query string**
 
 > **NOTA**: Inicia con el símbolo de interrogación
+
+### Task 4 — HTTPS Messages
+
+> Son paquetes que se intercambian entre el usuario y el servidor.
+
+> [!NOTE]
+> Los mensajes ayudan a entender las peticiones del cliente y las respuestas del servidor con el que se está comunicando. \
+
+> [!IMPORTANT]
+> **¿Cómo nos vamos a comunicar?** \
+> Existen dos tipos de mensajes
+> - **HTTP response**: Es enviada por el usuario para lanzar ciertas acciones
+> - **HTTP request**: Es enviada por el servidor en respuesta a la petición del cliente
+
+|   Campo    | ¿Qué es?                                                                                                                        |                        Ejemplo                         |
+| :--------: | ------------------------------------------------------------------------------------------------------------------------------- | :----------------------------------------------------: |
+| Start line | Es la primera línea del mensaje, por lo tanto indica si es una petición del usuario o una respuesta del servidor                |                 `POST /login HTTP/1.1`                 |
+|  Headers   | Están compuestos por pares clave-valor que proveen información adicional acerca del mensaje                                     | `Content-Type: application/json<br>Content-Length: 56` |
+| Empty line | Es un divisor. Separa el header del cuerpo del mensaje                                                                          |                   `<SALTO_DE_LINEA>`                   |
+|    Body    | Es donde se almacenan los datos del mensaje. El cuerpo puede incluir datos que el usuario quiere enviar al servidor como datos. |      `username=alejandro&password=1234seguridad`       |
+
+> [!IMPORTANT]
+> **La comunicación es la clave de una relación** \
+> Entender los HTTP Messages es importante
+> - Son la base fundacional de cómo es que se comunica una app web
+> - Entender cómo funcionan puede ayudar a entender y diagnosticar problemas de comunicación web
+> - Es crucial para la seguridad. Entender los mensajes puede ayudar a crear medidas de seguridad más estrictas para proteger los datos durante la transmisión
+
+***
+*Pregunta 1: Which HTTP message is returned by the web server after processing a client's request?* \
+**Respuesta: HTTP Response**
+
+> **PALABRAS CLAVE** -> *returned by the web server*
+
+*Pregunta 2: What follows the headers in an HTTP message?* \
+**Respuesta: Empty Line**
+
 ## Lecciones aprendidas
