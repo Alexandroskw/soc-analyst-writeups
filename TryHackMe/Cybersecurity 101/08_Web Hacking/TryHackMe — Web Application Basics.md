@@ -4,6 +4,7 @@
 
 ## Introducción
 La sala se enfoca en lo elemental de una aplicación web como una URL, peticiones y respuestas HTTP.
+
 ## Solución
 ### Task 2 — Web Application Overview
 Se puede pensar en una aplicación web como un planeta, donde los internautas son los astronautas que exploran el planeta por la superficie a miles de kilómetros de distancia viendo únicamente lo que hay en la superficie.
@@ -43,7 +44,7 @@ Es la dirección que se pone en el navegador. Permite buscar cualquier tipo de c
 > **URL COMPLETA** \
 > `http://user:password@tryhackme.com:80/view-room?id=1#task3`
 
-> [!IMPORTANT]
+> [!TIP]
 > **Algunas notas aclaratorias**
 > - **User**: Es extraño que aparezca en la actualidad ya que poner los detalles de acceso a una cuenta no es muy seguro ya que expone información sensible
 > - **Host**: Hay nombres de dominio que tienen pequeñas diferencias con los reales, esta práctica se llama *typosquatting*
@@ -101,5 +102,193 @@ Es la dirección que se pone en el navegador. Permite buscar cualquier tipo de c
 
 *Pregunta 2: What follows the headers in an HTTP message?* \
 **Respuesta: Empty Line**
+
+
+### Task 5 — HTTP Request: Request line and Methods
+Las **HTTP Request** es lo que un usuario envía a un servidor web esperando a que algo suceda en una aplicación web. Estas peticiones son (usualmente) el primer punto de contacto entre el usuario y el servidor. Es imperativo entender cómo funcionan.
+
+| Línea        | Qué es                                                                                                                 | Ejemplo                     |
+| ------------ | ---------------------------------------------------------------------------------------------------------------------- | --------------------------- |
+| Request line | Le dice al servidor qué se está solicitando. Se divide en tres partes: **HTTP Method**, **URL path** y **URL Version** | `METHOD /path HTTP/version` |
+| URL Path     | Le dice al servidor donde puede encontrar el recurso solicitado.                                                       | `GET /api/user`             |
+| HTTP Version | Muestra la versión del protocolo que se está utilizando entre el cliente y el servidor                                 | `GET /api/user HTTP/1.1`    |
+
+| Métodos   | Descripción                                                                                            |
+| --------- | ------------------------------------------------------------------------------------------------------ |
+| `GET`     | Obtiene los datos del servidor sin modificarlos                                                        |
+| `POST`    | Envía datos al servidor                                                                                |
+| `PUT`     | Reemplaza o actualiza información en el servidor                                                       |
+| `DELETE`  | Remueve información del servidor                                                                       |
+| `PATCH`   | Actualiza la parte de un recurso. Utilizado para realizar pequeños cambios en lugar de reemplazar todo |
+| `HEAD`    | Funciona como `GET` pero solo obtiene las cabeceras, no todo el contenido                              |
+| `OPTIONS` | Despliega los métodos que están disponibles para un recurso específico                                 |
+| `TRACE`   | Similar a `OPTIONS` pero usualmente para hacer debugging                                               |
+| `CONNECT` | Crea una conexión segura como `HTTPS`                                                                  |
+
+> [!NOTE]
+> Los 4 primeros métodos son los más populares pero es buena práctica entender que hay más y que se utilizan en contextos diferentes
+
+> [!IMPORTANT]
+> Los protocolos `HTTP/2` y `HTTP/3` son más modernos pero en la actualidad, la versión `HTTP/1.1` es la más versátil y utilizada. Muchos sistemas la siguen utilizando
+
+***
+*Pregunta 1: Which HTTP protocol version became widely adopted and remains the most commonly used version for web communication, known for introducing features like persistent connections and chunked transfer encoding?* \
+**Respuesta: `HTTP/1.1`**
+
+*Pregunta 2: Which HTTP request method describes the communication options for the target resource, allowing clients to determine which HTTP methods are supported by the web server?* \
+**Respuesta: `OPTIONS`**
+
+> **NOTA**: El método dice qué tipo de peticiones están disponibles para ese recurso en específico
+
+*Pregunta 3: In an HTTP request, which component specifies the specific resource or endpoint on the web server that the client is requesting, typically appearing after the domain name in the URL?* \
+**Respuesta: URL Path**
+
+> **RECORDATORIO**: El **URL Path** indica en dónde se encuentra el recurso solicitado
+
+### Task 6 — HTTP Request: Headers and Body
+
+| Header       | Descripción                                                                                                     | Ejemplo                                                                          |
+| ------------ | --------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| Host         | Especifica el nombre del servidor web que se está solicitando                                                   | `Host: tryhackme.com`                                                            |
+| User-Agent   | Comparte la información del navegador que hace la solicitud                                                     | `User-Agent: Mozilla/5.0`                                                        |
+| Referer      | Indica la URL de donde proviene la solicitud.                                                                   | `Referer: https://www.google.com`                                                |
+| Cookie       | La información que el servidor web le pidió anteriormente al navegador que almacenara se guarda en las cookies. | `Cookie: user_type=student; room=introtowebapplication; room_status=in_progress` |
+| Content-Type | Describe qué tipo o formato de datos están en la solicitud                                                      | `Content-Type: application/json`                                                 |
+#### Request Body
+Algunas **HTTP Request** como `PUT` y `POST` los datos están alojados dentro del body de la solicitud. El formato puede ser de varias formas pero los más populares son: `URL Encoded`, `Form Data`, `JSON` y `XML`.
+- **URL Encoded (application/x-www-form-urlencoded**: Los datos están estructurados en pares de clave y valor (`key=value`). Si hay muchos pares, se deben separar por el símbolo `&`. Los caracteres especiales están codificados con `%`
+  
+```http
+POST /profile HTTP/1.1
+Host: tryhackme.com
+User-Agent: Mozilla/5.0
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 33
+
+name=Aleksandra&age=27&country=US
+```
+
+- **Form data (multipart/form-data)**: Permite múltiples bloques de datos para ser enviados. Cada bloque está separado por una cadena delimitadora. Se utiliza para enviar información binaria (por ejemplo, subir imágenes a un servidor web)
+
+```http
+POST /upload HTTP/1.1
+Host: tryhackme.com
+User-Agent: Mozilla/5.0
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+----WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="username"
+
+aleksandra
+----WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="profile_pic"; filename="aleksandra.jpg"
+Content-Type: image/jpeg
+
+[Binary Data Here representing the image]
+----WebKitFormBoundary7MA4YWxkTrZu0gW--
+```
+
+- **JSON (application/json)**: Los datos son enviados en JSON (JavaScript Object Notation). Se separan en pares de `"name":"value"` (múltiples valores se separan por comas (,))
+  
+```http
+POST /api/user HTTP/1.1
+Host: tryhackme.com
+User-Agent: Mozilla/5.0
+Content-Type: application/json
+Content-Length: 62
+
+{
+    "name": "Aleksandra",
+    "age": 27,
+    "country": "US"
+}
+```
+
+- **XML (application/xml)**: Los datos están estructurados dentro de etiquetas llamadas **tags**, una de apertura y otra de cierre. Pueden ser anidadas una dentro de otra
+  
+```http
+ POST /api/user HTTP/1.1
+Host: tryhackme.com
+User-Agent: Mozilla/5.0
+Content-Type: application/xml
+Content-Length: 124
+
+<user>
+    <name>Aleksandra</name>
+    <age>27</age>
+    <country>US</country>
+</user>
+```
+
+***
+*Pregunta 1: Which HTTP request header specifies the domain name of the web server to which the request is being sent?* \
+**Respuesta: Host**
+
+> **RECORDATORIO**: Se está *pidiendo* el nombre del servidor al que enviamos la solicitud
+
+*Pregunta 2: What is the default content type for form submissions in an HTTP request where the data is encoded as key=value pairs in a query string format?* \
+**Respuesta: `application/x-www-form-urlencoded`**
+
+> **PALABRAS CLAVE** -> `key=value`
+
+*Pregunta 3: Which part of an HTTP request contains additional information like host, user agent, and content type, guiding how the web server should process the request?* \
+**Respuesta: Request Headers**
+
+> **RECORDATORIO**: Los headers son los que tienen la información de cómo es que el servidor y el cliente se van a comunicar
+
+### Task 7 — HTTP Response: Status Line and Status Code
+Al interactuar con una app web, el servidor envía una **HTTP Response** de vuelta para confirmar si la solicitud fue exitosa o pasó algo más. Esta respuesta viene acompañada de un **status code** (código de estado) y una explicación breve que da una pista de cómo es que el servidor manejó la petición
+
+> La explicación breve es conocida como **Reason Phrase**
+
+> [!IMPORTANT]
+> La primera línea de cada HTTP Response se le conoce como **Status Line** que proporciona la siguiente información
+> - **HTTP Version**: Versión del protocolo HTTP utilizada
+> - **Status Code**: Número de tres dígitos que muestra el resultado de la solicitud
+> - **Reason Phrase**: Breve mensaje explicando el código de estado en términos humanos
+
+| Nombre                  | Descripción                                                                        | Código  |
+| ----------------------- | ---------------------------------------------------------------------------------- | :-----: |
+| Informational responses | El servidor recibió parte de la solicitud y espera el resto                        | 100-199 |
+| Succesful Responses     | Todo ha salido bien. Se ha establecido conexión y el servidor respondió como debía | 200-299 |
+| Redirection Messages    | El recurso solicitado ha sido movido a una locación diferente                      | 300-399 |
+| Client Error Responses  | Indican un problema con la solicitud. Tal vez una URL mal dada                     | 400-499 |
+| Server Error Responses  | El servidor encontró un error mientras procesaba la solicitud                      | 500-599 |
+
+> [!TIP]
+> Algunos de los códigos más comunes son
+> - **100 (Continue)**: El servidor obtuvo la primera parte de la solicitud. Se prepara para el resto
+> - **200 (OK)**: La solicitud fue exitosa. Se ha enviado el recurso solicitado
+> - **301 (Moved permanently)**: El recurso solicitado ha sido movido permanentemente a una nueva URL
+> - **404 (Not Found)**: El servidor no pudo encontrar el recurso a través de la URL dada por el usuario
+> - **500 (Internal Server Error)**: Algo ha ido mal con el servidor
+
+***
+*Pregunta 1: What part of an HTTP response provides the HTTP version, status code, and a brief explanation of the response's outcome?* \
+**Respuesta: Status Line**
+
+> **RECORDATORIO**: La línea de estado es lo primero que aparece en la HTTP Response
+
+*Pregunta 2: Which category of HTTP response codes indicates that the web server encountered an internal issue or is unable to fulfil the client's request?* \
+**Respuesta: Server Error Responses**
+
+> **PALABRAS CLAVE** -> *server encountered an internal issue*
+
+*Pregunta 3: Which HTTP status code indicates that the requested resource could not be found on the web server?* \
+**Respuesta: 404**
+
+### Task 8 — HTTP Response: Headers and Body
+
+> [!TIP]
+> Los headers de **HTTP Response** dan información importante acerca de la respuesta y le dice al cliente que usualmente es un navegador, cómo manejarla
+
+| Response Header | Descripción                                                                                                    | Ejemplo                                  |
+| --------------- | -------------------------------------------------------------------------------------------------------------- | ---------------------------------------- |
+| Date            | Muestra la fecha y hora exactas cuando se generó la solicitud en el servidor                                   | `Date: Fri, 23 Aug 2024 10:43:21 GTM`    |
+| Content-Type    | Qué contenido se está obteniendo, por ejemplo JSON, o HTML (también incluye un juego de caracteres como UTF-8) | `Content-Type: text/html; charset=utf-8` |
+| Server          | Indica qué software para servidor se está utilizando                                                           | `Server: nginx`                          |
+| Set-Cookie      | Envía las cookies del servidor al cliente y este último las almacena para enviarlas de vuelta en el futuro     | `Set-Cookie: sessionId=38af1337es7a8`    |
+| Cache-Control   | Le dice al cliente qué tan larga puede ser la caché de la respuesta antes de volver a revisar el servidor      | `Cache-Control: max-age=600`             |
+| Location        | Se utiliza                                                                                                     |                                          |
 
 ## Lecciones aprendidas
