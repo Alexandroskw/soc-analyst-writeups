@@ -291,4 +291,38 @@ Al interactuar con una app web, el servidor envía una **HTTP Response** de vuel
 | Cache-Control   | Le dice al cliente qué tan larga puede ser la caché de la respuesta antes de volver a revisar el servidor      | `Cache-Control: max-age=600`             |
 | Location        | Se utiliza                                                                                                     |                                          |
 
+> [!TIP]
+> **Sobre HTTP Response Body** \
+> En el HTTP Response Body es donde los datos viven en sí, es decir, el HTML, JSON, etc. Siempre se debe depurar y escapar cualquier dato, sobre todo, contenido generado por los usuarios antes de devolver la respuesta
+
+> [!IMPORTANT]
+> **Acerca de `Set-Cookie`** \
+> Para que las cookies estén seguras, es necesario hacer que vayan sobre el protocolo `HTTPS` en lugar de `HTTP`. Para esto, es necesario agregar la bandera `HttpOnly` para que no se puedan accesar a través de JavaScript además de la bandera `Secure`.
+
+***
+*Pregunta 1: Which HTTP response header can reveal information about the web server's software and version, potentially exposing it to security risks if not removed?* \
+**Respuesta: Server**
+
+> **PALABRAS CLAVE** -> *server software*
+
+*Pregunta 2: Which flag should be added to cookies in the Set-Cookie HTTP response header to ensure they are only transmitted over HTTPS, protecting them from being exposed during unencrypted transmissions?* \
+**Respuesta:** \
+**Respuesta: `Secure`**
+
+*Pregunta 3: Which flag should be added to cookies in the Set-Cookie HTTP response header to prevent them from being accessed via JavaScript, thereby enhancing security against XSS attacks?* \
+**Respuesta: `HttpOnly`**
+
+### Task 9 — Security Headers
+
+> [!IMPORTANT]
+> Los **HTTP Security Headers** ayudan a mejorar la seguridad de la app web ya que mitigan ataques como XSS (Cross-Site Scripting), Clickjacking, entre otros.
+>
+> Para saber más acerca de ciertos headers se puede revisar [aquí](https://securityheaders.io/)
+
+| Header                           | Descripción                                                                                                                                         | Ejemplo                                                                                                     |
+| -------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| Content-Security-Policy (CSP)    | Ayuda a mitigar ataques comunes como XSS. permite a los administradores decir qué dominios o fuentes son confiables dando una capa más de seguridad | `Content-Security-Policy: default-src 'self'; script-src 'self' http://cdn.tryhackme.com; style-src 'self'` |
+| Strict-Transport-Security (HSTS) | Se asegura que el navegador web siempre se conecte mediante `HTTPS`                                                                                 | `Strict-Transport-Security: max-age=63072000; includeSubDomains; preload`                                   |
+| X-Content-Type-Options           | Puede ser usado para decirle a los navegadores que utilicen MIME, que siempre utilicen X-Content-Type-Options                                       | `X-Content-Type-Options: nosniff`                                                                           |
+| Referrer-Policy                  |                                                                                                                                                     |                                                                                                             |
 ## Lecciones aprendidas
