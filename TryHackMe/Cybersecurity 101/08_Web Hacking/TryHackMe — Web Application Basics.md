@@ -1,5 +1,5 @@
 # TryHackMe — Web Application Basics
-**Dificultad** -> easy | **Date** -> 06-oct-26 | **Type** -> Free \
+**Dificultad** -> easy | **Date** -> 06-oct-26 | **Type** -> Free + HandsOn \
 **Sala** -> [Web Application Basics](https://www.tryhackme.com/room/webapplicationbasics)
 
 ## Introducción
@@ -48,7 +48,7 @@ Es la dirección que se pone en el navegador. Permite buscar cualquier tipo de c
 > **Algunas notas aclaratorias**
 > - **User**: Es extraño que aparezca en la actualidad ya que poner los detalles de acceso a una cuenta no es muy seguro ya que expone información sensible
 > - **Host**: Hay nombres de dominio que tienen pequeñas diferencias con los reales, esta práctica se llama *typosquatting*
-> - **Query String**: Los usuarios pueden modificar estas cadenas, es importante saber manejarlas para evitar [inyecciones SQL](../../Logs/Intro%20to%20log%20analysis/TryHackMe%20—%20Intro%20to%20Log%20Analysis.md)
+> - **Query String**: Los usuarios pueden modificar estas cadenas, es importante saber manejarlas para evitar [inyecciones SQL](<TryHackMe — Intro to Log Analysis.md>)
 > - **Fragment**: Igual que las anteriores, el usuario las puede modificar. Hay que manejarlas con precaución
 
 ***
@@ -102,7 +102,6 @@ Es la dirección que se pone en el navegador. Permite buscar cualquier tipo de c
 
 *Pregunta 2: What follows the headers in an HTTP message?* \
 **Respuesta: Empty Line**
-
 
 ### Task 5 — HTTP Request: Request line and Methods
 Las **HTTP Request** es lo que un usuario envía a un servidor web esperando a que algo suceda en una aplicación web. Estas peticiones son (usualmente) el primer punto de contacto entre el usuario y el servidor. Es imperativo entender cómo funcionan.
@@ -280,7 +279,7 @@ Al interactuar con una app web, el servidor envía una **HTTP Response** de vuel
 ### Task 8 — HTTP Response: Headers and Body
 
 > [!TIP]
-> Los headers de **HTTP Response** dan información importante acerca de la respuesta y le dice al cliente que usualmente es un navegador, cómo manejarla
+> Los headers de **HTTP Response** dan información importante acerca de la respuesta y le dice al cliente, que usualmente es un navegador, cómo manejarla.
 
 | Response Header | Descripción                                                                                                    | Ejemplo                                  |
 | --------------- | -------------------------------------------------------------------------------------------------------------- | ---------------------------------------- |
@@ -319,10 +318,54 @@ Al interactuar con una app web, el servidor envía una **HTTP Response** de vuel
 >
 > Para saber más acerca de ciertos headers se puede revisar [aquí](https://securityheaders.io/)
 
-| Header                           | Descripción                                                                                                                                         | Ejemplo                                                                                                     |
-| -------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
-| Content-Security-Policy (CSP)    | Ayuda a mitigar ataques comunes como XSS. permite a los administradores decir qué dominios o fuentes son confiables dando una capa más de seguridad | `Content-Security-Policy: default-src 'self'; script-src 'self' http://cdn.tryhackme.com; style-src 'self'` |
-| Strict-Transport-Security (HSTS) | Se asegura que el navegador web siempre se conecte mediante `HTTPS`                                                                                 | `Strict-Transport-Security: max-age=63072000; includeSubDomains; preload`                                   |
-| X-Content-Type-Options           | Puede ser usado para decirle a los navegadores que utilicen MIME, que siempre utilicen X-Content-Type-Options                                       | `X-Content-Type-Options: nosniff`                                                                           |
-| Referrer-Policy                  |                                                                                                                                                     |                                                                                                             |
+| Header                           | Descripción                                                                                                                                         | Ejemplo                                                                                                                                                           | Características                                                                                                                                                                                                                                                                                                                        |
+| -------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Content-Security-Policy (CSP)    | Ayuda a mitigar ataques comunes como XSS. permite a los administradores decir qué dominios o fuentes son confiables dando una capa más de seguridad | `Content-Security-Policy: default-src 'self'; script-src 'self' http://cdn.tryhackme.com; style-src 'self'`                                                       | - `default-src`: especifica la política del sitio actual<br>- `script-src`: especifica la política donde el script puede ser cargado<br>- `style-src`: especifica la política donde los estilos CSS pueden ser cargad                                                                                                                |
+| Strict-Transport-Security (HSTS) | Se asegura que el navegador web siempre se conecte mediante `HTTPS`                                                                                 | `Strict-Transport-Security: max-age=63072000; includeSubDomains; preload`                                                                                         | - `max-age`: tiempo de expiración en segundos<br>- `includeSubDomain`: instruye al navegador aplicar esta propiedad a todos los subdominios<br>- `preload`: permite al sitio ser incluido en las listas de preca                                                                                                                     |
+| X-Content-Type-Options           | Puede ser usado para decirle a los navegadores que no utilicen MIME, que en su lugar siempre utilicen X-Content-Type-Options                        | `X-Content-Type-Options: nosniff`                                                                                                                                 | - `nosniff`: instruye al navegador a no detectar o adivinar el tipo                                                                                                                                                                                                                                                                  |
+| Referrer-Policy                  | Controla la cantidad de información enviada al servidor de destino cuando el usuario es redirigido del servidor de origen                           | - `Referrer-Policy: no-referer`<br>- `Referrer-Policy: same-origin`<br>- `Referrer-Policy: strict-origin`<br>- `Referrer-Policy: strict-origin-when-cross-origin` | - `no-referrer`: deshabilita cualquier el envío de información de la página actual<br>- `same-origin`: solo envía información de referencia cuando el destino sea igual al origen<br>- `stric-origin`: envía el sitio de referencia como origen<br>- `strict-origin-when-cross-origin`: similar al anterior excepto por las solicitudes de `same-origins`  |
+
+***
+*Pregunta 1: In a Content Security Policy (CSP) configuration, which property can be set to define where scripts can be loaded from?* \
+**Respuesta: `script-src`**
+
+> **PALABRAS CLAVE** -> *scripts*
+
+*Pregunta 2: When configuring the Strict-Transport-Security (HSTS) header to ensure that all subdomains of a site also use HTTPS, which directive should be included to apply the security policy to both the main domain and its subdomains?* \
+**Respuesta: `includeSubDomains`**
+
+> **NOTA**: se debe de aplicar la propiedad a todo el sitio, no solo a una página en específico.
+
+*Pregunta 3: Which HTTP header directive is used to prevent browsers from interpreting files as a different MIME type than what is specified by the server, thereby mitigating content type sniffing attacks?* \
+**Respuesta: `nosniff`**
+
+> **RECORDATORIO**: X-Content-Type-Options solo tiene una característica y es la única que previene este tipo de inyecciones
+
+### Task 10 — Making HTTP Requests (Practical)
+***
+*Pregunta 1: Make a **GET** request to `/api/users`. What is the flag?* \
+**Respuesta: THM{YOU_HAVE_JUST_FOUND_THE_USER_LIST}**
+
+*Pregunta 2: Make a **POST** request to `/api/user/2` and update the **country** of Bob from **UK** to **US**. What is the flag?* \
+**Respuesta: THM{YOU_HAVE_MODIFIED_THE_USER_DATA}**
+
+> **NOTA**: guardar la opción modificada
+
+![](<./Images/config_user.png>)
+
+*Pregunta 3: Make a **DELETE** request to `/api/user/1` to delete the user. What is the flag?* \
+**Respuesta: THM{YOU_HAVE_JUST_DELETED_A_USER}**
 ## Lecciones aprendidas
+- El servidor web es el encargado del hospedaje de cualquier app web
+- El front-end es la parte "bonita" de una página
+- Las URL dicen más de lo que se piensa
+- Las **HTTP Request** son la parte más importante en la comunicación entre un servidor y un cliente
+- Los métodos más importantes son: `GET`, `POST`, `PUT` y `DELETE`
+- Actualmente, el protocolo HTTP está en la versión 3 sin embargo, la versión 1.1 es la más estable y utilizada a día de hoy
+- La **Request Line** es la solicitud formal de un recurso
+- El **Request Body** almacena los datos en la solicitud (solo en los métodos `POST` y `PUT`)
+- Existen varios formatos para el **Req. Son la carta de presentaciónuest Body**, los más populares son: JSON, XML, URL Encoded y Form Data
+- Dentro de **Request Line** existe un código de tres dígitos que indica si la solicitud fue exitosa o hubo algún otro problema
+- Existen varios códigos de estado, los más populares son: 100, 200, 301, 404 y 500
+- Los **HTTP Response** tienen la información necesaria para que el cliente maneje la información
+- Los **Security Headers** son una capa de seguridad más a una app web. Es buena práctica revisar cual usar para evitar cierto tipo de ataques
