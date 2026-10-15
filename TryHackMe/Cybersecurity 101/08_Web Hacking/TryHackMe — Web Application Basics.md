@@ -48,7 +48,7 @@ Es la dirección que se pone en el navegador. Permite buscar cualquier tipo de c
 > **Algunas notas aclaratorias**
 > - **User**: Es extraño que aparezca en la actualidad ya que poner los detalles de acceso a una cuenta no es muy seguro ya que expone información sensible
 > - **Host**: Hay nombres de dominio que tienen pequeñas diferencias con los reales, esta práctica se llama *typosquatting*
-> - **Query String**: Los usuarios pueden modificar estas cadenas, es importante saber manejarlas para evitar [inyecciones SQL](<TryHackMe — Intro to Log Analysis.md>)
+> - **Query String**: Los usuarios pueden modificar estas cadenas, es importante saber manejarlas para evitar [inyecciones SQL](<../../Logs/Intro to log analysis/TryHackMe — Intro to Log Analysis.md>)
 > - **Fragment**: Igual que las anteriores, el usuario las puede modificar. Hay que manejarlas con precaución
 
 ***
@@ -351,7 +351,7 @@ Al interactuar con una app web, el servidor envía una **HTTP Response** de vuel
 
 > **NOTA**: guardar la opción modificada
 
-![](<./Images/config_user.png>)
+![config\_user](<./Images/config_user.png>)
 
 *Pregunta 3: Make a **DELETE** request to `/api/user/1` to delete the user. What is the flag?* \
 **Respuesta: THM{YOU_HAVE_JUST_DELETED_A_USER}**
@@ -369,3 +369,6 @@ Al interactuar con una app web, el servidor envía una **HTTP Response** de vuel
 - Existen varios códigos de estado, los más populares son: 100, 200, 301, 404 y 500
 - Los **HTTP Response** tienen la información necesaria para que el cliente maneje la información
 - Los **Security Headers** son una capa de seguridad más a una app web. Es buena práctica revisar cual usar para evitar cierto tipo de ataques
+
+## Referencias
+- [TryHackMe — Intro to log analysis](../../Logs/TryHackMe%20—%20Intro%20to%20log%20analysis)
