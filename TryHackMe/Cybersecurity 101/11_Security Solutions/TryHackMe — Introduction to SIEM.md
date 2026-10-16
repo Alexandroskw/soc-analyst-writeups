@@ -18,26 +18,14 @@ A los dispositivos los podemos llamar fuentes de registros (log sources). Se uti
 - **Host-Centric log sources**.
 - **Network-centric log sources**.
 
-#### Host-Centric Log Sources
+| Host-Centric Log Sources                                                                                                                                                                                                                                                                                                                   | Network-Centric Log Sources                                                                                                                                                                                                                                                                                                                                                                            |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Los dispositivos que generan este tipo de logs son windows, linux, servidores, etc., básicamente endpoints:<br>- Un usuario accesando a un archivo o intentando autenticarse<br>- Un proceso en ejecución realiza una actividad<br>- Un proceso agregando/editando/borrando una llave de registro<br>- Ejecución de comandos de PowerShell | Son los registros que se generan cuando los dispositivos se comunican entre ellos o cuando acceden a intenet. Los dispositivos que generan estos registros son IPS/IDS, firewall, routers, etc. Algunos ejemplos son:<br>- SSH<br>- Un archivo accesado vía FTP<br>- Tráfico de red<br>- Un usuario accediendo a un recurso de la empresa por medio de VPN<br>- Archivos de red compartiendo actividad |
 
-Los dispositivos que generan este tipo de logs son windows, linux, servidores, etc., básicamente endpoints:
-- Un usuario accesando a un archivo o intentando autenticarse
-- Un proceso en ejecución realiza una actividad
-- Un proceso agregando/editando/borrando una llave de registro
-- Ejecución de comandos de PowerShell
-
-#### Network-Centric Log Sources
-Son los registros que se generan cuando los dispositivos se comunican entre ellos o cuando acceden a intenet. Los dispositivos que generan estos registros son IPS/IDS, firewall, routers, etc. Algunos ejemplos son:
-- SSH
-- Un archivo accesado vía FTP
-- Tráfico de red
-- Un usuario accediendo a un recurso de la empresa por medio de VPN
-- Archivos de red compartiendo actividad
-
-Crean una gran cantidad de registros constantemente
+> Los **Network-Centric Log Sources** crean una gran cantidad de registros constantemente
 
 #### Answers Nowhere
-Hay algunos desafíos a los que nos enfrentamos al analizar los logs:
+Desafíos a los que nos enfrentamos al analizar los logs:
 - **Numerosas fuentes de logs**: Las redes tienen muchas fuentes que generan logs y a su vez generan cientos de eventos por segundo.
 - **No centralización**: Los logs residen en el dispositivo que los generó y para analizarlos se necesitaría conectarse vía **SSH** o **RDP** para analizarlos.
 - **Contexto limitado**: Si los logs de diferentes fuentes de están relacionados, pueden decir una historia diferente a la que están contando individualmente.
@@ -77,7 +65,7 @@ Windows registra cada evento que pueda ser visto por el **Event Viewer**. Le asi
 
 #### Linux machine
 Algunas de las locaciones más comunes donde Linux almacena los logs son:
-- `/var/log/httpd` o `/var/log/apache`: Logs de petición o respuesta y de errores de HTTP.
+- `/var/log/httpd` o `/var/log/apache`: Logs de solicitud o respuesta y de errores de HTTP.
 - `/var/log/cron`: Eventos relacionados con trabajos cron.
 - `/var/log/auth.log` o `/var/log/secure`: Logs relacionados con autenticación. Los primeros son para sistemas basados en Debian y los últimos para sistemas basados en REHL.
 - `/var/log/kern`: Logs relacionados con eventos del kernel.
@@ -85,13 +73,13 @@ Algunas de las locaciones más comunes donde Linux almacena los logs son:
 > [!TIP]
 > **Herramienta útil para visualizar logs — `lnav`**
 > 
-> Es un visualizador CLI para ver los logs de forma ordenada.
+> Es un visualizador CLI para ver los logs de forma ordenada. \
 > Referencia: [Linux Log Files Finally Make Sense with lnav](https://youtu.be/z0jBa_mkui0?si=6dfF6No5I6JwVQ7x)
 
 ---
 
 *Pregunta 1: In which location within a Linux environment are HTTP logs stored?* \
-**Respuesta: /var/log/httpd**
+**Respuesta: `/var/log/httpd`**
 
 > Los logs relacionados al protocolo HTTP(S) se almacenan en el registro del mismo nombre.
 
