@@ -98,5 +98,7 @@ El equipo SOC tiene a su disposición herramientas que le ayudan a cumplir con e
 > [!NOTE]
 > Las Soluciones de seguridad centralizan toda la información de los dispositivos o aplicaciones dentro de la red de la organización y automatizan la detección y respuesta
 
-- **SIEM (Security Information and Event Management)**: Colecta los logs de varios dispositivos en la red. Aquí es donde se crean las reglas de detección. 
+- **SIEM (Security Information and Event Management)**: Colecta los logs de varios dispositivos en la red. Aquí es donde se crean las reglas de detección encargadas de identificar la actividad sospechosa
+- **EDR (Endpoint Detection and Response)**: Da detalles en tiempo real del historial del dispositivo en el que se instaló y hace las alertas automáticamente
+- **Firewall**: 
 # Lecciones aprendidas
