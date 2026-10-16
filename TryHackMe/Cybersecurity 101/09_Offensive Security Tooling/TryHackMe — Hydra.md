@@ -31,7 +31,9 @@ Con base en qué protocolo se quiere hacer fuerza bruta, el comando cambia. Si s
 
 Un ejemplo de un ataque con Hydra a una página web
 
-> `hydra -l <username> -P <wordlist> <IP_MACHINE> http-post-form "/:username=^USER^&password=^PASS^:F=incorrect" -V`
+```bash
+hydra -l <username> -P <wordlist> <IP_MACHINE> http-post-form "/:username=^USER^&password=^PASS^:F=incorrect" -V
+```
 
 | bandera               | ¿Qué hace?                                                                                         |
 | --------------------- | -------------------------------------------------------------------------------------------------- |
