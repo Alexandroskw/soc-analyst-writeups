@@ -159,3 +159,7 @@ El equipo SOC tiene a su disposición herramientas que le ayudan a cumplir con e
 - Las alertas en forma de reportes, se llaman tickets y pasan a analistas de nivel superior para su análisis
 - Las tecnologías son lo que a un soldado son sus armas. Hacen la vida más sencilla para que el analista no haga todo de forma manual
 - Con base a lo anterior, se debe de determinar qué tipo de tecnologías se van a utilizar después de haber hecho una evaluación de las amenazas y recursos disponibles en la organización
+
+## Referencias
+- [TryHackMe — Introduction to SIEM](<TryHackMe — Introduction to SIEM.md>)
+- [TryHackMe — Intro to logs](<TryHackMe — Intro to logs.md>)
