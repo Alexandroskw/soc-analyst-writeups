@@ -221,12 +221,12 @@ ___
 
 > Todos los dispositivos en la red hacen una petición HTTP en proxy (**WP1**) ya que es el intermediario con el sitio real.
 
-![tap_after](<./Images/tap_setted.png>)
+![tap_after](<tap_setted.png>)
 
 > Cuando se hace una conexión TCP correcta, se manda un código `200 OK` para confirmar que se ha establecido conexión. \
 > Se debe buscar un paquete que descargue un archivo.
 
-![packet_attached_file](<./Images/downloaded_file_packet.png>)
+![packet_attached_file](<downloaded_file_packet.png>)
 
 *Pregunta 2: What is the flag found in the DNS traffic in scenario 2? The flag has the format THM{}.* \
 **Respuesta: THM{C2CommandFound}**
@@ -234,7 +234,7 @@ ___
 > Posicionar el TAP en 
 el servidor DNS y capturar todo el tráfico.
 
-![dns_tap](<./Images/dns_tap.png>)
+![dns_tap](<dns_tap.png>)
 
 > Se está buscando un archivo `.txt` ya que a través del archivo, se está inyectando un C2. \
 > **RECORDATORIO**: El protocolo DNS viaja en el puerto 53.
@@ -257,5 +257,5 @@ Standard query response 0x41eb TXT c2.tryhackrne.thn
 - Se requiere gran cantidad de almacenamiento para el almacenamiento de los paquetes.
 - Hay algunas herramientas especializadas para capturar los paquetes: Wireshark, TCPdump, IPS/IDS (snort), Suricata y Zeek
 
-# References
-[TryHackMe — Modelo OSI](<../../Cybersecurity%20101/Network%20Concepts/TryHackMe%20—%20Modelo%20OSI.md>)
+## Referencias
+[TryHackMe — Modelo OSI](<TryHackMe — Modelo OSI.md>)
