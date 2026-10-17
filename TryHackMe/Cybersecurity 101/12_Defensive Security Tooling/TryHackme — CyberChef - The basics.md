@@ -1,5 +1,5 @@
 # TryHackMe — Nombre de la sala
-**Dificultad** -> easy/medium/hard | **Date** -> 16-oct-2026 | **Type** -> Free/Premium \
+**Dificultad** -> easy | **Date** -> 16-oct-2026 | **Type** -> Free \
 **Sala** -> [CyberChef: The Basics](https://www.tryhackme.com/room/cyberchefbasics)
 
 # Introducción
@@ -51,4 +51,81 @@ Antes de hacer nada en **CyberChef**, es importante resaltar que hay una serie d
 3. Seleccionar las operaciones que se quieren utilizar
 4. Revisar la salida para verificar que es el resultado esperado antes de repetir el proceso 1 o 3
 
+| Paso                                     | Descripción                                                                                                                                                   |
+| ---------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 1. Poner objetivos                       | Se deben de proponer metas específicas y alcanzables para responder a la pregunta: **¿Qué quiero completar?**                                                 |
+| 2. Poner los datos en el área de entrada | Qué datos se van a utilizar, no se puede hacer nada sin ellos (duh!)<br>                                                                                      |
+| 3. Seleccionar las operaciones           | Es un poco engañoso si no se sabe a qué se está enfrentando. Por lo tanto se debe utilizar cualquier operación debajo de la categoría **Encryption/Encoding** |
+| 4. Revisar la salida                     | La pregunta implícita: **¿Se alcanzó el objetivo?**. Si la respuesta es si, entonces no hay mas, si no, hay que repetir los pasos                             |
+***
+*Pregunta 1: At which step would you determine, "What do I want to accomplish?* \
+**Respuesta: 1**
+
+> **RECORDATORIO**: Antes de cualquier cosa hay que preguntarnos *¿qué queremos hacer?* o *¿que metas queremos completar?*
+
+### Task 5 — Practice, practice, practice
+
+> Descargar los archivos adjuntos en la tarea
+
+| Extractor               | Descripción                                      |
+| ----------------------- | ------------------------------------------------ |
+| Extract IP address      | Extrae todas las direcciones IPv/6               |
+| Extract URLs            | Extrae las URL de la entrada                     |
+| Extract email addresses | Extrae todas las direcciones email de la entrada |
+
+> [!TIP]
+> **Algunas aclaraciones**
+> - La extracción de direcciones IP extrae cualquier IPv4/6 válidas
+> - La extracción de direcciones email obtiene todas las cadenas y caracteres con el formato `johndoe@domain[.]com`
+> - Se requiere un protocolo en la extracción de URL (HTTP, FTP, etc) de lo contrario puede generar varios falsos positivos. Para mas detalles revisar [aquí](<../08_Web Hacking/TryHackMe — Web Application Basics.md>)
+
+| Característica       | Descripción                                        |
+| -------------------- | -------------------------------------------------- |
+| From UNIX timestamp  | Convierte a tiempo UNIX una cadena                 |
+| To UNIX to timestamp | Convierte una cadena de tiempo (UTC) a tiempo UNIX |
+> [!IMPORTANT]
+> El *UNIX timestamp* es un valor de 32-bits que representa el número de segundos transcurridos desde el 1 de enero de 1970, año del nacimiento de UNIX.
+
+| Operaciones | Descripción                                                                                              | Ejemplo                                                                                         |
+| ----------- | -------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| From Base64 | Descifra datos de una cadena ASCII Base64 a formato crudo                                                | `V2VsY29tZSB0byB0cnloYWNrbWUh` se vuelve `Welcome to tryhackme!`                                |
+| URL Decode  | Convierte los caracteres codificados en formato porcentual de una URI o URL a sus valores sin codificar. | `https%3A%2F%2Fgchq%2Egithub%2Eio%2FCyberChef%2F` se vuelve `https://gchq.github.io/CyberChef/` |
+| From Base85 | Codifica arbitrariamente datos de bytes                                                                  | `BOu!rD]j7BEbo7` se vuelve `hello world!`                                                       |
+| From Base58 | Codifica arbitrariamente datos de bytes                                                                  | `AXLU7qR` se vuelve `Thm58`                                                                     |
+| To Base62   | cifra los datos arbitrariamente los datos de bytes utilizando un juego restringido de símbolos           | `Thm62` se vuelve `6NiRkOY`                                                                     |
+
+> [!IMPORTANT]
+> **Acerca de las _Bases_** \
+> Las Base(64, 85, 58, 62) se conocen como *Base encodings*, toman datos binarios y lo transforman en una representación basada en texto utilizando código ASCII
+
+> [!NOTE]
+> **Sobre Base85 y 62**
+> - **Base85** usualmente es más eficiente que **Base64**
+> - **Base62** utiliza un juego de símbolos que los humanos convenientemente usan y procesan en las computadoras.
+
+>  Entre más elevada sea la base, la cadena será mas corta que resulte
+
+***
+*Pregunta 1: What is the hidden email address?* \
+**Respuesta: `hidden@hotmail.com`**
+
+> Utilizar la extracción de email
+
+*Pregunta 2: What is the hidden IP address that ends in .232?* \
+**Respuesta: `102.20.11.232`**
+
+> Utilizar la extracción de IP con la casilla de `IPv4` seleccionada (seleccionada por defecto)
+
+*Pregunta 3: Which domain address starts with the letter "T"?* \
+**Respuesta: `TryHackMe.com`**
+
+*Pregunta 4: What is the binary value of the decimal number 78?* \
+**Respuesta: 01001110**
+
+> **NOTA**: Borrar el archivo cargado anteriormente antes de continuar
+
+*Pregunta 5: What is the URL encoded value of `https://tryhackme.com/r/careers`?* \
+**Respuesta: `https%3A%2F%2Ftryhackme%2Ecom%2Fr%2Fcareers`**
+
+> **NOTA**: Marcar la casilla *Encode all special chars*
 # Lecciones aprendidas
