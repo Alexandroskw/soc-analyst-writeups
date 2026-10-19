@@ -72,7 +72,7 @@ Es la dirección que se pone en el navegador. Permite buscar cualquier tipo de c
 > Son paquetes que se intercambian entre el usuario y el servidor.
 
 > [!NOTE]
-> Los mensajes ayudan a entender las peticiones del cliente y las respuestas del servidor con el que se está comunicando. \
+> Los mensajes ayudan a entender las peticiones del cliente y las respuestas del servidor con el que se está comunicando.
 
 > [!IMPORTANT]
 > **¿Cómo nos vamos a comunicar?** \
