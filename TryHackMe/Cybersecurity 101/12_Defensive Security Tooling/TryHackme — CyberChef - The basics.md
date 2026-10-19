@@ -4,6 +4,7 @@
 
 # Introducción
 Sala enfocada en una pequeña introducción en CyberChef, una herramienta tan versátil que se ha convertido en parte importante de los profesionistas en ciberseguridad
+
 # Solución
 
 > [!TIP]
@@ -56,7 +57,8 @@ Antes de hacer nada en **CyberChef**, es importante resaltar que hay una serie d
 | 1. Poner objetivos                       | Se deben de proponer metas específicas y alcanzables para responder a la pregunta: **¿Qué quiero completar?**                                                 |
 | 2. Poner los datos en el área de entrada | Qué datos se van a utilizar, no se puede hacer nada sin ellos (duh!)<br>                                                                                      |
 | 3. Seleccionar las operaciones           | Es un poco engañoso si no se sabe a qué se está enfrentando. Por lo tanto se debe utilizar cualquier operación debajo de la categoría **Encryption/Encoding** |
-| 4. Revisar la salida                     | La pregunta implícita: **¿Se alcanzó el objetivo?**. Si la respuesta es si, entonces no hay mas, si no, hay que repetir los pasos                             |
+| 4. Revisar la salida                     | La pregunta implícita: **¿Se alcanzó el objetivo?**. Si la respuesta es si, entonces no hay mas que hacer, si no, hay que repetir los pasos                   |
+
 ***
 *Pregunta 1: At which step would you determine, "What do I want to accomplish?* \
 **Respuesta: 1**
@@ -79,10 +81,11 @@ Antes de hacer nada en **CyberChef**, es importante resaltar que hay una serie d
 > - La extracción de direcciones email obtiene todas las cadenas y caracteres con el formato `johndoe@domain[.]com`
 > - Se requiere un protocolo en la extracción de URL (HTTP, FTP, etc) de lo contrario puede generar varios falsos positivos. Para mas detalles revisar [aquí](<../08_Web Hacking/TryHackMe — Web Application Basics.md>)
 
-| Característica       | Descripción                                        |
-| -------------------- | -------------------------------------------------- |
-| From UNIX timestamp  | Convierte a tiempo UNIX una cadena                 |
-| To UNIX to timestamp | Convierte una cadena de tiempo (UTC) a tiempo UNIX |
+| Característica       | Descripción                                                  |
+| -------------------- | ------------------------------------------------------------ |
+| From UNIX timestamp  | Convierte una marca de tiempo UNIX a una marca de tiempo UTC |
+| To UNIX to timestamp | Convierte una marca de tiempo (UTC) a tiempo UNIX            |
+
 > [!IMPORTANT]
 > El *UNIX timestamp* es un valor de 32-bits que representa el número de segundos transcurridos desde el 1 de enero de 1970, año del nacimiento de UNIX.
 
@@ -103,7 +106,7 @@ Antes de hacer nada en **CyberChef**, es importante resaltar que hay una serie d
 > - **Base85** usualmente es más eficiente que **Base64**
 > - **Base62** utiliza un juego de símbolos que los humanos convenientemente usan y procesan en las computadoras.
 
->  Entre más elevada sea la base, la cadena será mas corta que resulte
+>  Entre más elevada sea la base, la cadena resultante será más corta
 
 ***
 *Pregunta 1: What is the hidden email address?* \
@@ -128,4 +131,35 @@ Antes de hacer nada en **CyberChef**, es importante resaltar que hay una serie d
 **Respuesta: `https%3A%2F%2Ftryhackme%2Ecom%2Fr%2Fcareers`**
 
 > **NOTA**: Marcar la casilla *Encode all special chars*
+
+### Task 6 — Your first official cook
+***
+*Pregunta 1: Using the file you downloaded in Task 5, which IP starts and ends with "10"?* \
+**Respuesta: `10.10.2.10`**
+
+> **RECORDATORIO**: Utilizar la extracción de IP
+
+*Pregunta 2: What is the base64 encoded value of the string "**Nice Room!**"?* \
+**Respuesta: `TmljZSBSb29tIQ==`**
+
+*Pregunta 3: What is the URL decoded value for `https%3A%2F%2Ftryhackme%2Ecom%2Fr%2Froom%2Fcyberchefbasics`?* \
+**Respuesta: `https://tryhackme.com/r/room/cyberchefbasics`**
+
+> **NOTA**: Utilizar la receta para decodificar URL
+
+*Pregunta 4: What is the datetime string for the Unix timestamp `1725151258`?* \
+**Respuesta: `Sun 1 September 2024 00:40:58 UTC`**
+
+> **NOTA**: Utilizar la receta para decodificar el tiempo UNIX
+
+*Pregunta 5:  What is the Base85 decoded string of the value `<+oue+DGm>Ap%u7`?* \
+**Respuesta: `This is fun!`**
+
 # Lecciones aprendidas
+- CyberChef es una herramienta tan versátil que se ha ganado la reputación de ser llamada "La navaja suiza de los datos"
+- Se puede utilizar tanto en la web como de forma local descargando la última versión de su [repositorio](https://github.com/gchq/CyberChef/releases)
+- Se puede utilizar desde texto plano cargado directamente en su interfaz hasta una carpeta entera
+- Se pueden hacer operaciones tan simples como Base64 hasta operaciones tan complejas como cifrado AES y descifrado RSA
+- La forma 'correcta' de utilizar la herramienta es: **Marcar objetivos** -> **Poner los datos** -> **Seleccionar la operación** -> **Revisar la salida**
+- Si no se obtienen los resultados deseados, se debe de iniciar desde el paso 1 o el 3
+- Únicamente practicando es como se mejora en utilizar la herramienta
