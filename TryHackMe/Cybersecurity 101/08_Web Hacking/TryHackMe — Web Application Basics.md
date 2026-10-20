@@ -153,10 +153,12 @@ Las **HTTP Request** es lo que un usuario envía a un servidor web esperando a q
 | Referer      | Indica la URL de donde proviene la solicitud.                                                                   | `Referer: https://www.google.com`                                                |
 | Cookie       | La información que el servidor web le pidió anteriormente al navegador que almacenara se guarda en las cookies. | `Cookie: user_type=student; room=introtowebapplication; room_status=in_progress` |
 | Content-Type | Describe qué tipo o formato de datos están en la solicitud                                                      | `Content-Type: application/json`                                                 |
+
 #### Request Body
 Algunas **HTTP Request** como `PUT` y `POST` los datos están alojados dentro del body de la solicitud. El formato puede ser de varias formas pero los más populares son: `URL Encoded`, `Form Data`, `JSON` y `XML`.
+
 - **URL Encoded (application/x-www-form-urlencoded**: Los datos están estructurados en pares de clave y valor (`key=value`). Si hay muchos pares, se deben separar por el símbolo `&`. Los caracteres especiales están codificados con `%`
-  
+
 ```http
 POST /profile HTTP/1.1
 Host: tryhackme.com
@@ -281,14 +283,14 @@ Al interactuar con una app web, el servidor envía una **HTTP Response** de vuel
 > [!TIP]
 > Los headers de **HTTP Response** dan información importante acerca de la respuesta y le dice al cliente, que usualmente es un navegador, cómo manejarla.
 
-| Response Header | Descripción                                                                                                    | Ejemplo                                  |
-| --------------- | -------------------------------------------------------------------------------------------------------------- | ---------------------------------------- |
-| Date            | Muestra la fecha y hora exactas cuando se generó la solicitud en el servidor                                   | `Date: Fri, 23 Aug 2024 10:43:21 GTM`    |
-| Content-Type    | Qué contenido se está obteniendo, por ejemplo JSON, o HTML (también incluye un juego de caracteres como UTF-8) | `Content-Type: text/html; charset=utf-8` |
-| Server          | Indica qué software para servidor se está utilizando                                                           | `Server: nginx`                          |
-| Set-Cookie      | Envía las cookies del servidor al cliente y este último las almacena para enviarlas de vuelta en el futuro     | `Set-Cookie: sessionId=38af1337es7a8`    |
-| Cache-Control   | Le dice al cliente qué tan larga puede ser la caché de la respuesta antes de volver a revisar el servidor      | `Cache-Control: max-age=600`             |
-| Location        | Se utiliza                                                                                                     |                                          |
+| Response Header | Descripción                                                                                                     | Ejemplo                                  |
+| --------------- | --------------------------------------------------------------------------------------------------------------- | ---------------------------------------- |
+| Date            | Muestra la fecha y hora exactas cuando se generó la solicitud en el servidor                                    | `Date: Fri, 23 Aug 2024 10:43:21 GMT`    |
+| Content-Type    | Qué contenido se está obteniendo, por ejemplo JSON, o HTML (también incluye un juego de caracteres como UTF-8)  | `Content-Type: text/html; charset=utf-8` |
+| Server          | Indica qué software para servidor se está utilizando                                                            | `Server: nginx`                          |
+| Set-Cookie      | Envía las cookies del servidor al cliente y este último las almacena para enviarlas de vuelta en el futuro      | `Set-Cookie: sessionId=38af1337es7a8`    |
+| Cache-Control   | Le dice al cliente qué tan larga puede ser la caché de la respuesta antes de volver a revisar el servidor       | `Cache-Control: max-age=600`             |
+| Location        | Se utiliza en las respuestas de redirección (300). Le dice al cliente donde ir después si el recurso fue movido | `Location: /index.html`                  |
 
 > [!TIP]
 > **Sobre HTTP Response Body** \
@@ -296,7 +298,8 @@ Al interactuar con una app web, el servidor envía una **HTTP Response** de vuel
 
 > [!IMPORTANT]
 > **Acerca de `Set-Cookie`** \
-> Para que las cookies estén seguras, es necesario hacer que vayan sobre el protocolo `HTTPS` en lugar de `HTTP`. Para esto, es necesario agregar la bandera `HttpOnly` para que no se puedan accesar a través de JavaScript además de la bandera `Secure`.
+> Para que las cookies estén seguras, es necesario hacer que vayan sobre el protocolo `HTTPS` en lugar de `HTTP`. Para lograr que vayan sobre el protocolo `HTTPS` es necesario utilizar la bandera `Secure`. \
+> La bandera `HttpOnly` se utiliza para que no se puedan accesar (las cookies) a través de JavaScript.
 
 ***
 *Pregunta 1: Which HTTP response header can reveal information about the web server's software and version, potentially exposing it to security risks if not removed?* \
@@ -305,7 +308,6 @@ Al interactuar con una app web, el servidor envía una **HTTP Response** de vuel
 > **PALABRAS CLAVE** -> *server software*
 
 *Pregunta 2: Which flag should be added to cookies in the Set-Cookie HTTP response header to ensure they are only transmitted over HTTPS, protecting them from being exposed during unencrypted transmissions?* \
-**Respuesta:** \
 **Respuesta: `Secure`**
 
 *Pregunta 3: Which flag should be added to cookies in the Set-Cookie HTTP response header to prevent them from being accessed via JavaScript, thereby enhancing security against XSS attacks?* \
@@ -314,8 +316,7 @@ Al interactuar con una app web, el servidor envía una **HTTP Response** de vuel
 ### Task 9 — Security Headers
 
 > [!IMPORTANT]
-> Los **HTTP Security Headers** ayudan a mejorar la seguridad de la app web ya que mitigan ataques como XSS (Cross-Site Scripting), Clickjacking, entre otros.
->
+> Los **HTTP Security Headers** ayudan a mejorar la seguridad de la app web ya que mitigan ataques como XSS (Cross-Site Scripting), Clickjacking, entre otros. \
 > Para saber más acerca de ciertos headers se puede revisar [aquí](https://securityheaders.io/)
 
 | Header                           | Descripción                                                                                                                                         | Ejemplo                                                                                                                                                           | Características                                                                                                                                                                                                                                                                                                                        |
@@ -323,7 +324,7 @@ Al interactuar con una app web, el servidor envía una **HTTP Response** de vuel
 | Content-Security-Policy (CSP)    | Ayuda a mitigar ataques comunes como XSS. permite a los administradores decir qué dominios o fuentes son confiables dando una capa más de seguridad | `Content-Security-Policy: default-src 'self'; script-src 'self' http://cdn.tryhackme.com; style-src 'self'`                                                       | - `default-src`: especifica la política del sitio actual<br>- `script-src`: especifica la política donde el script puede ser cargado<br>- `style-src`: especifica la política donde los estilos CSS pueden ser cargad                                                                                                                |
 | Strict-Transport-Security (HSTS) | Se asegura que el navegador web siempre se conecte mediante `HTTPS`                                                                                 | `Strict-Transport-Security: max-age=63072000; includeSubDomains; preload`                                                                                         | - `max-age`: tiempo de expiración en segundos<br>- `includeSubDomain`: instruye al navegador aplicar esta propiedad a todos los subdominios<br>- `preload`: permite al sitio ser incluido en las listas de preca                                                                                                                     |
 | X-Content-Type-Options           | Puede ser usado para decirle a los navegadores que no utilicen MIME, que en su lugar siempre utilicen X-Content-Type-Options                        | `X-Content-Type-Options: nosniff`                                                                                                                                 | - `nosniff`: instruye al navegador a no detectar o adivinar el tipo                                                                                                                                                                                                                                                                  |
-| Referrer-Policy                  | Controla la cantidad de información enviada al servidor de destino cuando el usuario es redirigido del servidor de origen                           | - `Referrer-Policy: no-referer`<br>- `Referrer-Policy: same-origin`<br>- `Referrer-Policy: strict-origin`<br>- `Referrer-Policy: strict-origin-when-cross-origin` | - `no-referrer`: deshabilita cualquier el envío de información de la página actual<br>- `same-origin`: solo envía información de referencia cuando el destino sea igual al origen<br>- `stric-origin`: envía el sitio de referencia como origen<br>- `strict-origin-when-cross-origin`: similar al anterior excepto por las solicitudes de `same-origins`  |
+| Referrer-Policy                  | Controla la cantidad de información enviada al servidor de destino cuando el usuario es redirigido del servidor de origen                           | - `Referrer-Policy: no-referrer`<br>- `Referrer-Policy: same-origin`<br>- `Referrer-Policy: strict-origin`<br>- `Referrer-Policy: strict-origin-when-cross-origin` | - `no-referrer`: deshabilita cualquier el envío de información de la página actual<br>- `same-origin`: solo envía información de referencia cuando el destino sea igual al origen<br>- `stric-origin`: envía el sitio de referencia como origen<br>- `strict-origin-when-cross-origin`: similar al anterior excepto por las solicitudes de `same-origins`  |
 
 ***
 *Pregunta 1: In a Content Security Policy (CSP) configuration, which property can be set to define where scripts can be loaded from?* \
@@ -355,19 +356,20 @@ Al interactuar con una app web, el servidor envía una **HTTP Response** de vuel
 
 *Pregunta 3: Make a **DELETE** request to `/api/user/1` to delete the user. What is the flag?* \
 **Respuesta: THM{YOU_HAVE_JUST_DELETED_A_USER}**
+
 ## Lecciones aprendidas
 - El servidor web es el encargado del hospedaje de cualquier app web
 - El front-end es la parte "bonita" de una página
 - Las URL dicen más de lo que se piensa
-- Las **HTTP Request** son la parte más importante en la comunicación entre un servidor y un cliente
+- Las **HTTP Request** son la parte más importante en la comunicación entre un servidor y un cliente, es la petición del cliente
 - Los métodos más importantes son: `GET`, `POST`, `PUT` y `DELETE`
 - Actualmente, el protocolo HTTP está en la versión 3 sin embargo, la versión 1.1 es la más estable y utilizada a día de hoy
 - La **Request Line** es la solicitud formal de un recurso
 - El **Request Body** almacena los datos en la solicitud (solo en los métodos `POST` y `PUT`)
-- Existen varios formatos para el **Req. Son la carta de presentaciónuest Body**, los más populares son: JSON, XML, URL Encoded y Form Data
+- Existen varios formatos para el **Request Body**, los más populares son: JSON, XML, URL Encoded y Form Data
 - Dentro de **Request Line** existe un código de tres dígitos que indica si la solicitud fue exitosa o hubo algún otro problema
 - Existen varios códigos de estado, los más populares son: 100, 200, 301, 404 y 500
-- Los **HTTP Response** tienen la información necesaria para que el cliente maneje la información
+- Los **HTTP Response** tienen la información necesaria para que el cliente maneje la información, es la respuesta del servidor
 - Los **Security Headers** son una capa de seguridad más a una app web. Es buena práctica revisar cual usar para evitar cierto tipo de ataques
 
 ## Referencias

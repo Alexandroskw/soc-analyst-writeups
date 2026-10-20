@@ -39,7 +39,7 @@ Desafíos a los que nos enfrentamos al analizar los logs:
 > Los registros se relacionan directamente con los host.
 
 *Pregunta 2: Is VPN-related activity host-centric or network-centric?* \
-**Respuesta: newwork-centric**
+**Respuesta: network-centric**
 
 > Las VPN se relacionan directamente con Internet.
 
@@ -67,7 +67,7 @@ Windows registra cada evento que pueda ser visto por el **Event Viewer**. Le asi
 Algunas de las locaciones más comunes donde Linux almacena los logs son:
 - `/var/log/httpd` o `/var/log/apache`: Logs de solicitud o respuesta y de errores de HTTP.
 - `/var/log/cron`: Eventos relacionados con trabajos cron.
-- `/var/log/auth.log` o `/var/log/secure`: Logs relacionados con autenticación. Los primeros son para sistemas basados en Debian y los últimos para sistemas basados en REHL.
+- `/var/log/auth.log` o `/var/log/secure`: Logs relacionados con autenticación. Los primeros son para sistemas basados en Debian y los últimos para sistemas basados en RHEL.
 - `/var/log/kern`: Logs relacionados con eventos del kernel.
 
 > [!TIP]
