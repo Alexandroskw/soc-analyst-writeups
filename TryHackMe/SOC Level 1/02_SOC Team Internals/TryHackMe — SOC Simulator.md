@@ -20,7 +20,7 @@ Se detectó un correo sospechoso suplantando la identidad de Amazon (impersonati
 
 ### Análisis
 
-![8815\_amazon\_email\_impersonation](8815_amazon_email_impersonation.png)
+![8815\_amazon\_email\_impersonation](<./Images/8815_amazon_email_impersonation.png>)
 
 Un correo sospechoso a nombre de Amazon con una terminación extraña: `urgents@amazon.biz`. Una suplantación de identidad (impersonation), los correos oficiales relacionados con Amazon terminan en `.com`. El correo afectado es: `h.harris[@]thetrydaily[.]thm`. El enlace sospechoso está en el cuerpo del correo electrónico y, a simple vista se ha utilizado un acortador de URL para evitar ver adonde redirige el enlace `hxxp://bit[.]ly/3sHkX3da12340`.
 
