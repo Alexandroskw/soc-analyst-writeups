@@ -4,7 +4,7 @@
 
 ## Resumen
 Se detectó un correo sospechoso suplantando la identidad de Amazon (impersonation) con el ID 8815 en el dashboard. Segundos después, se lanzó otra alerta, esta vez relacionada al firewall bloqueando la conexión a una URL desconocida (ID 8816). Ambas alertas están relacionada, ya que la URL bloqueada está dentro del cuerpo del email que se recibió primero.
-## Alert-8815-Inbound email containing suspicious external link
+## Alerta-8815-Inbound email containing suspicious external link
 
 | Item           | Description                                              |
 | -------------- | -------------------------------------------------------- |
@@ -56,7 +56,7 @@ Poco después de la primera alerta (ID 8815), el firewall bloqueó una URL malic
 1. **Motivo de la alerta**: La alerta se dispara cada que un usuario intenta acceder a un sitio que ha sido marcado como sospechoso dentro de las reglas del firewall o debido a que la inteligencia de amenazas lo ha marcado como una.
 2. **Mismo enlace del correo anterior**: Segundos antes del disparo de esta alerta del firewall, llegó una alerta sobre un correo con un enlace (potencialmente) peligroso.
    ![](<./Images/8815_SIEM_alert.png>)
-3. **Análisis del enlace del emisor del correo**: Siguiendo las instrucciones del playbook, se debe de verificar los detalles de la conexión y posteriormente la veracidad del enlace. ![8815\_link](8815_link.png) De acuerdo con *TryDetectThis*, el enlace está marcado como malicioso.
+3. **Análisis del enlace del emisor del correo**: Siguiendo las instrucciones del playbook, se debe de verificar los detalles de la conexión y posteriormente la veracidad del enlace. ![8815\_link](<./Images/8815_link.png>) De acuerdo con *TryDetectThis*, el enlace está marcado como malicioso.
 4. **¿Qué relación tiene con otra actividad?**: Antes de esta alerta, en el dashboard apareció una (alerta) relacionada a un correo con un enlace (potencialmente) dañino. Cuando se hace la correlación, el enlace al que se intentó ingresar, es el mismo que el del correo. ![](<./Images/8816_SIEM_alert.png>)
 
 ### Veredicto
@@ -72,9 +72,9 @@ Se confirma como un **Verdadero Positivo**, un intento de ingresar a un sitio ma
 | Triaje y reporte               | 23:04 (triaje) — 00:20 (reporte)  | -                   |
 
 ## Pasos para la remediación
-1. **Bloqueo del correo**: Bloquear el correo electrónico asociado al correo de phishing.
+1. **Cuarentena del correo**: Poner en cuarentena el correo para posteriormente eliminarlo, así mismo bloquear el dominio del correo.
 2. **Corroborar con el usuario**: Asegurarse de que el usuario **H. Harris** no ha ingresado más información o ha utilizado su correo institucional en otras plataformas ajenas a la organización.
-3. **Monitoreo del tráfico de red**: Crear reglas más estrictas para evitar correos de phishing y monitorear el tráfico saliente de la red.
+3. **Monitoreo del tráfico de red**: Bloqueo del dominio `amazon[.]biz` y agregar la URL a la lista negra.
 4. **Capacitación en concientización de los usuarios**: Concientizar a los usuarios acerca del phishing con el fin de evitar hacer clic en enlaces de dudosa procedencia y evitar la exfiltración de credenciales.
 
 ## Lecciones aprendidas
