@@ -90,4 +90,3 @@ Se confirma como un **Verdadero Positivo**, un intento de ingresar a un sitio ma
 4. No entrar en desesperación. Hay que tener paciencia al analizar los logs y las alertas en el dashboard
 5. Las queries en el SIEM son importantes para filtrar de forma más eficiente lo que se está buscando
 6. Se deben de dar acciones correctivas para evitar un futuro incidente como el que se analizó
-7. 
