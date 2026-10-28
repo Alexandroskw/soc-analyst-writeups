@@ -23,6 +23,6 @@ Documentar el proceso de análisis, investigación y respuesta ante incidentes, 
 Cada write-up incluye comandos utilizados, hallazgos relevantes, respuestas con razonamiento y **Lecciones aprendidas**.
 
 ## Estado
-En construcción activa. Siguiendo Cybersecurity 101 path.
+En construcción activa. Siguiendo SOC L1 path.
 ### Perfiles
 [TryHackMe](https://tryhackme.com/p/alexxkw)
