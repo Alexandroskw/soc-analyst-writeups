@@ -8,6 +8,7 @@ Sala enfocada en el framework de la "pirámide del dolor", qué es y como clasif
 ## Solución
 
 ### Hash Values (Trivial)
+
 > *El valor de un hash es un valor numérico de longitud fija que identifica de manera única los datos. Un valor hash es el resultado de un algoritmo de hash.*
 
 ##### Algoritmos más famosos
@@ -73,4 +74,12 @@ Incluyen a la Matriz MITRE ATT&CK, que se refiere a todos los pasos que un adver
 
 > [!NOTE]
 > Actualmente existen 10 técnicas de exfiltración según la matriz [MITRE ATT&CK](https://attack.mitre.org/)
+
 ## Lecciones aprendidas
+
+- La pirámide del dolor es una herramienta para hacerle la vida más complicada a un atacante
+- Entre más alto escale la pirámide el atacante, más molesto le resultará atacarnos
+- Hay puntos donde se puede detener a un atacante para que revalúe su táctica o se rinda y se vaya
+- Los proveedores de DNS son (indirectamente) responsables de ataques punycode ya que no tienen buenas regulaciones para cambiar los nombres de dominio
+- Hay plataformas donde otros profesionales comparten sus reglas para muchos tipos de ataques, no es explícitamente obligatorio crearlas desde cero
+- La Matriz MITRE ATT&CK es una suerte de base de datos acerca de las tácticas y técnicas de los adversarios que se basa en observaciones del mundo real
