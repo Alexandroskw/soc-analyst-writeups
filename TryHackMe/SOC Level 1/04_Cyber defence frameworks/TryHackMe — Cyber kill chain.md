@@ -75,4 +75,40 @@ Alcanzando la persistencia
 > Es una técnica utilizada para cambiar los atributos de fecha y hora de un archivo para ocultar los nuevos o cambios en los existentes.
 
 ### Command & Control (C2)
+Un **Command & Control** (o C2 Beaconing) es una comunicación maliciosa entre el servidor C2 y la víctima infectada, a través de la cual el actor malicioso remotamente controla y manipula a la víctima. Después de establecer la conexión, el atacante tiene control total sobre el host infectado
+
+> El IRC (Internet Relay Chat) era el canal predilecto de los atacantes para establecer un C2 pero actualmente es fácilmente detectado.
+
+> [!TIP]
+> Actualmente los canales más usados para establecer un canal C2 son
+> - **HTTP** en el puerto 80 y **HTTPS** en el puerto 443. Los atacantes mezclan el tráfico legítimo con el tráfico malicioso para evadir los firewalls
+> - **DNS**. El host infectado hace solicitudes DNS constantemente al servidor DNS del atacante (Se conoce también como **DNS Tunneling**)
+
+### Actions on Objectives (Exfiltración)
+El atacante alcanza el objetivo principal para poder obtener:
++ Obtener credenciales de los usuarios
++ Escalar privilegios obteniendo accesos elevados de administrador para poder explotar una configuración mal realizada
++ Reconocimiento interno para descubrir debilidades de software
++ Movimientos laterales
++ Recolectar y filtrar datos sensibles
++ Borrar respaldos y ocultar copias
++ Sobreescribir o corromper datos
+
+### Ataque a Target (Caso práctico)
+
+![](<./Images/Cyber_kill_chain_target_attack.png>)
+
+- **PowerShell**: Es el armamento que se utilizó
+- **Spearphishing attack**: Por cual medio se entregó el malware
+- **Exploitation public-facing app**: En qué (o sobre qué) se explotó la vulnerabilidad
+- **Dynamic Linker hijacking**: Creación de persistencia en la vulnerabilidad explotada
+- **Fallback channels**: El medio (o canal) por donde se controló a la víctima
+- **Data from local system**: Los datos del sistema objetivo se han filtrado
 ## Lecciones aprendidas
+- El framework Cyber Kill Chain es para seguridad perimetral y protección contra malware únicamente
+- El framework está desactualizado, no es lo más conveniente depender completamente en el
+- Cada parte de la cadena tiene su importancia y se puede detectar hasta cierto punto
+- La fase de entrega (puede ser) es uno de los pasos más más críticos en la cadena ya que es por donde el atacante empieza el ataque
+- Las amenazas han crecido tanto que este framework ha sido sobrepasado
+- El ataque a Target es uno de los ejemplos más prácticos sobre cómo actúa la cadena en la vida real
+- La persistencia es el eslabón más fuerte de la cadena ya que es donde el atacante crea un canal de comunicación para la exfiltración de los datos de la víctima
