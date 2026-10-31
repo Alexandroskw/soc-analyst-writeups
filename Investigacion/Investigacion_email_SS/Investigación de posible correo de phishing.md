@@ -3,7 +3,7 @@
 ## Resumen
 El correo llegó a la bandeja de **Correo no deseado** a mi cuenta de Outlook a mediados de octubre del presente año.
 
-![correo\_pixelado](correo_pixelado.png)
+![correo\_pixelado](./Images/correo_pixelado.png)
 
 En primera instancia, el saludo es completamente genérico: *Hello*. No pone ningún nombre. Seguidamente, hace una *propuesta* que quiere compartir conmigo pero sin dar más detalles hasta que envíe un correo para 'validar' que mi email existe.
 
@@ -26,19 +26,19 @@ Los `Received` más relevantes son, por orden:
 
 Se busca el servidor email obtenido en [VirusTotal](https://www.virustotal.com):
 
-![virustotal\_search](virustotal_search.png)
+![virustotal\_search](./Images/virustotal_search.png)
 
 En **VirusTotal** -> **0/92** motores de seguridad no lo marcan como malicioso y el dominio fue registrado hace 15 años.
 
 Buscando a través de [AbuseIPDB](https://www.abuseipdb.com/)
 
-![IP\_search](IP_search.png)
+![IP\_search](./Images/IP_search.png)
 
  - **ISP**: SIA RixHost
  - **Utilización**: Centro de datos o Web Hosting.
  - **Ubicación**: Letonia
 
-![IP\_Reports](IP_Reports.png)
+![IP\_Reports](./Images/IP_Reports.png)
 
 Tres de los cuatro reportes coinciden en que es `Hacking` y los cuatro coinciden en que es un `Web App Attack`. El Web Hosting puede ser el responsable de estos reportes.
 
@@ -46,9 +46,9 @@ Tres de los cuatro reportes coinciden en que es `Hacking` y los cuatro coinciden
 
 > En **AbuseIPDB**, se ha reportado al menos cuatro veces. No se puede asegurar que el dominio `dataclub[.]info` sea estrictamente malicioso.
 
-![whois\_domain](whois_domain.png)
+![whois\_domain](./Images/whois_domain.png)
 
-![whois-2\_domain](whois-2_domain.png)
+![whois-2\_domain](./Images/whois-2_domain.png)
 
 - **Año de registro**: 2011-05-31
 - **Año de actualización**: 2026-08-12
@@ -64,13 +64,13 @@ $ cat 'Return-Path' Proposal.eml
 Return-Path: abruev.b@tashmeduni[.]uz
 ```
 
-![return-path\_domain](return-path_domain.png)
+![return-path\_domain](./Images/return-path_domain.png)
 
 - **Fecha de creación**: 2025-05-08
 - **Fecha de actualización**: 2026-01-20
 - **Ubicación**: Tashkent, Uzbekistán
 
-![VirusTotal\_Return-Path](VirusTotal_Return-Path.png)
+![VirusTotal\_Return-Path](./Images/VirusTotal_Return-Path.png)
 
 En **VirusTotal** -> **0/92** motores de búsqueda no lo marcan como malicioso. Además está marcado como perteneciente a una institución educacional.
 
@@ -85,13 +85,13 @@ X-Sender-IP: 85[.]204[.]79[.]43
 
 Se hace una búsqueda en **AbuseIPDB**:
 
-![Sender-IP](Sender-IP.png)
+![Sender-IP](./Images/Sender-IP.png)
 
 - **ISP**: SUVAN NET LLC
 - **Uso**: Centro de datos o Web Hosting
 - **Ubicación**: Uzbekistán
 
-![Reports\_Sender-IP](Reports_Sender-IP.png)
+![Reports\_Sender-IP](./Images/Reports_Sender-IP.png)
 
 Todos los reportes coinciden que solo es un Email spammer.
 ## Conclusión
