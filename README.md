@@ -3,12 +3,10 @@ Repositorio de writeups y notas de salas y laboratorios de **TryHackMe** y **Let
 
 # Objetivo
 Documentar el proceso de análisis, investigación y respuesta ante incidentes, intentando ir más allá de únicamente obtener la flag.
-
 - Practicar, documentar y mejorar habilidades de **Blue Team/SOC**.
 - Mejorar el pensamiento analítico y la metodología de la investigación.
 - Crear una base de conocimiento personal reutilizable.
 - Preparación para roles de **Analista SOC**.
-
 # Estructura de este repositorio
 
 ```
@@ -17,10 +15,13 @@ Documentar el proceso de análisis, investigación y respuesta ante incidentes, 
 │   │   └── Room-name/
 │   │       └── TryHackMe — nombre de la sala.md
 │   └── ...
+├── Investigaciones/
+│   └── Investigacion_email/
+│       └── archivo.md
 └── README.md
 ```
 
-Cada write-up incluye comandos utilizados, hallazgos relevantes, respuestas con razonamiento y **Lecciones aprendidas**.
+Cada write-up incluye comandos utilizados, hallazgos relevantes, respuestas con razonamiento y **Lecciones aprendidas**. En el directorio `Investigaciones/` se subirán análisis sobre correos recibidos en la bandeja de correo no deseado y qué es lo que se ha encontrado con base en los encabezados del email.
 
 ## Estado
 En construcción activa. Siguiendo SOC L1 path.
