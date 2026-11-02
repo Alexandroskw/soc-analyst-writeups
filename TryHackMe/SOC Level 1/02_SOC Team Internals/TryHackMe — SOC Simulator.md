@@ -36,7 +36,7 @@ Un correo sospechoso a nombre de Amazon con una terminación extraña: `urgents@
    ```
 
 ### Veredicto
-Se confirma como **Verdadero Positivo**. El correo es un indicio de phishing donde suplantan la identidad de Amazon. La evidencia apunta que el usuario H. Harris es la víctima principal ya que no detectó otro correo con el mismo enlace en otro endpoint (se verificó también el enlace malicioso. Imagen en el apartado de evidencia).
+Se confirma como **Verdadero Positivo**. El correo es un indicio de phishing donde suplantan la identidad de Amazon. La evidencia apunta que el usuario H. Harris es la víctima principal ya que no detectó otro correo con el mismo enlace en otro endpoint (se identificó también el enlace malicioso. Imagen en el apartado de evidencia).
 
 ## Alerta-8816-Access to Blacklisted External URL Blocked by Firewall
 
