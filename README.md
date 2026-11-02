@@ -22,7 +22,7 @@ Documentar el proceso de análisis, investigación y respuesta ante incidentes, 
 └── README.md
 ```
 
-> Cada write-up incluye comandos utilizados, hallazgos relevantes, respuestas con razonamiento y **Lecciones aprendidas**. En el directorio `Investigaciones/` se subirán análisis sobre correos recibidos en la bandeja de correo no deseado y qué es lo que se ha encontrado con base en los encabezados del email.
+> Cada write-up incluye comandos utilizados, hallazgos relevantes, respuestas con razonamiento y **Lecciones aprendidas**. En el directorio `Investigación/` se subirán análisis sobre correos recibidos en la bandeja de correo no deseado y qué es lo que se ha encontrado con base en los encabezados del email.
 
 ## Estado
 En construcción activa. Siguiendo SOC L1 path.
