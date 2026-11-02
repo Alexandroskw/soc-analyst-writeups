@@ -16,8 +16,8 @@ Documentar el proceso de análisis, investigación y respuesta ante incidentes, 
 │   │   └── Room-name/
 │   │       └── TryHackMe — nombre de la sala.md
 │   └── ...
-├── Investigaciones/
-│   └── Investigacion_email/
+├── Investigación/
+│   └── Investigaciónn_email/
 │       └── archivo.md
 └── README.md
 ```
