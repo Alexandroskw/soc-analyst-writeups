@@ -55,7 +55,7 @@ Tres de los cuatro reportes coinciden en que es `Hacking` y los cuatro coinciden
 - **Estado**: `clientDeleteProhibited`, `clientRenewProhibited`, `clientTransferProhibited`, `clientUpdateProhibited` (bloqueos de seguridad)
 - **Servidores**: `ns4.dataclub[.]lv` / `ns5.dataclub[.]lv`
 
-El dominio fue registrado el 5 de mayo de 2011 (2011-05-31) y fue actualizado el 12 de agosto de 2026 (2026-08-12), (poco antes de recibir el correo a mediados de octubre). El dominio `dataclub[.]info` parece ser uno legítimo y no malicioso.
+El dominio fue registrado el 31 de mayo de 2011 (2011-05-31) y fue actualizado el 12 de agosto de 2026 (2026-08-12), (poco antes de recibir el correo a mediados de octubre). El dominio `dataclub[.]info` parece ser uno legítimo y no malicioso.
 
 ### Buscando mediante `Return-Path`
 
