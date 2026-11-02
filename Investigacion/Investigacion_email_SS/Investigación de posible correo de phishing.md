@@ -7,7 +7,7 @@ El correo llegó a la bandeja de **Correo no deseado** a mi cuenta de Outlook a 
 
 En primera instancia, el saludo es completamente genérico: *Hello*. No pone ningún nombre. Seguidamente, hace una *propuesta* que quiere compartir conmigo pero sin dar más detalles hasta que envíe un correo para 'validar' que mi email existe.
 
-**Hipótesis inicial**
+**Hipótesis inicial** \
 El email es un sondeo de validación (email validation). Alguna antesala de otro correo de ingeniería social. El actual correo no contiene ningún archivo adjunto ni enlace.
 
 ## Investigación
