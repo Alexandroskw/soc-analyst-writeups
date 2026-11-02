@@ -87,18 +87,20 @@ Se confirma como un **Verdadero Positivo**, un intento de ingresar a un sitio ma
 
 ### Decisión
 **Escalación**: Si, al L2 de turno
-**Severidad de la decisión**: Alta. La alerta con el ID 8816
+**Severidad**: Alta. La alerta con el ID 8816
 
-**Razón**: Si bien el firewall bloqueó la conexión, el usuario **H. Harris** intento acceder al enlace malicioso. Se requiere confirmar que no hubo otra actividad en su equipo ni exfiltración de credenciales.
+**Razón**: Si bien el firewall bloqueó la conexión, el usuario **H. Harris** intentó acceder al enlace malicioso. Se requiere confirmar que no hubo otra actividad en su equipo ni compromiso de sus credenciales.
 
 **Qué se realizó**
 - Triage y correlación de ambas alertas
-- Verificación del remitente y el enlace
+- Verificación del remitente y el enlace (de forma visual)
 - Confirmación de otros destinatarios (ningún resultado adicional)
 
 **Se solicita al L2**:
 1. Revisar el endpoint afectado
 2. Contactar al usuario y reinicio de credenciales de ser necesario
+
+Las acciones de contención se encuentran en la sección *Pasos para la remediación*.
 
 ## Lecciones aprendidas
 1. Hay que dar una buena documentación sobre el(los) incidente(s) y relacionarlos como es debido
