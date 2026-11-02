@@ -3,7 +3,8 @@
 **Sala** -> N/A
 
 ## Resumen
-Se detectó un correo sospechoso suplantando la identidad de Amazon (impersonation) con el ID 8815 en el dashboard. Poco más de un minuto después (según los timestamps), se lanzó otra alerta, esta vez relacionada al firewall bloqueando la conexión a una URL en la lista negra (ID 8816). Ambas alertas están relacionada, ya que la URL bloqueada está dentro del cuerpo del email que se recibió primero.
+Se detectó un correo sospechoso suplantando la identidad de Amazon (impersonation) con el ID 8815 en el dashboard. Poco más de un minuto después (según los timestamps), se lanzó otra alerta, esta vez relacionada al firewall bloqueando la conexión a una URL en la lista negra (ID 8816). Ambas alertas están relacionadas, ya que la URL bloqueada está dentro del cuerpo del email que se recibió primero.
+
 ## Alerta-8815-Inbound email containing suspicious external link
 
 | Item           | Description                                              |
@@ -15,7 +16,7 @@ Se detectó un correo sospechoso suplantando la identidad de Amazon (impersonati
 | Timestamp      | 10/22/2026 22:59:08.946 (Dashboard timestamp)            |
 | Alert Severity | Medium                                                   |
 | Recipient      | `h.harris@thetrydaily.thm`                               |
-| IP Address     | `10.20.2.17` (pending confirmation)                  |
+| IP Address     | `10.20.2.17`                                             |
 | Event time     | 10/22/2026 23:00:29.594 (Splunk timestamp)               |
 
 ### Análisis
@@ -29,12 +30,13 @@ Un correo sospechoso a nombre de Amazon con una terminación extraña: `urgents@
 2. **Crea una necesidad de urgencia**: Insta al usuario a resolver de manera urgente un conflicto con respecto de un paquete.
 3. **Análisis del emisor del correo**: Siguiendo las instrucciones del playbook, después de analizar los artefactos del correo, se debe de averiguar si el emisor es confiable. ![](<./Images/8815_link.png>)
 4. **Búsqueda dentro del SIEM**: Para filtrar cualquier ruido, se hace una búsqueda dentro de Splunk con la query
+   
    ```
    "h.harris@thetrydaily.thm"
    ```
 
 ### Veredicto
-Se confirma como **Verdadero Positivo**. El correo es un indicio de phishing donde suplantan la identidad de Amazon. La evidencia apunta que el usuario H. Harris es la víctima principal ya que no detectó otro correo con el mismo enlace en otro endpoint (se verificó también el enlace malicioso).
+Se confirma como **Verdadero Positivo**. El correo es un indicio de phishing donde suplantan la identidad de Amazon. La evidencia apunta que el usuario H. Harris es la víctima principal ya que no detectó otro correo con el mismo enlace en otro endpoint (se verificó también el enlace malicioso. Imagen en el apartado de evidencia).
 
 ## Alerta-8816-Access to Blacklisted External URL Blocked by Firewall
 
@@ -54,14 +56,14 @@ Se confirma como **Verdadero Positivo**. El correo es un indicio de phishing don
 
 ![](<./Images/8816_dashboard.png>)
 
-Poco después de la primera alerta (ID 8815), el firewall bloqueó una URL maliciosa. Esta regla se lanza cada que algún usuario intenta conectarse a una URL bloqueada dentro de la lista negra del firewall o si el análisis de amenazas lo determina así. La IP asociada a ese intento de acceso es `10.20.2.17`. Así mismo, el enlace al que se intentó acceder, es el mismo enlace que se detectó en el correo poco antes de que se lanzara esta alerta. Por lo que se puede confirmar que H. Harris intentó acceder al enlace.
+Poco después de la primera alerta (ID 8815), el firewall bloqueó una URL maliciosa. Esta regla se lanza cada que algún usuario intenta conectarse a una URL bloqueada dentro de la lista negra del firewall o si el análisis de amenazas lo determina así. La IP asociada a ese intento de acceso es `10.20.2.17`. Así mismo, el enlace al que se intentó acceder es el mismo enlace que se detectó en el correo poco antes de que se lanzara esta alerta. Por lo que se puede confirmar que H. Harris intentó acceder al enlace.
 
 ### Evidencia
 1. **Motivo de la alerta**: La alerta se dispara cada que un usuario intenta acceder a un sitio que ha sido marcado como sospechoso dentro de las reglas del firewall o debido a que la inteligencia de amenazas lo ha marcado como una.
 2. **Mismo enlace del correo anterior**: Segundos antes del disparo de esta alerta del firewall, llegó una alerta sobre un correo con un enlace (potencialmente) peligroso.
    ![](<./Images/8815_SIEM_alert.png>)
 3. **Análisis del enlace del emisor del correo**: Siguiendo las instrucciones del playbook, se debe averiguar los detalles de la conexión y posteriormente la veracidad del enlace, la acción de revisar la fiabilidad del enlace se hizo en la alerta anterior.
-4. **¿Qué relación tiene con otra actividad?**: Antes de esta alerta, en el dashboard apareció una (alerta) relacionada a un correo con un enlace (potencialmente) dañino. Cuando se hace la correlación, el enlace al que se intentó ingresar, es el mismo que el del correo. ![](<./Images/8816_SIEM_alert.png>)
+4. **¿Qué relación tiene con otra actividad?**: Antes de esta alerta, en el dashboard apareció otra (alerta) relacionada a un correo con un enlace (potencialmente) dañino. Cuando se hace la correlación, el enlace al que se intentó ingresar, es el mismo que el del correo. ![](<./Images/8816_SIEM_alert.png>)
 
 ### Veredicto
 Se confirma como un **Verdadero Positivo**, un intento de ingresar a un sitio marcado como malicioso. La evidencia apunta que el usuario H. Harris intentó ingresar desde su workstation a dicho enlace y el firewall bloqueó el intento de conexión.
@@ -82,6 +84,21 @@ Se confirma como un **Verdadero Positivo**, un intento de ingresar a un sitio ma
 2. **Corroborar con el usuario**: Asegurarse de que el usuario **H. Harris** no ha ingresado más información o ha utilizado su correo institucional en otras plataformas ajenas a la organización.
 3. **Monitoreo del tráfico de red**: Bloqueo del dominio `amazon[.]biz` y agregar la URL a la lista negra.
 4. **Capacitación en concientización de los usuarios**: Concientizar a los usuarios acerca del phishing con el fin de evitar hacer clic en enlaces de dudosa procedencia y evitar la exfiltración de credenciales. (solución a largo plazo)
+
+### Decisión
+**Escalación**: Si, al L2 de turno
+**Severidad de la decisión**: Alta. La alerta con el ID 8816
+
+**Razón**: Si bien el firewall bloqueó la conexión, el usuario **H. Harris** intento acceder al enlace malicioso. Se requiere confirmar que no hubo otra actividad en su equipo ni exfiltración de credenciales.
+
+**Qué se realizó**
+- Triage y correlación de ambas alertas
+- Verificación del remitente y el enlace
+- Confirmación de otros destinatarios (ningún resultado adicional)
+
+**Se solicita al L2**:
+1. Revisar el endpoint afectado
+2. Contactar al usuario y reinicio de credenciales de ser necesario
 
 ## Lecciones aprendidas
 1. Hay que dar una buena documentación sobre el(los) incidente(s) y relacionarlos como es debido
