@@ -23,7 +23,7 @@ Se detectó un correo sospechoso suplantando la identidad de Amazon (impersonati
 
 ![8815\_amazon\_email\_impersonation](<./Images/8815_amazon_email_impersonation.png>)
 
-Un correo sospechoso a nombre de Amazon con una terminación extraña: `urgents@amazon.biz`. Una suplantación de identidad (impersonation), los correos oficiales relacionados con Amazon terminan en `.com`. El correo afectado es: `h.harris[@]thetrydaily[.]thm`. El enlace sospechoso está en el cuerpo del correo electrónico y, a simple vista se ha utilizado un acortador de URL para evitar ver adónde redirige el enlace `hxxp://bit[.]ly/3sHkX3da12340`.
+Un correo sospechoso a nombre de Amazon con una terminación extraña: `urgents@amazon.biz`. Una suplantación de identidad (impersonation), los correos oficiales relacionados con Amazon terminan en `.com`. El correo afectado es: `h.harris[@]thetrydaily[.]thm`. El enlace sospechoso está en el cuerpo del correo electrónico y, a simple vista se ha utilizado un acortador de URL para evitar ver adónde redirige el enlace .
 
 ### Evidencia
 1. **Motivo de la alerta**: La alerta se dispara cada que llega un correo con uno o más enlaces agregados y que son (potencialmente) peligrosos. El correo tiene una dirección sospechosa. ![](<./Images/8815_SIEM_alert.png>)
@@ -36,7 +36,7 @@ Un correo sospechoso a nombre de Amazon con una terminación extraña: `urgents@
    ```
 
 ### Veredicto
-Se confirma como **Verdadero Positivo**. El correo es un indicio de phishing donde suplantan la identidad de Amazon. La evidencia apunta que el usuario H. Harris es la víctima principal ya que no detectó otro correo con el mismo enlace en otro endpoint (se identificó también el enlace malicioso. Imagen en el apartado de evidencia).
+Se confirma como **Verdadero Positivo**. El correo es un indicio de phishing donde suplantan la identidad de Amazon. La evidencia apunta que el usuario H. Harris es la víctima principal ya que no se detectó otro correo con el mismo enlace en otro endpoint (se identificó también el enlace malicioso. Imagen en el apartado de evidencia).
 
 ## Alerta-8816-Access to Blacklisted External URL Blocked by Firewall
 
@@ -85,26 +85,26 @@ Se confirma como un **Verdadero Positivo**, un intento de ingresar a un sitio ma
 3. **Monitoreo del tráfico de red**: Bloqueo del dominio `amazon[.]biz` y agregar la URL a la lista negra.
 4. **Capacitación en concientización de los usuarios**: Concientizar a los usuarios acerca del phishing con el fin de evitar hacer clic en enlaces de dudosa procedencia y evitar la exfiltración de credenciales. (solución a largo plazo)
 
-### Decisión
-**Escalación**: Si, al L2 de turno
+## Decisión
+**Escalación**: Sí, al L2 de turno
 **Severidad**: Alta. La alerta con el ID 8816
 
 **Razón**: Si bien el firewall bloqueó la conexión, el usuario **H. Harris** intentó acceder al enlace malicioso. Se requiere confirmar que no hubo otra actividad en su equipo ni compromiso de sus credenciales.
 
 **Qué se realizó**
 - Triage y correlación de ambas alertas
-- Verificación del remitente y el enlace (de forma visual)
-- Confirmación de otros destinatarios (ningún resultado adicional)
+- Verificación del remitente y el enlace (de forma visual debido a la alerta 8816)
+- Confirmación de otros destinatarios (ningún resultado adicional buscando mediante la url: `hxxp://bit[.]ly/3sHkX3da12340`)
 
 **Se solicita al L2**:
 1. Revisar el endpoint afectado
-2. Contactar al usuario y reinicio de credenciales de ser necesario
+2. Contactar al usuario y reiniciar credenciales de ser necesario
 
 Las acciones de contención se encuentran en la sección *Pasos para la remediación*.
 
 ## Lecciones aprendidas
 1. Hay que dar una buena documentación sobre el(los) incidente(s) y relacionarlos como es debido
-2. Correlacionar los logs en el SIEM es una de las partes más importante para el análisis de un reporte de seguridad
+2. Correlacionar los logs en el SIEM es una de las partes más importantes para el análisis de un reporte de seguridad
 3. Los *playbooks* son una herramienta útil, si una alerta tiene uno se debe de utilizar, así será más fácil hacer el análisis de una alerta ya documentada
 4. No entrar en desesperación. Hay que tener paciencia al analizar los logs y las alertas en el dashboard
 5. Las queries en el SIEM son importantes para filtrar de forma más eficiente lo que se está buscando
