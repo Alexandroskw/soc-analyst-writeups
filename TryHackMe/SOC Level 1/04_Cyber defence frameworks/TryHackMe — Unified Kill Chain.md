@@ -79,5 +79,28 @@ Es la técnica que un adversario usa para alcanzar otros sistemas en la red, que
 
 > Hay sistemas que no son alcanzables tan directamente pero contienen información útil y/o seguridad débil.
 
+***
+#### Collection (Colección) ([MITRE Tactic TA0009](https://attack.mitre.org/tactics/TA0009/))
+El adversario puede estar buscando obtener datos valiosos o de interés, esto compromete la confidencialidad de los datos y llevar a la siguiente etapa que es la exfiltración.
+
+#### Exfiltration (Exfiltración) ([MITRE Tactic TA0010](https://attack.mitre.org/tactics/TA0010/))
+El adversario puede estar buscando el robo de datos que se empaquetarían utilizando medidas de cifrado y compresión para evitar alguna detección
+
+#### Impact (Impacto) ([MITRE Tactic TA0040](https://attack.mitre.org/tactics/TA0040/))
+Si el adversario está buscando comprometer la integridad y la disponibilidad de los datos puede entonces, manipular, interrumpir o destruir dichos datos.
+
+#### Objectives (Objetivos)
+Con todo el acceso y el control sobre los sistemas y la red de la organización, el adversario puede buscar conseguir su mas grande objetivo de su ataque, que puede ser financiero, con un ransomware puede cifrar los datos y pedir un rescate para liberarlos o simplemente dañar la reputación del negocio amenazando con liberar datos sensibles y confidenciales al público
 
 ## Lecciones aprendidas
+- La **UKC** es un framework mucho más moderno que, por ejemplo, Pyramid of pain
+- Está extremadamente detallada para abarcar una gran cantidad de pasos que podría seguir un atacante (18 pasos)
+- Los primeros ocho pasos se enfocan en como es que un atacante accede a un sistema y qué técnicas (puede) utiliza(r) para poder entrar a un entorno de red.
+	- De las fases más importantes es el reconocimiento ya que el atacante obtiene información de la víctima
+	- La persistencia permite a un atacante mantenerse dentro de la red incluso si perdió el acceso inicial
+	- El **C2** es el canal por el cual, el atacante establece la comunicación remota con la víctima
+- Los 6 pasos "intermedios" se centran en cómo es que un atacante ha logrado la persistencia en el sistema víctima
+	- La escalada de privilegios es uno de los pasos más críticos de esta etapa ya que el atacante puede acceder a un sistema que típicamente solo el usuario administrador o root tiene
+	- La ejecución otro de los pasos más peligrosos de esta fase ya que el atacante logra inyectar su código malicioso
+	- Otro de los pasos críticos es el movimiento lateral que el adversario usa para moverse a través de la red a otro objetivo para seguir completando sus objetivos
+- Los últimos cuatro pasos son la "salida", es decir, el atacante ha cumplido sus objetivos y ha dejado un daño a la organización
