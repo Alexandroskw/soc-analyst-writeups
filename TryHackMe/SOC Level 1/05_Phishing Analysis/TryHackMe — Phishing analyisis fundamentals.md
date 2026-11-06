@@ -57,4 +57,4 @@ Cuando se revisa un email por su código fuente salen a la vista elementos que a
 - Existen diversos tipos de phishing, unos más especializados que otros pero con la finalidad de engañar al receptor del mensaje
 
 ## Referencias
-[Investigación de posible correo de phishing](Investigación%20de%20posible%20correo%20de%20phishing.md)
+[Investigación de posible correo de phishing](../../../Investigacion/Investigacion_email_SS/Investigación%20de%20posible%20correo%20de%20phishing.md)
