@@ -17,7 +17,7 @@ El email es un sondeo de validación (email validation). Alguna antesala de otro
 ### Análisis de los encabezados `Received`
 
 ```shell
-$ cat 'Received' Proposal.eml
+$ grep 'Received' Proposal.eml
 ```
 
 Los `Received` más relevantes son, por orden:
@@ -60,7 +60,7 @@ El dominio fue registrado el 31 de mayo de 2011 (2011-05-31) y fue actualizado e
 ### Buscando mediante `Return-Path`
 
 ```shell
-$ cat 'Return-Path' Proposal.eml
+$ grep 'Return-Path' Proposal.eml
 Return-Path: abruev.b@tashmeduni[.]uz
 ```
 
@@ -77,7 +77,7 @@ En **VirusTotal** -> **0/92** motores de búsqueda no lo marcan como malicioso. 
 ### Buscando mediante la IP de origen
 
 ```shell
-$ cat 'IP' Proposal.eml
+$ grep 'IP' Proposal.eml
 Authentication-Results: mx.microsoft.com 1; spf=pass (sender IP is
 Received: from IP-151-117.dataclub[.]info ([109[.]248[.]151[.]117])
 X-Sender-IP: 85[.]204[.]79[.]43
