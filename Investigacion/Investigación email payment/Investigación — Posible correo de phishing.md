@@ -10,7 +10,7 @@ A primera vista el correo adjunta una imagen de un supuesto chat explicando la s
 Al llegar hasta el final del supuesto chat con soporte técnico, aparece un botón al que se le puede hacer clic que lleva a un sitio externo para 'actualizar' el método de pago.
 
 ##### Hipótesis inicial
-El email es un correo de phishing que se hace pasar por un servicio de almacenamiento en la nube (**impersonate**). El enlace lleva a un sitio web desconocido donde se le solicitará a la víctima que introduzca sus datos bancarios para clonar la tarjeta asociada y realizar compras no autorizadas.
+El email es un correo de phishing que se hace pasar por un servicio de almacenamiento en la nube (**impersonate**). El enlace lleva a un sitio web desconocido donde se le solicitará a la víctima que introduzca sus datos bancarios para clonar la tarjeta asociada y realizar compras no autorizadas o cualquier otro tipo de malversación de fondos.
 
 ---
 ## Investigación
@@ -27,7 +27,7 @@ Los encabezados más relevantes por orden son:
 - `Received-SPF.............................................Pass (protection[.]outlook[.]com: domain of urbandfgora[.]shop`
 - `Received.................................................from urbandfgora[.]shop (20[.]110[.]181[.]37)`
 
-Se busca el servidor email en [VirusTotal](https://www.virustotal.com):
+#### Se busca el servidor email en [VirusTotal](https://www.virustotal.com):
 
 ![virustotal\_received](./Images/virustotal_received.png)
 
@@ -35,7 +35,7 @@ En **VirusTotal**: **0/92** motores lo marcan como malicioso sin embargo, hay qu
 
 ![virustotal\_received\_suspicious](<./Images/virustotal_received_suspicious.png>)
 
-Buscando a través de [AbuseIPDB](https://www.abuseipdb.com/check/20.110.181.37):
+#### Buscando a través de [AbuseIPDB](https://www.abuseipdb.com/check/20.110.181.37):
 
 ![IP_search](./Images/abuseipdb_header.png)
 
@@ -62,7 +62,7 @@ Authentication-Results: mx.microsoft.com 1; spf=pass (sender IP is
  header.from=urbandfgora[.]shop;compauth=pass reason=100
 ```
 
-El header `Message-ID` contiene el identificador: `geopod-ismtpd-4-4`, y coincide con la plataforma **SendGrid**. Pero para determinar que sea parte de la infraestructura de **SendGrid**, los headers característicos (de **SendGrid**) `X-SG-EID` o `X-SG-ID` no hay resultados de dichos encabezados que determinen el uso de la infraestructura.
+El header `Message-ID` contiene el identificador: `geopod-ismtpd-4-4`, y coincide con la plataforma **SendGrid**. Pero para determinar que sea parte de la infraestructura de **SendGrid**, los headers característicos (de **SendGrid**) `X-SG-EID` o `X-SG-ID` deben estar estar en los headers y no hay resultados de dichos encabezados que determinen el uso de la infraestructura (*spoofing*).
 
 ## Revisando el dominio `urbandfgora[.]shop`
 
@@ -76,16 +76,16 @@ Datos de interés:
 - **Año de registro**: 2026-05-31
 - **Año de actualización**: 2026-09-10
 - **Estado**: `clientTransferProhibited` (bloqueos de seguridad)
-- **Servidores**: `dns1[.]registrar-servers[.]com`, `dns2[.]registrar-servers[.]com`
+- **Servidores**: `dns1[.]registrar-servers[.]com` / `dns2[.]registrar-servers[.]com`
 
-El dominio fue registrado el 31 de mayo de 2026 (**2026-05-31**) y actualizado el 10 de septiembre de 2026 (**2026-09-10**), y comenzó a generar actividad maliciosa (según los reportes de **AbuseIPDB**) dos meses antes de recibir el correo. Que el registro sea tan nuevo y los reportes de abuso son indicadores de riesgo altos.
+El dominio fue registrado el 31 de mayo de 2026 (**2026-05-31**) y actualizado el 10 de septiembre de 2026 (**2026-09-10**), y comenzó a generar actividad maliciosa (según los reportes de **AbuseIPDB**) un mes antes de recibir el correo. Que el registro sea tan nuevo y los reportes de abuso son indicadores de riesgo altos.
 
 ## Análisis del enlace malicioso
 
 > [!IMPORTANT]
 > Se utilizó el servicio [Hybrid Analysis](https://www.hybrid-analysis.com) como sandbox.
 
-Enlace analizado (neutralizado):
+**Enlace analizado (neutralizado)**:
 
 ```
 hxxp[://]nivellafinds[.]store/cl/33919_md/1007/11131474/2109/1051/6aeb1b9a691557fb45845073
@@ -99,8 +99,8 @@ hxxp[://]nivellafinds[.]store/cl/33919_md/1007/11131474/2109/1051/6aeb1b9a691557
 - **Detección de AV**: 0/6
 - **IOC**: 1 malicioso, 1 sospechoso y 17 informativos
 
-**Reporte completo**: \
-https://hybrid-analysis.com/sample/ddf80efb765c9e0d806835e102273478463d1c1005cd812f605047e3e8a6ff17/6af655b2f550cab8d50ca0c1
+> **Reporte completo**: \
+> https://hybrid-analysis.com/sample/ddf80efb765c9e0d806835e102273478463d1c1005cd812f605047e3e8a6ff17/6af655b2f550cab8d50ca0c1
 
 ## Indicadores de Compromiso (IOC) y técnicas ATT&CK
 
@@ -115,8 +115,32 @@ https://hybrid-analysis.com/sample/ddf80efb765c9e0d806835e102273478463d1c1005cd8
 ## Análisis de red
 Durante la ejecución del sandbox, el enlace hace múltiples peticiones DNS y HTTP/S a servicios de Google. Con base en los IOC, el atacante intenta hacer que el usuario introduzca sus credenciales de su cuenta de Google (**T1204**), posiblemente un intento de **credential harvesting**. La prueba no pudo establecer conexión completa, posiblemente a que la infraestructura del atacante estaba desactivada temporalmente.
 
-> En el reporte completo aparecen capturas relacionadas con este comportamiento descrito
+> En el reporte completo aparecen capturas relacionadas con el comportamiento descrito anteriormente.
 
 ![](<./Images/dns_requests.png>)
 
 ![](<./Images/HTTP_traffic.png>)
+
+## Conclusión
+Tras el análisis de los encabezados, dominio y la ejecución del enlace malicioso se puede concluir:
+- El correo es un **phishing** que se hace pasar por un servicio genérico de servicio de cloud: "Cloud Support".
+- El dominio `urbandfgora[.]shop` es de reciente creación, se le relaciona con reportes de abuso y se aloja en infraestructura de Azure.
+- El **spoofing** del correo suplanta los servicios de **SendGrid** para pasar las pruebas de autenticación y pasar por legítimo.
+- Con base en el punto anterior, el atacante controla el dominio `urbandfgora[.]shop`, aunque SPF, DKIM y DMARC pasaron no invalida la naturaleza maliciosa del correo.
+- El enlace redirige a un enlace de reciente creación (`nivellafinds[.]shop`) y **Hybrid Analysis** ha marcado como maliciosos (75/100).
+- El comportamiento de la red propone un posible robo de credenciales (o datos de pago), aunque en la prueba no se observó una captura de este proceso.
+
+### Evidencias relevantes
+- Dominios de reciente creación (`urbandfgora[.]shop` y `nivellafinds[.]shop`).
+- El enlace hace múltiples peticiones DNS y HTTP/S a servicios de Google.
+- La dirección IP (`20[.]110[.]181[.]37`) tiene una puntuación de 21% de abuso en **AbuseIPDB**.
+- El enlace malicioso intenta hacer conexión a servicios de Google para un posible robo de credenciales.
+- El IOC con el **ATT&CK ID T1204** es el indicador con mas peso ya que el atacante intenta(rá) que el usuario introduzca sus claves de acceso engañandolo con un enlace genuino.
+
+## Lecciones Aprendidas
+- La autenticación de un correo no es garantía de legitimidad (SPF, DKIM y DMARC en pass). Un atacante puede configurar su infraestructura para hacer pasar estos filtros.
+- Los dominios mas nuevos son un indicativo de alto valor. Sumando los reportes de abuso se puede determinar si el dominio es malicioso o cuanto menos de importancia.
+- Las tácticas ATT&CK son una gran ayuda para entender cómo el adversario quiere realizar su ataque.
+- Es relativamente fácil para un atacante comprar un dominio y utilizarlo con fines maliciosos.
+- Una infraestructura puede ser suplantada a través del spoofing y el dueño de la infraestructura original jamás podría enterarse de que ello.
+- Un atacante puede camuflar su tráfico con el tráfico habitual para poder pasar inadvertido y evadir filtros de red o de firewall.
