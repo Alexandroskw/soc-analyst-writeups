@@ -12,6 +12,7 @@ Al llegar hasta el final del supuesto chat con soporte técnico, aparece un bot�
 ##### Hipótesis inicial
 El email es un correo de phishing que se hace pasar por un servicio de almacenamiento en la nube (**impersonate**). El enlace lleva a un sitio web desconocido donde se le solicitará a la víctima que introduzca sus datos bancarios para clonar la tarjeta asociada y realizar compras no autorizadas.
 
+---
 ## Investigación
 
 > Se descargó el correo en formato `.eml` para realizar esta investigación
@@ -48,7 +49,7 @@ La IP tiene actividad reciente y contiene diez reportes, de los cuales cuatro co
 
 ![reports](./Images/abuseIP_reports.png)
 
-![reports-2](abuseIP_reports-2.png)
+![reports-2](./Images/abuseIP_reports-2.png)
 
 Se busca el header `Authentication-Results` para verificar la 'autenticidad' del correo. SPF, DKIM y DMARC pasaron con éxito (`pass`), sin embargo no significa que sea fiable. Debido a la condición de `pass`, Exchange no sospechó de ellos.
 
@@ -61,7 +62,7 @@ Authentication-Results: mx.microsoft.com 1; spf=pass (sender IP is
  header.from=urbandfgora[.]shop;compauth=pass reason=100
 ```
 
-Posteriormente se busca el header `Message-ID`. El identificador resultante es: `geopod-ismtpd-4-4` y coincide con la plataforma **SendGrid**. Pero para determinar que sea parte de la infraestructura de **SendGrid**, en los headers deben de aparecer `X-SG-EID` y/o `X-SG-ID` propios de este proveedor, pero no hay resultados.
+El header `Message-ID` contiene el identificador: `geopod-ismtpd-4-4`, y coincide con la plataforma **SendGrid**. Pero para determinar que sea parte de la infraestructura de **SendGrid**, los headers característicos (de **SendGrid**) `X-SG-EID` o `X-SG-ID` no hay resultados de dichos encabezados que determinen el uso de la infraestructura.
 
 ## Revisando el dominio `urbandfgora[.]shop`
 
@@ -77,61 +78,45 @@ Datos de interés:
 - **Estado**: `clientTransferProhibited` (bloqueos de seguridad)
 - **Servidores**: `dns1[.]registrar-servers[.]com`, `dns2[.]registrar-servers[.]com`
 
-El dominio fue registrado el 31 de mayo de 2026 (**2026-05-31**) y actualizado el 10 de septiembre de 2026 (**2026-09-10**), un mes antes de recibir el correo a principios de noviembre. Que el registro haya sido a mediados del presente año es sospechoso. Unos cuantos meses después (~6 meses aproximadamente) comenzó a tener una gran actividad (dos meses atrás según los reportes de **AbuseIPDB**).
+El dominio fue registrado el 31 de mayo de 2026 (**2026-05-31**) y actualizado el 10 de septiembre de 2026 (**2026-09-10**), y comenzó a generar actividad maliciosa (según los reportes de **AbuseIPDB**) dos meses antes de recibir el correo. Que el registro sea tan nuevo y los reportes de abuso son indicadores de riesgo altos.
 
-Por último, se suma la presunta manipulación del header `Message-ID`, que hizo que superara los filtros de autenticidad gracias a que se suplantó una infraestructura conocida, por lo tanto se puede confirmar el spoofing.
-
-## Prueba del enlace adjunto
+## Análisis del enlace malicioso
 
 > [!IMPORTANT]
-> Se utilizó el servicio [Hybrid Analysis](https://www.hybrid-analysis.com) como sandbox para esta prueba.
+> Se utilizó el servicio [Hybrid Analysis](https://www.hybrid-analysis.com) como sandbox.
 
-> Se ejecuta una prueba para determinar el comportamiento del enlace malicioso (el enlace estaba adjunto en el supuesto chat con soporte técnico).
-
-El enlace es el siguiente:
+Enlace analizado (neutralizado):
 
 ```
 hxxp[://]nivellafinds[.]store/cl/33919_md/1007/11131474/2109/1051/6aeb1b9a691557fb45845073
 ```
 
-Una vez ejecutadas las pruebas, se obtuvieron los siguientes resultados:
+### Resultados en Hybrid Analysis
 
 ![](<./Images/hybrid_analysis-result.png>)
 
 - **Amenaza**: 75/100, se confirma como malicioso
-- **Detección de AV**: 0/6 (4 sin resultados, 1 limpio y 1 sin clasificación)
+- **Detección de AV**: 0/6
 - **IOC**: 1 malicioso, 1 sospechoso y 17 informativos
 
-### Indicadores de Compromiso (IOC)
+**Reporte completo**: \
+https://hybrid-analysis.com/sample/ddf80efb765c9e0d806835e102273478463d1c1005cd812f605047e3e8a6ff17/6af655b2f550cab8d50ca0c1
 
-#### [ATT&CK ID: T1204](https://attack.mitre.org/techniques/T1204/): User Execution
+## Indicadores de Compromiso (IOC) y técnicas ATT&CK
 
-![](<./Images/IOC_malicious.png>)
+> [!NOTE]
+> De los indicadores reportados anteriormente, se destacan las técnicas **ATT&CK** más relevantes para este caso
 
-Un atacante puede aprovechar ciertas acciones de un usuario para lograr la ejecución a través de ingeniería social como abrir un documento o enlace malicioso. Los adversarios también pueden engañar a los usuarios para realizar acciones como:
-- Habilitar herramientas de acceso remoto para permitir control directo del sistema
-- Ejecutar JS malicioso en el navegador permitiendo a los adversarios robar cookies de sesiones
-- Descargar y ejecutar malware para que el usuario lo ejecute
-- Coaccionar al usuario para copiar, pegar y ejecutar código manualmente
+| Técnica                                                   | Descripción                                                                                                                    | Observaciones                                                                         |
+| --------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------- |
+| **T1204** — User Execution                                | El atacante depende de que el usuario interactúe con el contenido, independientemente si es un enlace o un documento malicioso | El correo usa ingeniería social con un chat falso para "actualizar" el método de pago |
+| **T1583.001** — Acquire Infrastructure: Domains           | Un atacante puede adquirir un dominio para usar en la infraestructura del ataque                                               | Dominios `urbandfgora[.]shop` y `nivellafinds[.]shop`                                 |
+| **T1071.001** — Application layer protocol: Web Protocols | Uso de protocolos como HTTP/S para evadir detección y comunicarse                                                              | El enlace genera tráfico a dominios de google                                         |
+## Análisis de red
+Durante la ejecución del sandbox, el enlace hace múltiples peticiones DNS y HTTP/S a servicios de Google. Con base en los IOC, el atacante intenta hacer que el usuario introduzca sus credenciales de su cuenta de Google (**T1204**), posiblemente un intento de **credential harvesting**. La prueba no pudo establecer conexión completa, posiblemente a que la infraestructura del atacante estaba desactivada temporalmente.
 
-#### [ATT&CK ID: T1583.001](https://attack.mitre.org/techniques/T1583/001/): Acquire Infrastructure: Domains
-
-![](<./Images/IOC_suspicious.png>)
-
-Los adversarios podrían adquirir dominios que pueden utilizar durante los ataques dirigidos. Pueden comprar o en algunos casos adquirirlos gratis. Los atacantes pueden elegir dominios que sean similares a dominios legítimos, incluso mediante el uso de homógrafos o de un dominio de nivel superior (TLD) diferente.
-
-#### [ATT&CK ID: T1071.001](https://attack.mitre.org/techniques/T1071/001/): Application Layer Protocol: Web Protocols
-Los adversarios podrían comunicarse usando protocolos en la capa de aplicación que se asocien con el tráfico web para evitar la detección o el filtrado de la red mezclándose con el tráfico existente. Los protocolos como **HTTP/S** y **WebSocket** que llevan el tráfico son muy comunes en varios entornos.
-
-### Análisis de red
-El enlace hace múltiples peticiones DNS a servicios de Google. Con base en los IOC, el atacante intenta hacer que el usuario introduzca sus credenciales de su cuenta de Google (**T1204**). Como el el adversario recientemente adquirió una nueva infraestructura (**T1583.001**), el enlace no puede establecer conexión.
+> En el reporte completo aparecen capturas relacionadas con este comportamiento descrito
 
 ![](<./Images/dns_requests.png>)
 
-El tráfico HTTP muestra el mismo patrón de comportamiento, múltiples peticiones a servicios de Google, posiblemente intentando obtener acceso a la cuenta del usuaro:
-
 ![](<./Images/HTTP_traffic.png>)
-
-> Reporte completo: https://hybrid-analysis.com/sample/ddf80efb765c9e0d806835e102273478463d1c1005cd812f605047e3e8a6ff17/6af655b2f550cab8d50ca0c1
-
-
