@@ -110,4 +110,4 @@ Mirror vs. TAP: los TAP's ofrecen una reducción del desempeño casi nula. El mi
 - Hay algunas herramientas especializadas para capturar los paquetes: Wireshark, TCPdump, IPS/IDS (snort), Suricata y Zeek
 
 #### Referencias
-[TryHackMe — Network Traffic Basics](TryHackMe/Network/Network%20Traffic%20Basics/TryHackMe%20—%20Network%20Traffic%20Basics.md)
+[TryHackMe — Network Traffic Basics](../../Network/Network%20Traffic%20Basics/TryHackMe%20—%20Network%20Traffic%20Basics.md)
