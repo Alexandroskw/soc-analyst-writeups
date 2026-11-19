@@ -106,6 +106,54 @@ Se utilizan firewalls, IDS/IPS y controles de acceso para examinar y limitar la 
 *Pregunta 4: Which suspicious IP address was found attempting the brute-force attack against the VPN gateway?* \
 **Respuesta: `45.137.22.13`**
 
+---
 
+*Pregunta 1: Examine the firewall logs. What external IP performed the most reconnaissance?* \
+**Respuesta: `203.0.113.45`**
+
+> **TIP** -> utilizar el filtro `src_ip` en Splunk en la barra lateral izquierda
+
+*Pregunta 2: In the firewall log, Which internal host was targeted by scans?* \
+**Respuesta: `10.0.0.20`**
+
+> **RECORDATORIO** -> filtrar primero por la IP de la anterior pregunta (`src_ip`) y después por la acción BLOCK (`action=BLOCK`)
+
+```
+action=BLOCK src_ip="203.0.113.45"
+```
+
+*Pregunta 3: Which username was targeted in VPN logs?* \
+**Respuesta: `svc_backup`**
+
+> **TIP** -> filtrar por el nombre de usuario en la query
+
+*Pregunta 4: What internal IP was assigned after successful VPN login?* \
+**Respuesta: `10.8.0.23`**
+
+> **RECORDATORIO** -> filtrar por la IP que más ataques ha realizado y posteriormente por el acceso exitoso a la VPN
+
+```
+username=svc_backup result="SUCCESS" src_ip="203.0.113.45"
+```
+
+*Pregunta 5: Which port was used for lateral SMB attempts?* \
+**Respuesta: 445**
+
+> **TIP** -> filtrar primero por el tipo de alerta y posteriormente el puerto de destino
+
+```
+alert="ET EXPLOIT Possible MS-SMB Lateral Movement" dst_port=445
+```
+
+*Pregunta 6: In the IDS logs, which host beaconed to the C2?* \
+**Respuesta: `10.0.0.60`**
+
+*Pregunta 7: During the investigation, which IP was observed to be associated with C2?* \
+**Respuesta: `198.51.100.77`**
+
+*Pregunta 8: Which host showed the exfiltration attempts?* \
+**Respuesta: `10.0.0.51`**
+
+> **TIP** -> Revisar los logs del IDS y filtrar por la clasificación de la alerta
 
 ## Lecciones aprendidas
