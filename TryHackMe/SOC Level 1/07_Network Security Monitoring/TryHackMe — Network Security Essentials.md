@@ -73,4 +73,39 @@ Si el perímetro está mal configurado o es débil, los atacantes pueden:
 - Marcar tráfico saliente extraño que puede significar señales de malware o exfiltración de datos
 - Entender qué debería (o que no debería) estar expuesto en el perímetro 
 
+### Monitoreo y protección
+Se utilizan firewalls, IDS/IPS y controles de acceso para examinar y limitar la exposición de sistemas sensibles y reforzar las reglas de seguridad; permitiendo a los analistas:
+- Detectar ataques en fases tempranas como escaneo de puertos o ataques de fuerza bruta
+- Detectar configuraciones erróneas que dejan a los sistemas sensibles expuestos
+- Identificar anomalías del tráfico saliente que pueden indicar malware o exfiltración de datos
+
+#### Puntos para tener en cuenta
+- El trabajo de un analista es separar el tráfico normal de la actividad sospechosa
+- Revisar patrones sospechosos
+- Repetición de una sola fuente a varios destinos = **escaneo**
+- Repetición de una sola fuente a un destino = **fuerza bruta**
+- Tráfico en intervalos regulares perfectos = **Señales de malware**
+- El contexto es importante. Una alerta del IDS te dice por qué algo se ha marcado es mas valioso que un bloqueo del firewall
+- El monitoreo del perímetro de la red es la primera línea de defensa para detectar los ataques
+
+---
+
+*Pregunta 1: Examine the firewall logs. Which IP address is performing the port scan?* \
+**Respuesta: `203.0.113.10`**
+
+*Pregunta 2: In the WAF Logs, which single source IP is responsible for all the blocked web attacks?* \
+**Respuesta: `198.51.100.12`**
+
+> **NOTA** -> Utilizar `grep`
+
+*Pregunta 3: In the VPN logs, how many brute-force attempts failed?* \
+**Respuesta: 90**
+
+> **TIP** -> utilizar `grep` con un pipe (`|`) con `wc`
+
+*Pregunta 4: Which suspicious IP address was found attempting the brute-force attack against the VPN gateway?* \
+**Respuesta: `45.137.22.13`**
+
+
+
 ## Lecciones aprendidas
