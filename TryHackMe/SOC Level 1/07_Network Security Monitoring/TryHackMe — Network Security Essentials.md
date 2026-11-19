@@ -46,4 +46,31 @@ Son generados por los dispositivos de red que se colocan en la red y monitorean 
 - **Web proxies**: Son una mina de oro para las organizaciones que enrutan su propio tráfico web a través de proxies. Registran cada visita de los usuarios al sitio web, lo que permite detectar amenazas en línea, infracciones de políticas o intentos de fuga de datos.
 - **VPN**: Administran el acceso remoto de los empleados. Sus logs registran quien está conectado a la red corporativa, desde donde y a qué hora, lo que es esencial para monitorear la seguridad de las conexiones remotas
 
+### Task 5 — Network perimeter
+Es la línea que separa a la red interna (segura) de la organización con la red externa (insegura), es decir, el Internet. 
+
+> El perímetro de la red es la principal línea de defensa y la más importante.
+
+#### El perímetro
+Se define por componentes de hardware en las fronteras de la red. Algunos componentes del perímetro de la red incluyen:
+- Firewalls
+- Routers/gateways
+- Zona desmilitarizada (DMZ)
+- VPNs/Gateways de acceso remoto
+
+> [!IMPORTANT]
+> El perímetro de la red es una colección de dispositivos que actúan entre sí para proteger los activos de la organización. Estos dispositivos tienen un rol específico en la administración, filtrado y aseguramiento en el flujo de los datos entre la red interna y externa.
+
+Si el perímetro está mal configurado o es débil, los atacantes pueden:
+- Explotar los servicios expuestos para ganar acceso
+- Realizar escaneos y reconocimiento para mapear la red
+- Lanzar ataques de fuerza bruta contra servicios de inicio de sesión
+- Usar canales de exfiltración de datos para enviar los datos robados
+
+#### Rol de un analista de seguridad
+- Revisar los logs de un firewall para bloquear o permitir conexiones
+- Identificar intentos de escaneo o intentos de inicio de sesión por fuerza bruta
+- Marcar tráfico saliente extraño que puede significar señales de malware o exfiltración de datos
+- Entender qué debería (o que no debería) estar expuesto en el perímetro 
+
 ## Lecciones aprendidas
