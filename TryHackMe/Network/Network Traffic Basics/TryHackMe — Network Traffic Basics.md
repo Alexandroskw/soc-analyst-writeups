@@ -2,10 +2,10 @@
 **Dificultad** -> easy | **Date** -> 24-jul-26 | **Type** -> Free + Hands-On \
 **Sala** -> [Network Traffic Basics](https://www.tryhackme.com/room/networktrafficbasics)
 
-# Introducción
+## Introducción
 Sala enfocada en entender el análisis de red (NTA) y qué herramientas se utilizan para recolectar el tráfico.
 
-# Solución
+## Solución
 ### Task 2 — What is the Purpose of Network Traffic Analysis?
 Gracias a los logs de DNS se puede obtener
 - Peticiones y tipo de peticiones
@@ -176,12 +176,12 @@ No.   Time       Source           Destination      Protocol Length Info
 |    East-West    | Tráfico que se queda en la LAN. Incluye la LAN que se extiende a la nube | - Directory, Authentication & Identity Services <br>- File shares & print services<br>- Router, switching, and infrastructure services<br>- Application Communication<br>- Backup & Replication<br>- Monitoring & Management |
 
 #### Flow examples
-
 |       Flujo       | ¿Qué hace?                                                                                                                                                                                                                                                                              |
 | :---------------: | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 |       HTTPS       | Se tiene dos sesiones: una entre el cliente y el proxy, y otra entre el proxy y el servidor web. Desde el punto de vista del cliente, este ha establecido una sesión con el servidor web.                                                                                               |
 |   External DNS    | El host envía la consulta al servidor DNS interno en el puerto 53, el cual actuará en nombre del host. Verificará si tiene una respuesta a la consulta en su caché. De no ser así enviará la consulta a través del enrutador pasando por el firewall a los servidores DNS configurados. |
 | SMB with Kerberos | Al abrir un recurso compartido se crea una sesión SMB.<br>El equipo usa Kerberos: con el Ticket Granting Ticket (TGT) ya obtenido, pide un ticket de servicio y lo usa para conectarse y acceder al recurso.                                                                            |
+
 ___
 *Pregunta 1: Which category of devices generates the most traffic in a network?* \
 **Respuesta: endpoint**
@@ -221,20 +221,19 @@ ___
 
 > Todos los dispositivos en la red hacen una petición HTTP en proxy (**WP1**) ya que es el intermediario con el sitio real.
 
-![tap_after](<tap_setted.png>)
+![tap_after](./Images/tap_setted.png)
 
 > Cuando se hace una conexión TCP correcta, se manda un código `200 OK` para confirmar que se ha establecido conexión. \
 > Se debe buscar un paquete que descargue un archivo.
 
-![packet_attached_file](<downloaded_file_packet.png>)
+![packet_attached_file](./Images/downloaded_file_packet.png)
 
 *Pregunta 2: What is the flag found in the DNS traffic in scenario 2? The flag has the format THM{}.* \
 **Respuesta: THM{C2CommandFound}**
 
-> Posicionar el TAP en 
-el servidor DNS y capturar todo el tráfico.
+> Posicionar el TAP en el servidor DNS y capturar todo el tráfico.
 
-![dns_tap](<dns_tap.png>)
+![dns_tap](./Images/dns_tap.png)
 
 > Se está buscando un archivo `.txt` ya que a través del archivo, se está inyectando un C2. \
 > **RECORDATORIO**: El protocolo DNS viaja en el puerto 53.
@@ -244,7 +243,7 @@ el servidor DNS y capturar todo el tráfico.
 Standard query response 0x41eb TXT c2.tryhackrne.thn
 ```
 
-# Lecciones aprendidas
+## Lecciones aprendidas
 - Gracias al análisis de tráfico de red se pueden descubrir ataques como **DNS tunneling**, **ARP Poisoning** o **Fragmentation attack**.
 - Se puede monitorear tanto el desempeño de la red como reconstruír un ataque a raíz de una respuesta a incidentes.
 - Los firewalls no registran en su totalidad todo el contenido de los paquetes
@@ -257,5 +256,5 @@ Standard query response 0x41eb TXT c2.tryhackrne.thn
 - Se requiere gran cantidad de almacenamiento para el almacenamiento de los paquetes.
 - Hay algunas herramientas especializadas para capturar los paquetes: Wireshark, TCPdump, IPS/IDS (snort), Suricata y Zeek
 
-## Referencias
-[TryHackMe — Modelo OSI](<TryHackMe — Modelo OSI.md>)
+### Referencias
+[TryHackMe — Modelo OSI](../../../Cybersecurity%20101/05_Networking/TryHackMe%20—%20Modelo%20OSI.md)
