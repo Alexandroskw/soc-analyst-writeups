@@ -13,6 +13,7 @@ Al llegar hasta el final del supuesto chat con soporte técnico, aparece un bot�
 El email es un correo de phishing que se hace pasar por un servicio de almacenamiento en la nube (**impersonate**). El enlace lleva a un sitio web desconocido donde se le solicitará a la víctima que introduzca sus datos bancarios para clonar la tarjeta asociada y realizar compras no autorizadas o cualquier otro tipo de malversación de fondos.
 
 ---
+
 ## Investigación
 
 > Se descargó el correo en formato `.eml` para realizar esta investigación
@@ -112,6 +113,7 @@ hxxp[://]nivellafinds[.]store/cl/33919_md/1007/11131474/2109/1051/6aeb1b9a691557
 | **T1204** — User Execution                                | El atacante depende de que el usuario interactúe con el contenido, independientemente si es un enlace o un documento malicioso | El correo usa ingeniería social con un chat falso para "actualizar" el método de pago |
 | **T1583.001** — Acquire Infrastructure: Domains           | Un atacante puede adquirir un dominio para usar en la infraestructura del ataque                                               | Dominios `urbandfgora[.]shop` y `nivellafinds[.]shop`                                 |
 | **T1071.001** — Application layer protocol: Web Protocols | Uso de protocolos como HTTP/S para evadir detección y comunicarse                                                              | El enlace genera tráfico a dominios de google                                         |
+
 ## Análisis de red
 Durante la ejecución del sandbox, el enlace hace múltiples peticiones DNS y HTTP/S a servicios de Google. Con base en los IOC, el atacante intenta hacer que el usuario introduzca sus credenciales de su cuenta de Google (**T1204**), posiblemente un intento de **credential harvesting**. La prueba no pudo establecer conexión completa, posiblemente a que la infraestructura del atacante estaba desactivada temporalmente.
 
