@@ -108,6 +108,8 @@ Se utilizan firewalls, IDS/IPS y controles de acceso para examinar y limitar la 
 
 ---
 
+### Investigando brechas
+
 *Pregunta 1: Examine the firewall logs. What external IP performed the most reconnaissance?* \
 **Respuesta: `203.0.113.45`**
 
@@ -157,3 +159,15 @@ alert="ET EXPLOIT Possible MS-SMB Lateral Movement" dst_port=445
 > **TIP** -> Revisar los logs del IDS y filtrar por la clasificación de la alerta
 
 ## Lecciones aprendidas
+- La seguridad perimetral es la primer línea de defensa en una organización
+- Si se configura mal el perímetro (un firewall, puertos abiertos, etc), es una ventana abierta a los ataques externos
+- Al ser la primer línea de defensa, (la seguridad perimetral) da datos acerca de qué está ocurriendo en la red, como un escaneo de puertos o un ataque de fuerza bruta
+- Los principales puntos de ataque son los endpoints, ya que son las computadoras de los usuarios/empleados
+- Al investigar una brecha, se puede hacer mediante la terminal o herramientas que centralizan los logs como Splunk
+- Un analista de seguridad es el explorador, avista las potenciales amenazas en el perímetro
+- Si una IP se dirige a varios destinos es un sinónimo de un escaneo
+- Si una IP se dirige a un solo destino es un sinónimo de un ataque de fuerza bruta
+- Los logs de un firewall dan el contexto para empezar a hacer una investigación más profunda
+- Si hay tráfico saliente que se comporta de forma anómala, puede significar una exfiltración de datos o un ataque de malware
+- Cada archivo de log cuenta una parte de la historia, el trabajo del analista es hacer la relación y armar la historia completa
+- Configurar bien el perímetro da la información necesaria para detectar cierto tipo de ataques en una fase temprana de los mismos
