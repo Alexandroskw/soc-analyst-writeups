@@ -51,5 +51,17 @@ El analista SOC puede observar que la IP de origen y destino se encuentran dentr
 > [!IMPORTANT]
 > Después de confirmar que no es una actividad autorizada, el analista SOC puede escalar la alerta para iniciar el proceso de Respuesta a Incidentes.
 
+### Escaneo vertical vs. horizontal
 
+> [!TIP]
+> **Escaneo horizontal** \
+> Es un tipo de escaneo de puertos donde el atacante busca el mismo puerto a través de múltiples host en la red que está escaneando. \
+> Se puede detectar si en los logs aparece la misma IP de origen en un mismo puerto pero en múltiples IPs.
+
+> [!TIP]
+> **Escaneo vertical** \
+> Es un tipo de escaneo de puertos donde un solo host es escaneado a través de múltiples puertos. Los atacantes pueden realizar este escaneo para obtener un punto de apoyo en un host e identificar sus servicios expuestos. \
+> Se puede detectar si en los logs se observa la misma IP de origen en la misma IP de destino pero en múltiples puertos de destino.
+
+> En ocasiones los atacantes pueden realizar ambos tipos de escaneo para ganar ambas ventajas.
 ## Lecciones aprendidas
