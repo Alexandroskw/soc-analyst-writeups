@@ -34,5 +34,22 @@ Para poder distinguir entre un descubrimiento válido del no válido, los equipo
 - Integrar Inteligencia de Amenazas con la detección de casos de uso y marcar la actividad de escaneo solo de las fuentes maliciosas o sospechosas
 - Se pudo haber pasado por alto alguna actividad de escaneo maliciosa, debido a ello algunos equipos utilizan la Inteligencia de Amenazas para elevar el nivel de severidad de las alertas en lugar de solo lanzarlas
 
+### Escaneo externo vs interno
+#### Escaneo externo
+Un analista SOC puede observar que la IP de origen en este tipo de ataques es una IP externa y que la de destino es una IP que pertenece a la organización. Estos escaneos indican que el ataque sigue en la fase de reconocimiento de acuerdo con **MITRE ATT&CK** (es una alerta de baja severidad).
+
+> El atacante aun no tiene un punto de apoyo, sigue haciendo el reconocimiento inicial para identificar alguna oportunidad que le dé acceso inicial a la red.
+
+> [!TIP]
+> El analista SOC puede bloquear la IP atacante a través del firewall del perímetro. Sin embargo se debe recordar que el atacante puede regresar ocultando su IP.
+
+#### Escaneo interno
+El analista SOC puede observar que la IP de origen y destino se encuentran dentro de la red de la organización. Estos escaneos indican que el atacante ahora está en la fase de descubrimiento de acuerdo con **MITRE ATT&CK** (es una alerta de alta severidad).
+
+> En otros frameworks también se le conoce como reconocimiento interno, lo que indica que el atacante obtuvo un punto de apoyo en la red y ahora ha realizado un movimiento lateral.
+
+> [!IMPORTANT]
+> Después de confirmar que no es una actividad autorizada, el analista SOC puede escalar la alerta para iniciar el proceso de Respuesta a Incidentes.
+
 
 ## Lecciones aprendidas
