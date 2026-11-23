@@ -25,7 +25,7 @@ El uso de apps web trae ventajas como mejor compatibilidad, mayor accesibilidad,
 > [!NOTE]
 > Los atacantes pueden utilizar el ciclo de petición-respuesta (request-response) para saturar el servidor y brincarse los controles de seguridad o para engañar al servidor y ejecutar comandos maliciosos.
 
-#### Componentes de un servidor
+#### Componentes de un servicio web
 
 | Componente                   | ¿Qué contiene                                                                     |
 | ---------------------------- | --------------------------------------------------------------------------------- |
@@ -99,5 +99,20 @@ Tipo de WAF disponibles:
 > [!TIP]
 > Los AV son solo una capa de seguridad más, se deben de combinar con otros elementos de seguridad para dar una mejor protección.
 
-
 ## Lecciones aprendidas
+- La migración de aplicaciones de escritorio a aplicaciónes web no es nuevo, lleva al menos tres décadas en marcha
+- Las apps webs aportan ventajas al usuario final y al mismo tiempo dan una serie de brechas de seguridad
+- Entre más crezcan las apps web, mas superficie de ataque existe
+- Los propietarios de las apps son los responsables directos de la seguridad de los datos de los usuarios de sus aplicaciones
+- Las partes principales de un servidor web son: **aplicación**, **servidor web** y el **host**
+- Los servidores mas conocidos son Apache y NGINX. Existe el IIS de Microsoft que es usado en entornos empresariales
+- Los servidores web crean sus propios logs que registran toda la interacción entre el usuario y el servidor que posteriormente se puede utilizar para identificar actividad maliciosa
+- Los WAF son la primera línea de defensa de los servidores web y son los encargados de defenderlos en contra de ataques
+	- Basados en web
+	- Basados en firmas
+	- Basados en host
+- Los WAFs tienen ciertas características para detectar al malware y comportamientos anómalos en el servidor
+- Las mitigaciones previenen de algunos ataques pero no los eliminan del todo
+- Existen más métodos de detección puesto que están siempre en constante evolución
+- Los CDN son una capa más de defensa y en algunos casos pueden absorber ataques como los DoS
+- Los CDN sirven como caché para que los usuarios no tengan latencia al usar la aplicación
