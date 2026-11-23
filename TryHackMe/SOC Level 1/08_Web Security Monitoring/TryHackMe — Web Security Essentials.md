@@ -44,7 +44,7 @@ El uso de apps web trae ventajas como mejor compatibilidad, mayor accesibilidad,
 > [!IMPORTANT]
 > Los servidores web están posicionados en frente de las apps y sitios web, por eso son una parte fundamental de la infraestructura de Internet. Debido a ello, (y que están expuestos) son un blanco común para ataques.
 
-### Protegiendo la red
+### Protecting the web
 
 > Hay varias medidas de seguridad disponibles para asegurar apps y sitios web. A estas medidas se le conocen como **Mitigación** ya que algunas de ellas proveen visibilidad y otras pueden detener activamente o limitar un ataque.
 
@@ -58,6 +58,46 @@ El uso de apps web trae ventajas como mejor compatibilidad, mayor accesibilidad,
 > [!IMPORTANT]
 > Los servidores web crean registros de cada petición que recibe. Estos logs son valiosos ya que registran información acerca de cada interacción que tiene el servidor, incluyendo la IP, marca de tiempo, datos o páginas solicitadas, respuestas del estado del servidor y el User-Agent
 
-### 
+### Defense Systems
+
+> [!TIP]
+> **Sobre los CDN (Content Delivery Network)** \
+> Almacenan y entregan contenido en caché de servidores cercanos para reducir la latencia a los usuarios. También ayudan a la seguridad actuando como búfer entre el usuario y el servidor original.
+
+
+| Beneficio             | ¿Qué hace?                                                                                 |
+| --------------------- | ------------------------------------------------------------------------------------------ |
+| Enmascaramiento de IP | Esconde la IP original del servidor, haciendo más difícil al atacante apuntar a el         |
+| Protección DDoS       | Pueden absorber una gran cantidad de tráfico haciendo que el ataque DoS sea menos efectivo |
+| Forzar HTTPS          | Cifrar la comunicación a través de TLS (obligatorio en la mayoría de los CDN)              |
+| WAF integrado         | Muchos CNDs integran firewalls de apps web                                                 |
+
+#### Web Application Firewall (WAF)
+
+> [!TIP]
+> Inspeccionan el tráfico HTTP entrante y lo bloquean (o registran) basados en reglas de seguridad.
+
+Tipo de WAF disponibles:
+- **Basado en cloud (Cloud-based) (Reverse proxy)**: Se sitúa en frente del servidor web
+- **Basado en host (host-based)**: Software que se instala en el servidor web y permite el control de cada aplicación
+- **Basado en red (network-based)**: Es un dispositivo físico o virtual situado en el perímetro de la red
+
+| Característica                                   | Método de detección                                                | Ejemplo                                                                                   |
+| ------------------------------------------------ | ------------------------------------------------------------------ | ----------------------------------------------------------------------------------------- |
+| Detección basada en firma (signature-based)      | Empata patrones de ataque comunes o payloads                       | Una solicitud con un `User-Agent` que coincide con la herramienta `sqlmap/1.8.1`          |
+| Detección basada en heurística (Heuristic-based) | Analiza el contexto y el comportamiento de la solicitud            | Una cadena de consulta con caracteres especiales (`search?q=%3Cscript%20(1)`)             |
+| Análisis de anomalías y comportamiento           | Marca las desviaciones del comportamiento del tráfico habitual     | Una sola IP haciendo repetidos intentos de inicio de sesión en un corto periodo de tiempo |
+| Filtrado por locación y reputación de IP         | Usa la localización e inteligencia de amenazas para bloquear la IP | Una solicitud de una IP que se encuentra fuera del área de operaciones usual              |
+
+> [!NOTE]
+> Los métodos de detección están en constante evolución, dar una tabla más grande sería virtualmente imposible. Las reglas de detección pueden ser personalizadas también, basadas en las necesidades del dueño de la aplicación.
+
+### Antivirus (AV)
+
+> La mayoría de los antivirus se basan en la detección de firmas (signature-based), comparando los archivos con una base de datos patrones o malware conocido.
+
+> [!TIP]
+> Los AV son solo una capa de seguridad más, se deben de combinar con otros elementos de seguridad para dar una mejor protección.
+
 
 ## Lecciones aprendidas
