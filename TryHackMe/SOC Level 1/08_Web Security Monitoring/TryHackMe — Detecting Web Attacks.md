@@ -36,4 +36,30 @@ Se basan en explotar las vulnerabilidades dentro del servidor web, el código de
 - **SQL Injection (SQLi)**: Es una ataque a la base de datos que está detrás del sitio o aplicación web. El atacante construye queries a través de concatenación de cadenas en lugar de usar queries parametrizadas.
 - **Command Injection**: El sitio web toma la entrada del usuario y la pasa al sistema sin revisarla permitiendo que los atacantes puedan mandar comandos de manera encubierta para que el servidor los ejecute con el mismo privilegio que el de la aplicación.
 
+### Log-based detection
+
+> [!TIP]
+> Los logs son una herramienta valiosa para la detección de los logs ya que cada petición enviada al servidor web deja evidencia en los logs de acceso y los defensores pueden analizar estas entradas para revisar patrones que revelen escaneo, intentos de explotación u otro tipo de ataques.
+
+
+| Campo                                  | Ejemplo                                                                                |
+| -------------------------------------- | -------------------------------------------------------------------------------------- |
+| IP del cliente                         | Conocida como maliciosa o fuera del rango geográfico especificado                      |
+| Marca de tiempo y la página solicitada | Las peticiones hechas en horas inusuales o repetidas en un periodo de tiempo muy corto |
+| Código de estado                       | Respuestas `404` repetidas que indican que una página no pudo ser encontrada           |
+| Tamaño de la respuesta                 | Significativamente grande o pequeña de lo normal a las respuestas usuales              |
+| Referrer                               | Refiriendose a páginas que no encajan con la navegación habitual del sitio             |
+| User-Agent                             | Navegador desactualizado o herramientas de ataque comunes (`sqlmap` o `wpscan`)        |
+
+```
+10.10.10.10 [20/aug/2025:17:43:01] "GET /profile.html HTTP/1.1" 200 2212 "/login.html" "Mozilla/5.0"
+```
+
+> [!NOTE]
+> A pesar de ser muy útiles, los logs no siempre capturan todo el contenido de una petición, sobre todo el body de las peticiones `POST` y `GET`
+
+> [!TIP]
+> Los logs de acceso no registran todos los datos del método `POST`, así que los investigadores pueden ver qué petición está ocurriendo. Del mismo modo las peticiones `GET` pueden registrar las rutas completas y las cadenas de las queries pero algunos formatos no las incluyen del todo. Depende enteramente del software del servidor y de la configuración de los registros.
+
+
 ## Lecciones aprendidas
