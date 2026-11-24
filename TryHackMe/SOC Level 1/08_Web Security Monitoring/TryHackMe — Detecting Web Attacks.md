@@ -61,5 +61,26 @@ Se basan en explotar las vulnerabilidades dentro del servidor web, el código de
 > [!TIP]
 > Los logs de acceso no registran todos los datos del método `POST`, así que los investigadores pueden ver qué petición está ocurriendo. Del mismo modo las peticiones `GET` pueden registrar las rutas completas y las cadenas de las queries pero algunos formatos no las incluyen del todo. Depende enteramente del software del servidor y de la configuración de los registros.
 
+### Network-based detection
+
+> [!TIP]
+> El Network Traffic Analysis permite a un analista examinar los datos sin procesar entre el cliente y el servidor. Inspeccionando los paquetes un analista puede observar el comportamiento de un ataque en un nivel más detallado (incluyendo los protocolos de transporte y los datos de la aplicación en sí).
+
+> [!NOTE]
+> La captura de paquetes de red son mucho mas verbosas que los registros de los servidores pero revelan datos entre cada petición y respuesta como los headers HTTP, los bodies de la petición `POST`, cookies y los archivos cargados y descargados.
+
+---
+
+*Pregunta 1: What password does the attacker successfully identify in the brute-force attack?* \
+**Respuesta: `astrongpassword123`**
+
+> **NOTA** -> utilizar el filtro `http.response.code`
+
+*Pregunta 2: What is the flag the attacker found in the database using SQLi?* \
+**Respuesta: `THM{dumped_the_db}`**
+
+> **TIP** -> Revisar los métodos `GET /account`
+
+
 
 ## Lecciones aprendidas
