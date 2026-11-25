@@ -39,8 +39,7 @@ Se basan en explotar las vulnerabilidades dentro del servidor web, el código de
 ### Log-based detection
 
 > [!TIP]
-> Los logs son una herramienta valiosa para la detección de los logs ya que cada petición enviada al servidor web deja evidencia en los logs de acceso y los defensores pueden analizar estas entradas para revisar patrones que revelen escaneo, intentos de explotación u otro tipo de ataques.
-
+> Los logs son una herramienta valiosa para la detección de los registros ya que cada petición enviada al servidor web deja evidencia en los logs de acceso y los defensores pueden analizar estas entradas para revisar patrones que revelen escaneo, intentos de explotación u otro tipo de ataques.
 
 | Campo                                  | Ejemplo                                                                                |
 | -------------------------------------- | -------------------------------------------------------------------------------------- |
@@ -81,6 +80,42 @@ Se basan en explotar las vulnerabilidades dentro del servidor web, el código de
 
 > **TIP** -> Revisar los métodos `GET /account`
 
+### Web application firewall (WAF)
 
+> [!NOTE]
+> Son la primera línea de defensa de una página o aplicación web. Analizan los paquetes completamente y descifran el tráfico TLS y lo filtra antes de que llegue al servidor.
+
+#### Reglas
+
+| Tipo                                                    | Descripción                                                                                                     | Ejemplo                                                         |
+| ------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------- |
+| Bloquear patrones comunes de ataque                     | Bloquea las payloads maliciosas conocidas                                                                       | Bloquear el User-Agent: `sqlmap`                                |
+| Denegar fuentes maliciosas conocidas                    | Usando la reputación de una IP, inteligencia de amenazas o bloqueo geográfico para detener el tráfico peligroso | Bloquea IPs de campañas recientes de botnets                    |
+| Reglas personalizadas                                   | Adaptadas a las necesidades de la aplicación específica                                                         | Permitir únicamente peticiones `GET` y `POST` en `/login`       |
+| Limitar la tasa de transferencia y prevención de abusos | Limita la frecuencia de las peticiones para prevenir abusos                                                     | Limitar intentos de inicio de sesión a 5 por minuto por cada IP |
+
+> [!NOTE]
+> Actualmente los WAF modernos bloquean y detectan automáticamente User-Agents maliciosos.
+
+Los WAF no siempre deben de bloquear el tráfico sospechoso, pueden utilizar CAPTCHA para verificar si es tráfico real o un bot malicioso.
+
+> [!IMPORTANT]
+> En la actualidad el tráfico de bots maliciosos ha incrementado un 37% de todo el tráfico global de la web. Por eso la importancia de que en los WAF se utilicen métodos de verificación como los CAPTCHA.
+
+> [!IMPORTANT]
+> Los WAF modernos incluyen reglas ya integradas diseñadas para mitigar los 10 principales riesgos de seguridad OWASP. También aprovechan las fuentes de inteligencia de amenazas para bloquear automáticamente peticiones de IPs maliciosa conocidas y User-Agents maliciosos.
 
 ## Lecciones aprendidas
+- Los ataques del lado del cliente se aprovechan del usuario y el cómo utiliza su dispositivo y sobre todo el navegador que utiliza.
+- La superficie de ataque a las aplicaciones web ha aumentado debido al aumento de plugins de terceros por el crecimiento de las primeras
+- Lo que ocurre dentro del navegador es virtualmente imposible de detectar para un analista.
+- Los ataques del lado del servidor aprovechan vulnerabilidades dentro del servidor y qué tan bien configurado está.
+- Todas las peticiones que se hacen al servidor son registradas, por lo que un analista puede verificar si hubo un comportamiento inusual en el tráfico.
+- Ya que se registra toda interacción entre el usuario y el servidor, un atacante puede dejar rastros de su ataque.
+- A pesar de que se registra toda interacción, lo que no se registra es el contenido de las peticiones `GET` y `POST`.
+- Wireshark permite analizar los datos de los paquetes entre el cliente y el servidor.
+- La captura de los paquetes con Wireshark es mucho más detallada que con los logs.
+- Los WAF son la primera línea. Ellos pueden detectar todo el tráfico e incluso descifrar el tráfico TLS (HTTPS).
+- Los WAF modernos hacen los desafíos de CAPTCHA tan populares actualmente.
+- El tráfico de bots en la red ha aumentado en un 37%.
+- Los WAF pueden bloquear automáticamente User-Agents maliciosos conocidos automáticamente.
