@@ -118,4 +118,4 @@ Los WAF no siempre deben de bloquear el tráfico sospechoso, pueden utilizar CAP
 - Los WAF son la primera línea. Ellos pueden detectar todo el tráfico e incluso descifrar el tráfico TLS (HTTPS).
 - Los WAF modernos hacen los desafíos de CAPTCHA tan populares actualmente.
 - El tráfico de bots en la red ha aumentado en un 37%.
-- Los WAF pueden bloquear automáticamente User-Agents maliciosos conocidos automáticamente.
+- Los WAF pueden bloquear automáticamente User-Agents maliciosos conocidos.
